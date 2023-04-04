@@ -67,12 +67,26 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
     );
     setSelectedEpisode(selectedSeasonEpisodes[0]);
   };
+  // const handleFullScreenClick = () => {
+  //   const iframe = document.getElementById("iframe") as HTMLIFrameElement;
+  //   if (iframe.requestFullscreen) {
+  //     iframe.requestFullscreen();
+  //   } else if (iframe.webkitRequestFullscreen) {
+  //     /* Safari */
+  //     iframe.webkitRequestFullscreen();
+  //   } else if (iframe.msRequestFullscreen) {
+  //     /* IE11 */
+  //     iframe.msRequestFullscreen();
+  //   }
+  // }
+
 
   return (
     <div>
       {selectedEpisode && (
         <div>
-        <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %" ></iframe>
+        {/* <button onClick={handleFullScreenClick}>Fullscreen</button> */}
+        <iframe id="iframe-embed" src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
 
           <h2>Episode - {selectedEpisode.name}</h2>
           <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedEpisode.still_path}`} alt={selectedEpisode.name} />
