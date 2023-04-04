@@ -39,7 +39,7 @@
 
 .sub-menu {
   display: inline-block;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .sub-menu ul {
@@ -57,4 +57,10 @@
 
 .sub-menu li:hover {
   color: #007bff;
+}
+iframe{
+  height:80vh
+}
+.body{
+  text-align: center;
 }

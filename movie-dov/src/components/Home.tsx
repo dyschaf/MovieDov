@@ -1,16 +1,12 @@
 import { useEffect } from "react"
 import Search from "./Search";
 function Home(){
-    // const header=header:any: {
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Content-Type': 'text/plain'
-    
-    // useEffect(
-        
-    //     )
     return(
         <>
+        <body className="body">
+        <h1>Movies and TV shows</h1>
         <Search/>
+        </body>
         </>
     )
 }
