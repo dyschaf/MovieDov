@@ -36,6 +36,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       );
       const data = await response.json();
       setSeasons(data.seasons);
+      window.location.href = "/#upper"
     };
 
     if (selectedSeason !== null) {

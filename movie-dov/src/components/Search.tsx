@@ -45,10 +45,11 @@ const Search: React.FC = () => {
 
   const handleMovieCardClick = (movieId: number) => {
     setSelectedMovieId(movieId);
+    window.location.href = "/#upper"
   };
 
   return (
-    <div>
+    <div id='upper'>
       {selectedMovieId && searchType === "movie" ? (
         <>
           <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/${searchType}?id=${selectedMovieId}`} width="100%" height="100%" ></iframe>
