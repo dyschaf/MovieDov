@@ -14,10 +14,16 @@ const SubMenu: React.FC<SubMenuProps> = ({ onSearchTypeChange }) => {
   return (
     <div className="sub-menu">
       <h3>Search By:</h3>
-      <ul>
-        <li onClick={() => handleSearchTypeChange('movie')}>Movies</li>
-        <li onClick={() => handleSearchTypeChange('tv')}>TV Shows</li>
-      </ul>
+      {/* <ul> */}
+        {/* <li> */}
+        <button name='movie' onClick={() => handleSearchTypeChange('movie')}>Movie</button>
+        {/* <input type={"button"} onClick={() => handleSearchTypeChange('movie')}>Movies</input> */}
+        {/* </li> */}
+        {/* <li> */}
+        <button onClick={() => handleSearchTypeChange('tv')}>Tv Shows</button>
+        {/* </li> */}
+
+      {/* </ul> */}
     </div>
   );
 }

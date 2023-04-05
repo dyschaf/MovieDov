@@ -67,7 +67,7 @@ const Search: React.FC = () => {
       <h1>Search</h1>
       <SubMenu onSearchTypeChange={handleSearchTypeChange} />
       <br />
-      <input type="text" onChange={(e) => handleSearch(e.target.value)} />
+      <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} />
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} onClick={handleMovieCardClick} />
