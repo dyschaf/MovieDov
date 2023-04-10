@@ -74,4 +74,9 @@ iframe{
   justify-content: space-around;
   /* flex-direction: column */
 }
+.seasonEpisode{
+  /* padding: 20px; */
+  display: flex;
+  justify-content: center;
+}
 

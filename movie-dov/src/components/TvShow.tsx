@@ -28,20 +28,16 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
   const [seasonEpisodes, setSeasonEpisodes] = useState<Episode[]>([]);
   const [selectedSeason, setSelectedSeason] = useState<number | null>(1);
   const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
-  
-  const fetchSeasons = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`
-    );
-    const data = await response.json();
-    setSeasons(data.seasons);
-    window.location.href = "/#upper"
-  };
+
   useEffect(() => {
-    fetchSeasons();
-  }, []);
-  useEffect(() => {
-   
+    const fetchSeasons = async () => {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`
+      );
+      const data = await response.json();
+      setSeasons(data.seasons);
+      window.location.href = "/#upper"
+    };
 
     if (selectedSeason !== null) {
       const fetchEpisodes = async () => {
@@ -94,27 +90,28 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
         {/* <button onClick={handleFullScreenClick}>Fullscreen</button> */}
         <iframe id="iframe-embed" src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
 
-          <h2>Episode - {selectedEpisode.name}</h2>
-          <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedEpisode.still_path}`} alt={selectedEpisode.name} />
+          <h4>Episode - {selectedEpisode.name}</h4>
+          {/* <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedEpisode.still_path}`} alt={selectedEpisode.name} /> */}
           <p>{selectedEpisode.overview}</p>
         </div>
       )}
       {/* <h1>{seasons.name}</h1> */}
       {/* <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${seasons.poster_path}`} alt={""} /> */}
       {/* <p>{seasons.overview}</p> */}
+      <div className='seasonEpisode'>
       <div>
         <h2>Seasons</h2>
         <select onChange={handleSeasonSelect}>
           {seasons.map((season) => (
-            <option key={season.id} value={season.season_number+1}>
-              Season {season.season_number+1}
+            <option key={season.id} value={season.season_number === 1 ?season.season_number: season.season_number+1}>
+              Season {season.season_number === 1 ?season.season_number: season.season_number+1}
             </option>
           ))}
         </select>
       </div>
       {selectedSeason && (
         <div>
-          <h2>Episodes - Season {selectedSeason}</h2>
+          <h2>Episodes</h2>
           <select onChange={handleEpisodeSelect}>
             {seasonEpisodes.map((episode) => (
               <option key={episode.id} value={episode.episode_number}>
@@ -124,6 +121,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
           </select>
         </div>
       )}
+      </div>
       
     </div>
   );
