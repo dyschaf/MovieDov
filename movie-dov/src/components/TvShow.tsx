@@ -112,7 +112,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       {selectedSeason && (
         <div>
           <h2>Episodes</h2>
-          <select onChange={handleEpisodeSelect}>
+          <select className='episodes' onChange={handleEpisodeSelect}>
             {seasonEpisodes.map((episode) => (
               <option key={episode.id} value={episode.episode_number}>
                 Episode {episode.episode_number} - {episode.name}

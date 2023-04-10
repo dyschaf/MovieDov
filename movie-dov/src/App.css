@@ -79,4 +79,7 @@ iframe{
   display: flex;
   justify-content: center;
 }
+.episodes{
+max-width: 250px;
+}
 
