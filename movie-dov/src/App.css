@@ -64,3 +64,14 @@ iframe{
 .body{
   text-align: center;
 }
+.movie-card{
+  max-width: 250px;
+  min-width: 150px;
+}
+.mapMovieCard{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* flex-direction: column */
+}
+

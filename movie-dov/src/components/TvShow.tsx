@@ -28,16 +28,20 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
   const [seasonEpisodes, setSeasonEpisodes] = useState<Episode[]>([]);
   const [selectedSeason, setSelectedSeason] = useState<number | null>(1);
   const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
-
+  
+  const fetchSeasons = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`
+    );
+    const data = await response.json();
+    setSeasons(data.seasons);
+    window.location.href = "/#upper"
+  };
   useEffect(() => {
-    const fetchSeasons = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`
-      );
-      const data = await response.json();
-      setSeasons(data.seasons);
-      window.location.href = "/#upper"
-    };
+    fetchSeasons();
+  }, []);
+  useEffect(() => {
+   
 
     if (selectedSeason !== null) {
       const fetchEpisodes = async () => {

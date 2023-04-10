@@ -1,5 +1,5 @@
 // Search.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieCard from './MovieCard';
 import SubMenu from './SubMenu';
 import TvShow from "./TvShow";
@@ -16,12 +16,21 @@ const Search: React.FC = () => {
   const [searchType, setSearchType] = useState('movie');
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
+  const [query, setQuery] = useState('');
 
   const handleSearchTypeChange = (type: string) => {
-    setSearchType(type);
-  };
+  setSearchType(type);
+  setSelectedMovieId(null);
+  setMovies([]);
+  handleSearch(query)
 
+    // window.history.replaceState(null, '', window.location.href.split('#')[0])
+  };
+  useEffect(() => {
+    handleSearch(query);
+  }, [searchType]);
   const handleSearch = (query: string) => {
+    setQuery(query);
     const requestOptions: any = {
       method: 'GET',
       redirect: 'follow'
@@ -68,7 +77,7 @@ const Search: React.FC = () => {
       <SubMenu onSearchTypeChange={handleSearchTypeChange} />
       <br />
       <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} />
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className="mapMovieCard">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} onClick={handleMovieCardClick} />
         ))}
