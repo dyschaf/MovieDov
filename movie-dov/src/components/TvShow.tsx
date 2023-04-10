@@ -26,7 +26,7 @@ interface Episode {
 const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
   const [seasons, setSeasons] = useState<Season[]>([]);
   const [seasonEpisodes, setSeasonEpisodes] = useState<Episode[]>([]);
-  const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
+  const [selectedSeason, setSelectedSeason] = useState<number | null>(1);
   const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
 
   useEffect(() => {
@@ -41,11 +41,13 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
 
     if (selectedSeason !== null) {
       const fetchEpisodes = async () => {
+        
         const response = await fetch(
           `https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`
         );
         const data = await response.json();
         setSeasonEpisodes(data.episodes);
+        setSelectedEpisode(data.episodes[0]);
       };
 
       fetchEpisodes();
@@ -100,8 +102,8 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
         <h2>Seasons</h2>
         <select onChange={handleSeasonSelect}>
           {seasons.map((season) => (
-            <option key={season.id} value={season.season_number}>
-              Season {season.season_number}
+            <option key={season.id} value={season.season_number+1}>
+              Season {season.season_number+1}
             </option>
           ))}
         </select>
