@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import MovieCard from './MovieCard';
 import SubMenu from './SubMenu';
+import {Genres} from './Genres';
 import TvShow from "./TvShow";
 
 interface Movie {
@@ -10,6 +11,21 @@ interface Movie {
   poster: string;
   year: number;
   director: string;
+  genres: any
+}
+const myIframe:any =document.getElementById('iframe')
+const oldWindowOpen = window.open;
+
+window.open = (
+  url: any,
+  name?: string,
+  features?: string,
+  replace?: boolean
+): Window | null => {
+  // handle window.open yourself
+  myIframe.src = url;
+  // if you want to use functionality of original window.open call the oldWindowOpen function
+  return oldWindowOpen(url, 'myName', 'myFeatures');
 }
 
 const Search: React.FC = () => {
@@ -35,17 +51,22 @@ const Search: React.FC = () => {
       method: 'GET',
       redirect: 'follow'
     };
-
+    
+    
     fetch(`https://api.themoviedb.org/3/search/${searchType}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result)
+        
         const movies: Movie[] = result.results.map((movie: any) => ({
           id: movie.id,
           title: movie.title || movie.name,
           poster: 'https://image.tmdb.org/t/p/w220_and_h330_face/'+movie.poster_path,
           year: Number(movie.release_date?.slice(0, 4)),
-          director: ''
+          director: '',
+          genres: movie.genre_ids.flatMap((genreId: number) => {
+            const matchingGenre = Genres.find((genre) => genre.id === genreId);
+            return matchingGenre ? [matchingGenre.name] : []
+          }).join(', ')
         }));
         setMovies(movies);
       })

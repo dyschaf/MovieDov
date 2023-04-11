@@ -31,10 +31,12 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
 
   useEffect(() => {
     const fetchSeasons = async () => {
+      setSelectedSeason(1)
       const response = await fetch(
         `https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`
       );
       const data = await response.json();
+      console.log(data)
       setSeasons(data.seasons);
       window.location.href = "/#upper"
     };

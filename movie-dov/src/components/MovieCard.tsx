@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Genres } from './Genres';
 interface MovieCardProps {
   movie: {
     id: number;
@@ -7,18 +7,20 @@ interface MovieCardProps {
     year: number;
     director: string;
     poster: string;
+    genres:string;
   };
   onClick: (id: number) => void;
 }
 export let onClick:any
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
-
+console.log(movie.genres)
   return (
     <div className="movie-card" onClick={() => onClick(movie.id)}>
       <img src={movie.poster} alt={movie.title} />
       <h6>{movie.title}</h6>
       <p>{movie.year}</p>
-      <p>{movie.director}</p>
+      <p>{movie.genres}</p>
+      
     </div>
   );
 };
