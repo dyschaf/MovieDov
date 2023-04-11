@@ -94,23 +94,19 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       <div>
         <h2>Seasons</h2>
         <select onChange={handleSeasonSelect}>
-        {seasons && seasons[0]?.season_number === 1 ? (
-          // First set of options for the first season
-          seasons?.map((season) => (
+      
+        {seasons?.map((season) => {
+          if (season.season_number === 0) {
+            return null; // or you can use 'continue' statement here
+          }
+          return (
             <option key={season.id} value={season.season_number}>
               Season {season.season_number}
             </option>
-          ))
-        ) : (
-          // Second set of options for subsequent seasons
-          seasons?.map((season) => (
-            <option key={season.id} value={season.season_number + 1}>
-              Season {season.season_number + 1}
-            </option>
-          ))
-        )}
+          );
+        })}
 
-      </select>
+        </select>
 
       </div>
       {selectedSeason && (
