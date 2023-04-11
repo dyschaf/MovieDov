@@ -32,9 +32,9 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
   // const resetSelectedSeason = () => {
   //   setSelectedSeason(1);
   // };
+  useEffect(()=>setSelectedSeason(1),[id])
   useEffect(() => {
     const fetchSeasons = async () => {
-      setSelectedSeason(1)
       const response = await fetch(
         `https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`
       );
@@ -74,26 +74,13 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
     );
     setSelectedEpisode(selectedSeasonEpisodes[0]);
   };
-  // const handleFullScreenClick = () => {
-  //   const iframe = document.getElementById("iframe") as HTMLIFrameElement;
-  //   if (iframe.requestFullscreen) {
-  //     iframe.requestFullscreen();
-  //   } else if (iframe.webkitRequestFullscreen) {
-  //     /* Safari */
-  //     iframe.webkitRequestFullscreen();
-  //   } else if (iframe.msRequestFullscreen) {
-  //     /* IE11 */
-  //     iframe.msRequestFullscreen();
-  //   }
-  // }
-
 
   return (
     <div>
       {selectedEpisode && (
         <div>
         {/* <button onClick={handleFullScreenClick}>Fullscreen</button> */}
-        <iframe id="iframe-embed" src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
+        <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
 
           <h4>Episode - {selectedEpisode.name}</h4>
           {/* <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedEpisode.still_path}`} alt={selectedEpisode.name} /> */}
