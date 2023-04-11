@@ -29,6 +29,9 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
   const [selectedSeason, setSelectedSeason] = useState<number | null>(1);
   const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
 
+  // const resetSelectedSeason = () => {
+  //   setSelectedSeason(1);
+  // };
   useEffect(() => {
     const fetchSeasons = async () => {
       setSelectedSeason(1)

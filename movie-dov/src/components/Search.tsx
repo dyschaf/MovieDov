@@ -11,21 +11,7 @@ interface Movie {
   poster: string;
   year: number;
   director: string;
-  genres: any
-}
-const myIframe:any =document.getElementById('iframe')
-const oldWindowOpen = window.open;
-
-window.open = (
-  url: any,
-  name?: string,
-  features?: string,
-  replace?: boolean
-): Window | null => {
-  // handle window.open yourself
-  myIframe.src = url;
-  // if you want to use functionality of original window.open call the oldWindowOpen function
-  return oldWindowOpen(url, 'myName', 'myFeatures');
+  genres: string;
 }
 
 const Search: React.FC = () => {

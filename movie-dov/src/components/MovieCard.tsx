@@ -18,7 +18,7 @@ console.log(movie.genres)
     <div className="movie-card" onClick={() => onClick(movie.id)}>
       <img src={movie.poster} alt={movie.title} />
       <h6>{movie.title}</h6>
-      <p>{movie.year}</p>
+      {movie.year?<p>{movie.year}</p>:<></>}
       <p>{movie.genres}</p>
       
     </div>
