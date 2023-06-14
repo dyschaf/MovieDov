@@ -80,7 +80,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       {selectedEpisode && (
         <div>
         {/* <button onClick={handleFullScreenClick}>Fullscreen</button> */}
-        <iframe src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`} frameBorder="0" width="100%" height="100%" allowFullScreen></iframe>
+        <iframe src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`}  width="100%" height="100%" allowFullScreen></iframe>
         {/* <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe> */}
 
           <h4>Episode - {selectedEpisode.name}</h4>
