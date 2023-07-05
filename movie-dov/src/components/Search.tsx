@@ -4,7 +4,7 @@ import MovieCard from './MovieCard';
 import SubMenu from './SubMenu';
 import {Genres} from './Genres';
 import TvShow from "./TvShow";
-import Accordion from 'react-bootstrap/Accordion';
+// import Accordion from 'react-bootstrap/Accordion';
 
 
 interface Movie {

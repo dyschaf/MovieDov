@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
+// import Accordion from 'react-bootstrap/Accordion';
 interface Season {
   id: number;
   name: string;
