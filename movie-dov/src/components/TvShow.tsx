@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import Accordion from 'react-bootstrap/Accordion';
 interface Season {
   id: number;
   name: string;
@@ -80,8 +80,54 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       {selectedEpisode && (
         <div>
         {/* <button onClick={handleFullScreenClick}>Fullscreen</button> */}
-{/*         <iframe src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`}  width="100%" height="100%" allowFullScreen></iframe> */}
-        <iframe id="iframe" src={`https://www.2embed.cc/embed/tmdb/tv?id=${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
+        (
+    <div>
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>First iframe</Accordion.Header>
+          <Accordion.Body>
+            <iframe
+              src={`https://embed.smashystream.com/playere.php?tmdb=${id}&season=${selectedSeason}&${selectedEpisode.episode_number}`}
+              width="100%"
+              height="100%"
+              allowFullScreen
+            ></iframe>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Third iframe</Accordion.Header>
+          <Accordion.Body>
+            <iframe
+              src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`}
+              width="100%"
+              height="100%"
+              allowFullScreen
+            ></iframe>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Fourth iframe</Accordion.Header>
+          <Accordion.Body>
+            <iframe
+              id="iframe"
+              src={`https://www.2embed.cc/embed/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`}
+              width="100%"
+              height="100%"
+              allowFullScreen={true}
+            ></iframe>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+        {/* <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${id}&season=${selectedSeason}&${selectedEpisode.episode_number}`}  width="100%" height="100%" allowFullScreen></iframe>
+        <iframe src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`}  width="100%" height="100%" allowFullScreen></iframe>
+        <iframe src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`}  width="100%" height="100%" allowFullScreen></iframe>
+        <iframe id="iframe" src={`https://www.2embed.cc/embed/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe> */}
 
           <h4>Episode - {selectedEpisode.name}</h4>
           {/* <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedEpisode.still_path}`} alt={selectedEpisode.name} /> */}

@@ -4,6 +4,8 @@ import MovieCard from './MovieCard';
 import SubMenu from './SubMenu';
 import {Genres} from './Genres';
 import TvShow from "./TvShow";
+import Accordion from 'react-bootstrap/Accordion';
+
 
 interface Movie {
   id: number;
@@ -68,8 +70,36 @@ const Search: React.FC = () => {
     <div id='upper'>
       {selectedMovieId && searchType === "movie" ? (
         <>
-{/*           <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe> */}
-          <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%"allowFullScreen={true} ></iframe>
+        <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>First source</Accordion.Header>
+          <Accordion.Body>
+            <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`} width="100%" height="100%" allowFullScreen></iframe>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+
+      <Accordion>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>Second source</Accordion.Header>
+          <Accordion.Body>
+            <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`} width="100%" height="100%" allowFullScreen></iframe>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+
+      <Accordion>
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>Third source</Accordion.Header>
+          <Accordion.Body>
+            <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%" allowFullScreen={true}></iframe>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+{/*           
+          <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
+          <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
+          <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%"allowFullScreen={true} ></iframe> */}
           {/* <iframe id="iframe" src="https://www.2embed.to/embed/tmdb/movie?id=849869" width="100%" height="100%" frameBorder="0"></iframe> */}
         </>
         ) : (
