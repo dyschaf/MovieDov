@@ -92,7 +92,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
         <Accordion.Item eventKey="2">
         <Accordion.Header>Source 2</Accordion.Header>
         <Accordion.Body>
-        <iframe id="iframe" src={`https://www.2embed.cc/embed/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
+        <iframe id="iframe" src={`https://www.2embed.cc/embedtv/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
 
         </Accordion.Body>
       </Accordion.Item>  
