@@ -1,10 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Home from "./components/Home"
 import ErrorBoundary from './components/ErrorBoundary';
 import { Routes, Route, useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
+  
   return (
     <>
       <ErrorBoundary fallback={<div>Something went wrong!</div>}>

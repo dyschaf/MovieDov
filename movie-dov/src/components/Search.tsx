@@ -4,6 +4,7 @@ import MovieCard from './MovieCard';
 import SubMenu from './SubMenu';
 import {Genres} from './Genres';
 import TvShow from "./TvShow";
+import Accordion from 'react-bootstrap/Accordion'
 // import Accordion from 'react-bootstrap/Accordion';
 
 
@@ -96,7 +97,28 @@ const Search: React.FC = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion> */}
-          
+          <Accordion defaultActiveKey="1">
+          <Accordion.Item eventKey="1">
+        <Accordion.Header>Source 1</Accordion.Header>
+        <Accordion.Body>
+            <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
+
+        </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="2">
+        <Accordion.Header>Source 2</Accordion.Header>
+        <Accordion.Body>
+        <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%"allowFullScreen={true} ></iframe>
+   
+              </Accordion.Body>
+      </Accordion.Item>  
+      <Accordion.Item eventKey="3">
+        <Accordion.Header>Source 3</Accordion.Header>
+        <Accordion.Body>
+        <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
+              </Accordion.Body>
+      </Accordion.Item>  
+      </Accordion>
           <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
           <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
           <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%"allowFullScreen={true} ></iframe>
