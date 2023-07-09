@@ -93,12 +93,13 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
         <Accordion.Header>Source 2</Accordion.Header>
         <Accordion.Body>
         <iframe id="iframe" src={`https://www.2embed.cc/embedtv/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
-
+{/* test */}
         </Accordion.Body>
       </Accordion.Item>  
        <Accordion.Item eventKey="3">
         <Accordion.Header>Source 3</Accordion.Header>
         <Accordion.Body>
+
           
         <iframe
               src={`https://embed.smashystream.com/playere.php?tmdb=${id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
