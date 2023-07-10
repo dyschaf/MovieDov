@@ -115,7 +115,7 @@ const Search: React.FC = () => {
       <Accordion.Item eventKey="3">
         <Accordion.Header>Source 3</Accordion.Header>
         <Accordion.Body>
-        <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
+        <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
               </Accordion.Body>
       </Accordion.Item>  
       </Accordion>
