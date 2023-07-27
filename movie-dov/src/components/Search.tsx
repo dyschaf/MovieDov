@@ -97,7 +97,7 @@ const Search: React.FC = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion> */}
-          <Accordion defaultActiveKey="1">
+          <Accordion defaultActiveKey="3">
           <Accordion.Item eventKey="1">
         <Accordion.Header>Source 1</Accordion.Header>
         <Accordion.Body>
