@@ -42,6 +42,7 @@ const Search: React.FC = () => {
     };
     
     
+    // fetch(`https://api.themoviedb.org/3/search/keyword?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
     fetch(`https://api.themoviedb.org/3/search/${searchType}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
       .then(response => response.json())
       .then(result => {
@@ -80,6 +81,7 @@ const Search: React.FC = () => {
         </Accordion.Item>
       </Accordion>
 
+      
       <Accordion>
         <Accordion.Item eventKey="1">
           <Accordion.Header>Second source</Accordion.Header>
@@ -136,13 +138,20 @@ const Search: React.FC = () => {
       <h1>Search</h1>
       <SubMenu onSearchTypeChange={handleSearchTypeChange} />
       <br />
-      {searchType === "movie" ? (
+      {searchType === "all" ? (
       <h3>Search for a Movie</h3>):( <h3>Search for a TV Show</h3>)}
       <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} />
       <div className="mapMovieCard">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} onClick={handleMovieCardClick} />
         ))}
+      {/* {searchType === "movie" ? (
+      <h3>Search for a Movie</h3>):( <h3>Search for a TV Show</h3>)}
+      <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} />
+      <div className="mapMovieCard">
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} onClick={handleMovieCardClick} />
+        ))} */}
       </div>
     </div>
   );
