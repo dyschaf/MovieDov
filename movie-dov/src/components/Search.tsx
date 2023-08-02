@@ -99,7 +99,7 @@ const Search: React.FC = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion> */}
-          <Accordion defaultActiveKey="3">
+          <Accordion defaultActiveKey="4">
           <Accordion.Item eventKey="1">
         <Accordion.Header>Source 1</Accordion.Header>
         <Accordion.Body>
@@ -118,6 +118,12 @@ const Search: React.FC = () => {
         <Accordion.Header>Source 3</Accordion.Header>
         <Accordion.Body>
         <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
+              </Accordion.Body>
+      </Accordion.Item>  
+      <Accordion.Item eventKey="4">
+        <Accordion.Header>Source 4</Accordion.Header>
+        <Accordion.Body>
+        <iframe src={`https://vidsrc.to/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
               </Accordion.Body>
       </Accordion.Item>  
       </Accordion>
@@ -139,7 +145,10 @@ const Search: React.FC = () => {
       <SubMenu onSearchTypeChange={handleSearchTypeChange} />
       <br />
       {searchType === "all" ? (
-      <h3>Search for a Movie</h3>):( <h3>Search for a TV Show</h3>)}
+      <h3>Search for a Movie</h3>):
+      ( <>
+      <h3>Search for a TV Show</h3>
+      </>)}
       <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} />
       <div className="mapMovieCard">
         {movies.map((movie) => (

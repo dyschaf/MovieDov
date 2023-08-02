@@ -109,19 +109,34 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
             ></iframe>
               </Accordion.Body>
       </Accordion.Item>  
-       <Accordion.Item eventKey="3">
+       <Accordion.Item eventKey="4">
         <Accordion.Header>Source 4</Accordion.Header>
         <Accordion.Body>
 
           
         <iframe
-              src={`https://9anime.vc/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
+              // src={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
+              src={`https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
               width="100%"
               height="100%"
               allowFullScreen
             ></iframe>
               </Accordion.Body>
       </Accordion.Item>  
+      {/* </Accordion>
+      <Accordion> */}
+       {/* <Accordion.Item eventKey="5"> */}
+        {/* <Accordion.Header>Anime</Accordion.Header>
+        <Accordion.Body>
+        <iframe
+              // src={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
+              src={`https://aniwave.to/home`}
+              width="100%"
+              height="100%"
+              allowFullScreen
+            ></iframe>
+              </Accordion.Body>
+      </Accordion.Item>   */}
     </Accordion>
       {/* <Accordion>
         <Accordion.Item eventKey="0">
