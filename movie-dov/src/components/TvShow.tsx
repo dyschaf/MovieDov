@@ -81,7 +81,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       {selectedEpisode && (
         <div>
           
-          <Accordion defaultActiveKey="3">
+          <Accordion defaultActiveKey="4">
           <Accordion.Item eventKey="0">
         <Accordion.Header>Source 1</Accordion.Header>
         <Accordion.Body>
