@@ -125,8 +125,8 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       </Accordion.Item>  
       {/* </Accordion>
       <Accordion> */}
-       {/* <Accordion.Item eventKey="5"> */}
-        {/* <Accordion.Header>Anime</Accordion.Header>
+       <Accordion.Item eventKey="5">
+        <Accordion.Header>Anime</Accordion.Header>
         <Accordion.Body>
         <iframe
               // src={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
@@ -136,7 +136,21 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
               allowFullScreen
             ></iframe>
               </Accordion.Body>
-      </Accordion.Item>   */}
+      </Accordion.Item>  
+       <Accordion.Item eventKey="5">
+        <Accordion.Header>Anime</Accordion.Header>
+        <Accordion.Body>
+        <iframe
+              // src={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
+              // src={`https://aniwave.to/home`}
+              src={`https://aniwave.to/watch/oshi-no-ko2.4q1jm/ep-9?type=dub`}
+              // src={`https://aniwave.to/home`}
+              width="100%"
+              height="100%"
+              allowFullScreen
+            ></iframe>
+              </Accordion.Body>
+      </Accordion.Item>  
     </Accordion>
       {/* <Accordion>
         <Accordion.Item eventKey="0">

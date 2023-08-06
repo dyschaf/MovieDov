@@ -144,7 +144,7 @@ const Search: React.FC = () => {
       <h1>Search</h1>
       <SubMenu onSearchTypeChange={handleSearchTypeChange} />
       <br />
-      {searchType === "all" ? (
+      {searchType === "movie" ? (
       <h3>Search for a Movie</h3>):
       ( <>
       <h3>Search for a TV Show</h3>
