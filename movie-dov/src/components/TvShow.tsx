@@ -165,6 +165,20 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
             ></iframe>
               </Accordion.Body>
       </Accordion.Item>  
+       <Accordion.Item eventKey="8">
+        <Accordion.Header>Source 9</Accordion.Header>
+        <Accordion.Body>
+
+          
+        <iframe
+              // src={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
+              src={`https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              width="100%"
+              height="100%"
+              allowFullScreen
+            ></iframe>
+              </Accordion.Body>
+      </Accordion.Item>  
       {/* </Accordion>
       <Accordion> */}
        <Accordion.Item eventKey="8">

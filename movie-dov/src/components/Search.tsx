@@ -145,6 +145,12 @@ const Search: React.FC = () => {
         <iframe src={`https://vidsrc.xyz/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
               </Accordion.Body>
       </Accordion.Item>  
+      <Accordion.Item eventKey="8">
+        <Accordion.Header>Source 8</Accordion.Header>
+        <Accordion.Body>
+        <iframe src={`https://vidsrc.pro/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
+              </Accordion.Body>
+      </Accordion.Item>  
       </Accordion>
           {/* <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
           <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
