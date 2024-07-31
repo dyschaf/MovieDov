@@ -166,7 +166,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
               </Accordion.Body>
       </Accordion.Item>  
        <Accordion.Item eventKey="8">
-        <Accordion.Header>Source 9</Accordion.Header>
+        <Accordion.Header>Source 8</Accordion.Header>
         <Accordion.Body>
 
           
@@ -181,7 +181,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
       </Accordion.Item>  
       {/* </Accordion>
       <Accordion> */}
-       <Accordion.Item eventKey="8">
+       <Accordion.Item eventKey="9">
         <Accordion.Header>Anime</Accordion.Header>
         <Accordion.Body>
         <iframe
