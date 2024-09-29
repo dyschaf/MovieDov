@@ -186,7 +186,7 @@ const TvShow: React.FC<{ id: number }> = ({ id }) =>  {
         <Accordion.Body>
         <iframe
               // src={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              src={`https://aniwave.to/home`}
+              src={`https://aniwave.cool`}
               width="100%"
               height="100%"
               allowFullScreen
