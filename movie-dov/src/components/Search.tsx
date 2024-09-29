@@ -136,13 +136,13 @@ const Search: React.FC = () => {
       <Accordion.Item eventKey="6">
         <Accordion.Header>Source 6</Accordion.Header>
         <Accordion.Body>
-        <iframe src={`https://vidsrc.net/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
+        <iframe src={`https://multiembed.mov/directstream.php?video_id=${selectedMovieId}&tmdb=1`}  width="100%" height="100%" allowFullScreen></iframe>
               </Accordion.Body>
       </Accordion.Item>  
       <Accordion.Item eventKey="7">
         <Accordion.Header>Source 7</Accordion.Header>
         <Accordion.Body>
-        <iframe src={`https://vidsrc.xyz/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
+        <iframe src={`https://vidsrc.uk/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
               </Accordion.Body>
       </Accordion.Item>  
       <Accordion.Item eventKey="8">
