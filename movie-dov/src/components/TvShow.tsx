@@ -63,6 +63,11 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
     if (historySelect?.title) {
       setSaveTVShowTitle(historySelect.title);
     }
+    setTimeout(() => {
+      // setHistorySelect(null)  
+      }, (11000));
+
+      // console.log(selectedEpisode?.episode_number)
   }, [historySelect?.season, historySelect?.episode,historySelect?.title,]);
   useEffect(() => {
     if (historySelect) {
@@ -107,6 +112,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
       };
       if (historySelect) {
         setSelectedSeason(historySelect.season)
+        // console.log(selectedEpisode.episode.episode_number)
         id= historySelect.id
       }
       fetchEpisodes();
@@ -114,10 +120,12 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
     }
 
       fetchSeasons();
-      setTimeout(() => {
-      // setHistorySelect(null)  
-      }, (100000000000));
-    
+      // setTimeout(() => {
+      // // setHistorySelect(null)  
+      // }, (100000000000));
+      
+      // console.log(safeEpisode.episode_number)
+      // console.log(selectedEpisode.episode_number)
   }, [selectedSeason, id]);
 
   const handleSeasonSelect = (event:any) => {
@@ -184,17 +192,19 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
   
       setHistorySelect(null); // ✅ Reset history selection after saving
     }
+    // console.log(selectedEpisode.episode_number)
+    // console.log(selectedEpisode)
   }, [selectedEpisode]); // ✅ Removed `id` and `title` from dependencies // ✅ Removed `id` from dependencies
   return (
     <div>
-      {/* <DisplayHistory/> */}
+
       {selectedEpisode && (
         <div>
           <Accordion defaultActiveKey="5">
           <Accordion.Item eventKey="0">
         <Accordion.Header>Source 1</Accordion.Header>
         <Accordion.Body>
-        {/* <iframe src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`}  width="100%" height="100%" allowFullScreen></iframe> */}
+        <iframe src={`https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`}  width="100%" height="100%" allowFullScreen></iframe>
    
               </Accordion.Body>
       </Accordion.Item>  
@@ -225,7 +235,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              src={`https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`}
               width="100%"
               height="100%"
               allowFullScreen
@@ -239,7 +249,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              src={`https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`}
               width="100%"
               height="100%"
               allowFullScreen
@@ -255,7 +265,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
               // xsrc={`https://multiembed.mov/directstream.php?video_id=tt6263850  `}
-              src={`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode.episode_number}  `}
+              src={`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode.episode_number}`}
               width="100%"
               height="100%"
               allowFullScreen
@@ -269,7 +279,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              src={`https:vidsrc.uk/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https:vidsrc.uk/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`}
               width="100%"
               height="100%"
               allowFullScreen
@@ -283,7 +293,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              src={`https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`}
               width="100%"
               height="100%"
               allowFullScreen
