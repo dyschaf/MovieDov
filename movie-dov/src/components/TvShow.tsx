@@ -201,7 +201,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
         <Accordion.Item eventKey="2">
         <Accordion.Header>Source 2</Accordion.Header>
         <Accordion.Body>
-        {/* <iframe id="iframe" src={`https://www.2embed.cc/embedtv/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe> */}
+        <iframe id="iframe" src={`https://www.2embed.cc/embedtv/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`} width="100%" height="100 %"  allowFullScreen={true}></iframe>
 {/* test */}
         </Accordion.Body>
       </Accordion.Item>  
@@ -211,7 +211,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
 
           
         <iframe
-              // src={`https://embed.smashystream.com/playere.php?tmdb=${id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
+              src={`https://embed.smashystream.com/playere.php?tmdb=${id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
               width="100%"
               height="100%"
               allowFullScreen
@@ -225,7 +225,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              // src={`https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
               width="100%"
               height="100%"
               allowFullScreen
@@ -239,7 +239,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              // src={`https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
               width="100%"
               height="100%"
               allowFullScreen
@@ -255,7 +255,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
               // xsrc={`https://multiembed.mov/directstream.php?video_id=tt6263850  `}
-              // src={`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode.episode_number}  `}
+              src={`https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode.episode_number}  `}
               width="100%"
               height="100%"
               allowFullScreen
@@ -269,7 +269,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              // src={`https:vidsrc.uk/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https:vidsrc.uk/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
               width="100%"
               height="100%"
               allowFullScreen
@@ -283,7 +283,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
           
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              // src={`https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
+              src={`https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}  `}
               width="100%"
               height="100%"
               allowFullScreen
@@ -297,7 +297,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
         <Accordion.Body>
         <iframe
               // xsrc={`https://aniwave.to/watch/technoroid-overmind-${id}?ep=96946{id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`}
-              // src={`https://aniwave.cool`}
+              src={`https://aniwave.cool`}
               width="100%"
               height="100%"
               allowFullScreen
