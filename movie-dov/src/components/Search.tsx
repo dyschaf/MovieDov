@@ -5,9 +5,13 @@ import SubMenu from './SubMenu';
 import {Genres} from './Genres';
 import TvShow from "./TvShow";
 import Accordion from 'react-bootstrap/Accordion'
+import DisplayHistory from "./DisplayHistory"
 // import Accordion from 'react-bootstrap/Accordion';
 
-
+interface DisplayHistoryProps {
+  historySelect: any;  // Define the correct type for historySelect
+  setHistorySelect: React.Dispatch<React.SetStateAction<any>>;  // Define the correct type for setHistorySelect
+}
 interface Movie {
   id: number;
   title: string;
@@ -22,7 +26,11 @@ const Search: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
   const [query, setQuery] = useState('');
+  const [historySelect, setHistorySelect] = useState<any | null>(null);
 
+  useEffect(() => {
+    // Perform any setup here if necessary (for example, loading data from localStorage).
+  }, []); 
   const handleSearchTypeChange = (type: string) => {
   setSearchType(type);
   setSelectedMovieId(null);
@@ -67,9 +75,83 @@ const Search: React.FC = () => {
     setSelectedMovieId(movieId);
     window.location.href = "/#upper"
   };
+  useEffect(() => {
+    if (selectedMovieId && searchType === 'movie') {
+      // Get existing movie history from localStorage
+      const storedMovieHistory = JSON.parse(localStorage.getItem("movieHistory") || "[]");
+  
+      // Find the movie entry in the history
+      const existingMovieIndex = storedMovieHistory.findIndex((item: any) => item.id === selectedMovieId);
+  
+      // Create a new movie entry with updated timestamp
+      const newEntry = {
+        id: selectedMovieId,
+        title: movies.find((movie) => movie.id === selectedMovieId)?.title,
+        timestamp: new Date().toISOString(),
+        type: "movie"
+      };
+  
+      let updatedMovieHistory;
+  
+      if (existingMovieIndex > -1) {
+        // If movie already exists, update timestamp and move to top
+        const existingMovie = storedMovieHistory[existingMovieIndex];
+        existingMovie.timestamp = newEntry.timestamp;
+  
+        // Remove the existing movie entry and add the updated one to the top
+        storedMovieHistory.splice(existingMovieIndex, 1);
+        updatedMovieHistory = [existingMovie, ...storedMovieHistory];
+      } else {
+        // If movie doesn't exist, just add it to the top
+        updatedMovieHistory = [newEntry, ...storedMovieHistory];
+      }
+  
+      // Save the updated movie history back to localStorage
+      localStorage.setItem("movieHistory", JSON.stringify(updatedMovieHistory));
+    }
+  }, [selectedMovieId, searchType, movies]);
+  // console.log("TvShow.tsx received historySelect:", historySelect);
+  const handleHistorySelect = (item: any) => {
+    setHistorySelect({ ...item }); // ✅ Creates a new object to trigger re-renders
+  };
+  useEffect(() => {
+    if (historySelect) {
+      if (historySelect.type) {
+        setSearchType("movie")
+        setSelectedMovieId(historySelect.id);  // Set the selectedMovieId to the id of the movie
+        setHistorySelect(null);  // Clear the historySelect after handling
+        // console.log(historySelect)
+         
+        // This is a TV Show with an episode
+        // Handle TV Show logic here, for example, setting selectedEpisode or selectedSeason
+      } else {
+        // This is a Movie (no episode field)
+        // console.log(historySelect)
+        setSearchType("tv")
+        setSelectedMovieId(historySelect.id)
+      
+      }
+    }
+  }, [historySelect]); 
+  // const [forceRender, setForceRender] = useState(false);
 
+// useEffect(() => {
+//   setForceRender((prev) => !prev); // Force component update
+// }, [historySelect]);
+  
   return (
+    
     <div id='upper'>
+
+      {/* {searchType === "movie" ? (
+        <div> */}
+  {/* // Component logic */}
+          <DisplayHistory historySelect={historySelect}  setHistorySelect={setHistorySelect}/>
+        {/* </div>
+      )
+      : (
+        <></>
+      )} */}
       {selectedMovieId && searchType === "movie" ? (
         <>
         {/* <Accordion>
@@ -162,7 +244,9 @@ const Search: React.FC = () => {
         )}
         {selectedMovieId && searchType === "tv" ? (
           // <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/${searchType}?id=${selectedMovieId}&s${selected}&e=${selectedEpisode}`} width="100%" height="100 %" ></iframe>
-          <TvShow id={selectedMovieId}/>
+          <TvShow id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType}
+          />
+          // <TvShow id={selectedMovieId} setHistorySelect={setHistorySelect} />
         ) : (
           <></>
         )}

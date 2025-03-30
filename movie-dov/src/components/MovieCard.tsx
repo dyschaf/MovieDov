@@ -13,7 +13,7 @@ interface MovieCardProps {
 }
 export let onClick:any
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
-console.log(movie.genres)
+// console.log(movie)
   return (
     <div className="movie-card" onClick={() => onClick(movie.id)}>
       <img src={movie.poster} alt={movie.title} />
