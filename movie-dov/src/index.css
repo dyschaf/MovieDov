@@ -10,4 +10,122 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+};
+/* Container for the entire page */
+.container {
+    margin-top: 20px;
+  }
+  
+  /* Row for the two columns (Movie History on the left, TV Show History on the right) */
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* Column for Movie History */
+  .col-md-6 {
+    padding: 10px;
+  }
+  
+  /* Accordion header styling */
+  .accordion-header {
+    background-color: #f8f9fa;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Accordion header hover effect */
+  .accordion-header:hover {
+    background-color: #e2e6ea;
+  }
+  
+  /* Accordion body content */
+  .accordion-body {
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+  }
+  
+  /* Styling for the list items */
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Hover effect on list items */
+  .list-group-item:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Styling for the delete button */
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+  }
+  
+  /* Hover effect for the delete button */
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Custom styling for when the item is clicked */
+  .list-group-item:active {
+    background-color: #ddd;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+  
+    .col-md-6 {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .accordion-header {
+      font-size: 1rem;
+      padding: 8px;
+    }
+  
+    .accordion-body {
+      padding: 15px;
+    }
+  
+    .list-group-item {
+      font-size: 0.9rem;
+      padding: 8px;
+    }
+  }
+  
+  /* Optional custom scrollbar styling for the list items */
+  .list-group {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* Add some space at the bottom of the page */
+  .historyContainer {
+    margin-bottom: 20px;
+  }
+  

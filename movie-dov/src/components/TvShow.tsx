@@ -412,6 +412,35 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
         })}
 
         </select>
+         <div>
+            <button
+                onClick={() => {
+                    const currentIndex = seasons.findIndex(season => season.season_number === selectedSeason);
+                    const prevSeason = seasons[currentIndex - 1];
+                    if (prevSeason) {
+                        handleSeasonSelect({ target: { value: prevSeason.season_number } });
+                    }
+                }}
+                disabled={seasons[0]?.season_number === selectedSeason}
+            >
+                Previous Season
+            </button>
+
+            <button
+                onClick={() => {
+                    const currentIndex = seasons.findIndex(season => season.season_number === selectedSeason);
+                    const nextSeason = seasons[currentIndex + 1];
+                    if (nextSeason) {
+                        handleSeasonSelect({ target: { value: nextSeason.season_number } });
+                    }
+                }}
+                disabled={seasons[seasons.length - 1]?.season_number === selectedSeason}
+            >
+                Next Season
+            </button>
+        </div>
+    
+        
 
       </div>
       {selectedSeason && (
@@ -424,6 +453,33 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
               </option>
             ))}
           </select>
+          <div>
+                <button
+                    onClick={() => {
+                        const currentIndex = seasonEpisodes.findIndex(ep => ep.episode_number === safeEpisode.episode_number);
+                        const prevEpisode = seasonEpisodes[currentIndex - 1];
+                        if (prevEpisode) {
+                            handleEpisodeSelect({ target: { value: prevEpisode.episode_number } });
+                        }
+                    }}
+                    disabled={seasonEpisodes[0]?.episode_number === safeEpisode.episode_number}
+                >
+                    Previous Episode
+                </button>
+
+                <button
+                    onClick={() => {
+                        const currentIndex = seasonEpisodes.findIndex(ep => ep.episode_number === safeEpisode.episode_number);
+                        const nextEpisode = seasonEpisodes[currentIndex + 1];
+                        if (nextEpisode) {
+                            handleEpisodeSelect({ target: { value: nextEpisode.episode_number } });
+                        }
+                    }}
+                    disabled={seasonEpisodes[seasonEpisodes.length - 1]?.episode_number === safeEpisode.episode_number}
+                >
+                    Next Episode
+                </button>
+            </div>
         </div>
       )}
       </div>

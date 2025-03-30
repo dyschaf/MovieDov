@@ -1,62 +1,104 @@
 import React, { useEffect, useState } from 'react';
+import { Accordion, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 interface DisplayHistoryProps {
-  historySelect: any;  // Define the correct type for historySelect
-  setHistorySelect: React.Dispatch<React.SetStateAction<any>>;  // Define the correct type for setHistorySelect
+  historySelect: any;
+  setHistorySelect: React.Dispatch<React.SetStateAction<any>>;
 }
-// const DisplayHistory = () => {
-const DisplayHistory : React.FC<DisplayHistoryProps> = ({ historySelect, setHistorySelect }) => {
-  // console.log(2)
-  // ✅ Correct: Hooks are inside the function component
+
+const DisplayHistory: React.FC<DisplayHistoryProps> = ({ historySelect, setHistorySelect }) => {
   const [tvShowHistory, setTvShowHistory] = useState<any[]>([]);
   const [movieHistory, setMovieHistory] = useState<any[]>([]);
 
   const handleClick = (item: any) => {
-    setHistorySelect(null)
-    // console.log(item)
-    setHistorySelect(item); // Set selected history item to the state
-
+    setHistorySelect(null);
+    setHistorySelect(item);
   };
+
+  const deleteMovie = (index: number, event: React.MouseEvent) => {
+    event.stopPropagation();
+    const updatedHistory = [...movieHistory];
+    updatedHistory.splice(index, 1);
+    setMovieHistory(updatedHistory);
+    localStorage.setItem("movieHistory", JSON.stringify(updatedHistory));
+  };
+
+  const deleteTVShow = (index: number, event: React.MouseEvent) => {
+    event.stopPropagation();
+    const updatedHistory = [...tvShowHistory];
+    updatedHistory.splice(index, 1);
+    setTvShowHistory(updatedHistory);
+    localStorage.setItem("tvShowHistory", JSON.stringify(updatedHistory));
+  };
+
   useEffect(() => {
     setTvShowHistory(JSON.parse(localStorage.getItem("tvShowHistory") || "[]"));
     setMovieHistory(JSON.parse(localStorage.getItem("movieHistory") || "[]"));
   }, []);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTvShowHistory(JSON.parse(localStorage.getItem("tvShowHistory") || "[]"));
       setMovieHistory(JSON.parse(localStorage.getItem("movieHistory") || "[]"));
-    }, 100); // Set interval to check every 1000ms (1 second)
+    }, 1000); // Updates every second
   
-    // Cleanup the interval when the component unmounts
-    return () => clearInterval(interval);
-  }, []); // Empty dependency array, runs once on mount
-
+    return () => clearInterval(interval); // Clean up interval when component unmounts
+  }, []);
 
   return (
-    <div>
-      <h2>TV Show History</h2>
-      <ul>
-        {tvShowHistory.map((item, index) => (
-          <li key={index}  
-          onClick={() => handleClick(item)}
-          >
-            {item.title} - Season {item.season}, Episode {item.episode.episode_number}  <br />
-            {/* <small>{new Date(item.timestamp).toLocaleString()}</small> */}
-          </li>
-        ))}
-      </ul>
+    <div className="container">
+      <div className="row">
+        {/* Movie History Accordion (Left Side) */}
+        <div className="col-md-6">
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Movie History</Accordion.Header>
+              <Accordion.Body>
+                <ul className="list-group">
+                  {movieHistory.map((item, index) => (
+                    <li className="list-group-item d-flex justify-content-between" key={index} onClick={() => handleClick(item)}>
+                      {item.title}
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={(event) => deleteMovie(index, event)}
+                      >
+                        ✖
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </div>
 
-      <h2>Movie History</h2>
-      <ul>
-        {movieHistory.map((item, index) => (
-          <li key={index}  
-          onClick={() => handleClick(item)}
-          >
-            {item.title} <br />
-            {/* <small>{new Date(item.timestamp).toLocaleString()}</small> */}
-          </li>
-        ))}
-      </ul>
+        {/* TV Show History Accordion (Right Side) */}
+        <div className="col-md-6">
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>TV Show History</Accordion.Header>
+              <Accordion.Body>
+                <ul className="list-group">
+                  {tvShowHistory.map((item, index) => (
+                    <li className="list-group-item d-flex justify-content-between" key={index} onClick={() => handleClick(item)}>
+                      {item.title} - S{item.season}, E{item.episode.episode_number}
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={(event) => deleteTVShow(index, event)}
+                      >
+                        ✖
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </div>
+      </div>
     </div>
   );
 };
