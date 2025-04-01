@@ -73,7 +73,7 @@ const Search: React.FC = () => {
 
   const handleMovieCardClick = (movieId: number) => {
     setSelectedMovieId(movieId);
-    window.location.href = "/#upper"
+    window.location.href = "/#Accordion"
   };
   useEffect(() => {
     if (selectedMovieId && searchType === 'movie') {
@@ -181,7 +181,7 @@ const Search: React.FC = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion> */}
-          <Accordion defaultActiveKey="5">
+          <Accordion id="Accordion" defaultActiveKey="5">
           <Accordion.Item eventKey="1">
         <Accordion.Header>Source 1</Accordion.Header>
         <Accordion.Body>
