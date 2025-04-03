@@ -89,7 +89,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
       const data = await response.json();    
       setSaveTVShowTitle(data.name)
       setSeasons(data.seasons);
-      window.location.href = "/#upper"
+      window.location.href = "/#upper" 
     };
     if (selectedSeason !== null ) {
       const fetchEpisodes = async () => {
