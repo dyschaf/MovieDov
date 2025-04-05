@@ -93,6 +93,7 @@ const listLinks = selectedMovieId !== null ? [
         }));
         setMovies(movies);
     // window.location.href = "/#movie-search"
+    
         
       })
       .catch(error => console.log('error', error));
@@ -163,7 +164,15 @@ const listLinks = selectedMovieId !== null ? [
         setSelectedMovieId(historySelect.id);  // Set the selectedMovieId to the id of the movie
         setHistorySelect(null);  // Clear the historySelect after handling
         // console.log(historySelect)
-         
+        const moviePlayer = document.getElementById("player");
+        const stickyMenu = document.querySelector('.stick-menu');
+        const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
+    
+        if (moviePlayer) {
+        window.scrollTo({
+          top: moviePlayer.offsetTop - stickyMenuHeight,
+          // behavior: 'smooth'
+        });}
         // This is a TV Show with an episode
         // Handle TV Show logic here, for example, setting selectedEpisode or selectedSeason
       } else {

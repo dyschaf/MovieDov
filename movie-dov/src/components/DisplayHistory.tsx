@@ -14,6 +14,7 @@ const DisplayHistory: React.FC<DisplayHistoryProps> = ({ historySelect, setHisto
   const handleClick = (item: any) => {
     setHistorySelect(null);
     setHistorySelect(item);
+    
   };
 
   const deleteMovie = (index: number, event: React.MouseEvent) => {
