@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  /* background: #242731; */
+
+}
+.body {
+  /* top: 100; */
+  background-color: #242731;
+  margin: 0;
+  padding: 0;
+  color: white; /* Optional: ensures text is visible on dark background */
+  font-family: sans-serif; /* Optional: sets a default font */
+  height: 100%;
 }
 
 .App-logo {
@@ -37,10 +48,10 @@
   }
 }
 
-.sub-menu {
+.sub-menu { 
   display: inline-block;
   /* margin-left: 20px; */
-}
+ }
 
 .sub-menu ul {
   list-style: none;
@@ -62,24 +73,159 @@ iframe{
   height:80vh
 }
 .body{
-  text-align: center;
+  /* text-align: center; */
 }
-.movie-card{
-  max-width: 250px;
-  min-width: 150px;
+.movie-card + img {
+width: 260px;
+padding: 12px;
+
+/* height: 380px; */
+
 }
-.mapMovieCard{
+.movie-card {
+  top: 100;
+  background-color: #1e1f26;
+  border-radius: 16px;
+  padding: 12px;
+  width: 242px;
+  /* height: 306px; */
+  /* margin: 10px; */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  color: white;
+  /* text-align: center; */
+}
+.mapMovieCard {
+  /* top :40px; */
+  /* margin-top: 200px; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  /* flex-direction: column */
-}
-.seasonEpisode{
-  /* padding: 20px; */
-  display: flex;
   justify-content: center;
-}
-.episodes{
-max-width: 250px;
+  gap: 20px;
+  padding: 20px;
 }
 
+.movie-card:hover {
+  /* top: 100; */
+  transform: scale(1.03);
+}
+
+.movie-poster {
+  height: 306px;
+
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.movie-title {
+  margin: 10px 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.genre-tag {
+  background-color: #2f3038;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #d1d1d1;
+}
+.year-genre-tags{
+  display: inline-block;
+  flex-direction: row;
+}
+.movie-year {
+  font-size: 13px;
+  color: #888;
+  margin-right: auto;
+}
+
+
+.submenu-container {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  width: 88%;
+  /* max-width: 1000px; */
+  margin: 20px auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  /* width: 80vw */
+
+}
+
+.type-button {
+  border: none;
+  padding: 8px 16px;
+  margin-right: 8px;
+  border-radius: 9999px;
+  font-weight: 600;
+  background-color: #f0f0f0;
+  color: #555;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Default "movie" active style (pink) */
+.type-button.active.movie {
+  background-color: #e600d8;
+  color: white;
+}
+
+/* New "tv" active style (blue) */
+.type-button.active.tv {
+  background-color: #00aaff;
+  color: white;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #333;
+  background-color: transparent;
+}
+
+.search-icon {
+  margin-left: 8px;
+  font-size: 18px;
+  color: #444;
+}
+.stick-menu {
+  background-color: #242731;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-bottom: 5px;
+}
+.header {
+  padding-top: 20px;
+  padding-left: 7vw;
+  display: flex;
+  align-items: center;  /* Vertically center the items */
+  justify-content: flex-start;  /* Align items to the left */
+  gap: 10px;  /* Optional: Adds space between the logo and text */
+}
+
+.header img {
+  max-width: 40px;  /* Set a fixed size for the logo */
+  height: auto;  /* Ensure the aspect ratio is maintained */
+}
+
+.header h2 {
+  margin: 0;  /* Remove default margin of <h2> */
+  font-size: 24px;  /* Adjust the font size */
+  color: white;  /* Adjust the text color */
+}

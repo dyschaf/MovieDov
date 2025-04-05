@@ -1,11 +1,13 @@
 // Search.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import MovieCard from './MovieCard';
 import SubMenu from './SubMenu';
 import {Genres} from './Genres';
 import TvShow from "./TvShow";
 import Accordion from 'react-bootstrap/Accordion'
 import DisplayHistory from "./DisplayHistory"
+import logo from "../components/IMG/logo.png"
+
 // import Accordion from 'react-bootstrap/Accordion';
 
 interface DisplayHistoryProps {
@@ -27,6 +29,24 @@ const Search: React.FC = () => {
   const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
   const [query, setQuery] = useState('');
   const [historySelect, setHistorySelect] = useState<any | null>(null);
+  const savedSourceIndex = localStorage.getItem("selectedMovieSourceIndex");
+  const [selectedMovieSourceIndex, setSelectedMovieSourceIndex] = useState<number>(
+    savedSourceIndex ? parseInt(savedSourceIndex) : 0
+  );
+  const searchInputRef = useRef<HTMLInputElement>(null);
+const listLinks = selectedMovieId !== null ? [
+  `https://vidsrc.in/embed/movie/${selectedMovieId}`,
+  `https://vidsrc.pro/embed/movie/${selectedMovieId}`,
+  `https://vidsrc.me/embed/${selectedMovieId}`,
+  `https://www.2embed.cc/embed/${selectedMovieId}`,
+  `https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}`,
+  `https://vidsrc.to/embed/movie/${selectedMovieId}`,
+  
+  `https://vidsrc.uk/embed/movie/${selectedMovieId}`,
+  `https://multiembed.mov/directstream.php?video_id=${selectedMovieId}&tmdb=1`
+
+] : [];
+
 
   useEffect(() => {
     // Perform any setup here if necessary (for example, loading data from localStorage).
@@ -39,6 +59,11 @@ const Search: React.FC = () => {
 
     // window.history.replaceState(null, '', window.location.href.split('#')[0])
   };
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [query])
   useEffect(() => {
     handleSearch(query);
   }, [searchType]);
@@ -67,13 +92,30 @@ const Search: React.FC = () => {
           }).join(', ')
         }));
         setMovies(movies);
+    // window.location.href = "/#movie-search"
+        
       })
       .catch(error => console.log('error', error));
   };
-
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [])
   const handleMovieCardClick = (movieId: number) => {
     setSelectedMovieId(movieId);
-    window.location.href = "/#Accordion"
+    const moviePlayer = document.getElementById("player");
+    const stickyMenu = document.querySelector('.stick-menu');
+    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
+
+    if (moviePlayer) {
+    window.scrollTo({
+      top: moviePlayer.offsetTop - stickyMenuHeight,
+      // behavior: 'smooth'
+    });
+    // window.location.href = "/#player"
+// 
+  }
   };
   useEffect(() => {
     if (selectedMovieId && searchType === 'movie') {
@@ -134,106 +176,94 @@ const Search: React.FC = () => {
     }
   }, [historySelect]); 
   // const [forceRender, setForceRender] = useState(false);
+  const handleSourceClick = (index: number): void => {
+    setSelectedMovieSourceIndex(index);
+    localStorage.setItem("selectedMovieSourceIndex", index.toString()); // Save the index in localStorage
+  };
+  // let typingTimeout: NodeJS.Timeout;
+  const handleTyping = (query: string) => {
+    const movieSearchSection = document.getElementById("movie-search");
+    const stickyMenu = document.querySelector('.stick-menu');
+    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 0;
+
+    if (movieSearchSection) {
+    window.scrollTo({
+      top: movieSearchSection.offsetTop - stickyMenuHeight,
+      behavior: 'smooth'
+    });
+    // window.location.href = "/#player"
+// 
+  }
+    // As soon as the user starts typing, immediately redirect
+    // window.location.href = "/#movie-search";
+  
+    handleSearch(query);
+  };
 
 // useEffect(() => {
 //   setForceRender((prev) => !prev); // Force component update
 // }, [historySelect]);
-  
+const selectedLabel = searchType === 'movie' ? 'movie' : 'TV show';
   return (
     
     <div id='upper'>
+    <div className='stick-menu'>
+      <div className="header">
+        <img src={logo} alt="Logo" />
+        <h2>Movie-Dov</h2>
+    </div>
 
-      {/* {searchType === "movie" ? (
-        <div> */}
-  {/* // Component logic */}
-          <DisplayHistory historySelect={historySelect}  setHistorySelect={setHistorySelect}/>
-        {/* </div>
-      )
-      : (
-        <></>
-      )} */}
-      {selectedMovieId && searchType === "movie" ? (
+      {/* <h1>Search</h1> */}
+<div  className="submenu-container">
+            <SubMenu onSearchTypeChange={handleSearchTypeChange} />
+            <input
+        type="text"
+        className="search-input"
+        placeholder={ `What ${selectedLabel} you wanna watch?` }
+        onChange={(e) => handleTyping(e.target.value)}
+        ref={searchInputRef} 
+      />
+
+      <span className="search-icon">🔍</span>
+      </div>
+            {/* {searchType === "movie" ? (
+            <h3>Search for a Movie</h3>)
+            :
+            ( <>
+            <h3>Search for a TV Show</h3>
+            </>)} */}
+            {/* <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} /> */}
+            </div>
+            {selectedMovieId && listLinks[0] && searchType === "movie" ? (
         <>
-        {/* <Accordion>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>First source</Accordion.Header>
-          <Accordion.Body>
-            <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`} width="100%" height="100%" allowFullScreen></iframe>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      
-      <Accordion>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>Second source</Accordion.Header>
-          <Accordion.Body>
-            <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`} width="100%" height="100%" allowFullScreen></iframe>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion>
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>Third source</Accordion.Header>
-          <Accordion.Body>
-            <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%" allowFullScreen={true}></iframe>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion> */}
-          <Accordion id="Accordion" defaultActiveKey="5">
-          <Accordion.Item eventKey="1">
-        <Accordion.Header>Source 1</Accordion.Header>
-        <Accordion.Body>
-            <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
-
-        </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="2">
-        <Accordion.Header>Source 2</Accordion.Header>
-        <Accordion.Body>
-        <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%"allowFullScreen={true} ></iframe>
-   
-              </Accordion.Body>
-      </Accordion.Item>  
-      <Accordion.Item eventKey="3">
-        <Accordion.Header>Source 3</Accordion.Header>
-        <Accordion.Body>
-        <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
-              </Accordion.Body>
-      </Accordion.Item>  
-      <Accordion.Item eventKey="4">
-        <Accordion.Header>Source 4</Accordion.Header>
-        <Accordion.Body>
-        <iframe src={`https://vidsrc.to/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
-              </Accordion.Body>
-      </Accordion.Item>  
-      
-      <Accordion.Item eventKey="5">
-        <Accordion.Header>Source 5</Accordion.Header>
-        <Accordion.Body>
-        <iframe src={`https://vidsrc.in/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
-              </Accordion.Body>
-      </Accordion.Item>  
-      <Accordion.Item eventKey="6">
-        <Accordion.Header>Source 6</Accordion.Header>
-        <Accordion.Body>
-        <iframe src={`https://multiembed.mov/directstream.php?video_id=${selectedMovieId}&tmdb=1`}  width="100%" height="100%" allowFullScreen></iframe>
-              </Accordion.Body>
-      </Accordion.Item>  
-      <Accordion.Item eventKey="7">
-        <Accordion.Header>Source 7</Accordion.Header>
-        <Accordion.Body>
-        <iframe src={`https://vidsrc.uk/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
-              </Accordion.Body>
-      </Accordion.Item>  
-      <Accordion.Item eventKey="8">
-        <Accordion.Header>Source 8</Accordion.Header>
-        <Accordion.Body>
-        <iframe src={`https://vidsrc.pro/embed/movie/${selectedMovieId}`}  width="100%" height="100%" allowFullScreen></iframe>
-              </Accordion.Body>
-      </Accordion.Item>  
-      </Accordion>
+        <div>
+        <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start" }}>
+          {/* Movie sources list */}
+          <div>
+            <p></p>
+          <ul style={{ listStyleType: "none", padding: "30px", marginBottom: "20px" }}>sources
+            {listLinks.map((link, index) => (
+              <li key={index}
+              style={{padding: "20%"}}
+              >
+                <button
+                  onClick={() => handleSourceClick(index)}
+                  
+                >
+                  {index + 1} 
+                </button>
+              </li>
+            ))}
+          </ul>
+          </div>
+          <div id="player" style={{width:"80%"}}>
+          {/* Embed the selected movie source in the iframe */}
+          <iframe src={listLinks[selectedMovieSourceIndex]} width="100%" height="100%" allowFullScreen />
+        </div>
+        </div>
+        </div>
+          {/* <iframe src={listLinks[0]}  width="100%" height="100%" allowFullScreen></iframe> */}
+       
           {/* <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
           <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
           <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%"allowFullScreen={true} ></iframe> */}
@@ -250,19 +280,23 @@ const Search: React.FC = () => {
         ) : (
           <></>
         )}
-      <h1>Search</h1>
-      <SubMenu onSearchTypeChange={handleSearchTypeChange} />
-      <br />
-      {searchType === "movie" ? (
-      <h3>Search for a Movie</h3>):
-      ( <>
-      <h3>Search for a TV Show</h3>
-      </>)}
-      <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} />
-      <div className="mapMovieCard">
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} onClick={handleMovieCardClick} />
+            <div className="mapMovieCard" id='movie-search'>
+              {movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} onClick={handleMovieCardClick} />
         ))}
+      {/* {searchType === "movie" ? (
+        <div> */}
+
+  {/* // Component logic */}
+
+          <DisplayHistory historySelect={historySelect}  setHistorySelect={setHistorySelect}/>
+        {/* </div>
+      )
+      : (
+        <></>
+      )} */}
+      
+      
       {/* {searchType === "movie" ? (
       <h3>Search for a Movie</h3>):( <h3>Search for a TV Show</h3>)}
       <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} />

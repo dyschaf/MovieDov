@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import Search from "./Search";
+import logo from "../components/IMG/logo.png"
 function Home(){
 
     
@@ -7,7 +8,6 @@ function Home(){
         <>
         <body className="body">
         
-        <h1>Movies and TV shows</h1>
         <Search/>
         </body>
         </>

@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+// import './SubMenu.css'; // Import the styles
 
 interface SubMenuProps {
   onSearchTypeChange: (type: string) => void;
 }
 
 const SubMenu: React.FC<SubMenuProps> = ({ onSearchTypeChange }) => {
-  const handleSearchTypeChange = (type: string) => {
+  const [activeType, setActiveType] = useState<'movie' | 'tv'>('movie');
+
+  const handleSearchTypeChange = (type: 'movie' | 'tv') => {
+    setActiveType(type);
     onSearchTypeChange(type);
-    
   };
-  
 
   return (
-    <div className="sub-menu">
-      <h3>Search By:</h3>
-      {/* <ul> */}
-        {/* <li> */}
-        <button name='movie' onClick={() => handleSearchTypeChange('movie')}>Movie</button>
-        {/* <input type={"button"} onClick={() => handleSearchTypeChange('movie')}>Movies</input> */}
-        {/* </li> */}
-        {/* <li> */}
-        <button onClick={() => handleSearchTypeChange('tv')}>Tv Shows</button>
-        {/* </li> */}
+    <>
+            <button
+          className={`type-button ${activeType === 'movie' ? 'active movie' : ''}`}
+          onClick={() => handleSearchTypeChange('movie')}
+        >
+          Movie
+        </button>
 
-      {/* </ul> */}
-    </div>
+        <button
+          className={`type-button ${activeType === 'tv' ? 'active tv' : ''}`}
+          onClick={() => handleSearchTypeChange('tv')}
+        >
+          TV Show
+        </button>
+
+
+      
+    </>
   );
-}
-export {};
+};
+
 export default SubMenu;
