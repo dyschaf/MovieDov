@@ -36,12 +36,12 @@ const Search: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const selectedLabel = searchType === 'movie' ? 'movie' : 'TV show';
 
-  const [placeholderText, setPlaceholderText] = useState(`What ${searchType} do you wanna watch?`);
+  const [placeholderText, setPlaceholderText] = useState(`What ${selectedLabel} do you wanna watch?`);
 
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
-    setPlaceholderText(`Search ${searchType}`);
+    setPlaceholderText(`Search ${selectedLabel}`);
   }
 }, []);
 const listLinks = selectedMovieId !== null ? [
