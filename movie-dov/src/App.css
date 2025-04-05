@@ -20,6 +20,7 @@ html, .body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
@@ -229,4 +230,9 @@ padding: 12px;
   margin: 0;  /* Remove default margin of <h2> */
   font-size: 24px;  /* Adjust the font size */
   color: white;  /* Adjust the text color */
+}
+@media (max-width: 768px) {
+  .search-icon {
+    display: none;
+  }
 }

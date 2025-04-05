@@ -34,6 +34,16 @@ const Search: React.FC = () => {
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
   );
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const selectedLabel = searchType === 'movie' ? 'movie' : 'TV show';
+
+  const [placeholderText, setPlaceholderText] = useState(`What ${searchType} do you wanna watch?`);
+
+useEffect(() => {
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    setPlaceholderText(`Search ${searchType}`);
+  }
+}, []);
 const listLinks = selectedMovieId !== null ? [
   `https://vidsrc.in/embed/movie/${selectedMovieId}`,
   `https://vidsrc.pro/embed/movie/${selectedMovieId}`,
@@ -212,7 +222,6 @@ const listLinks = selectedMovieId !== null ? [
 // useEffect(() => {
 //   setForceRender((prev) => !prev); // Force component update
 // }, [historySelect]);
-const selectedLabel = searchType === 'movie' ? 'movie' : 'TV show';
   return (
     
     <div id='upper'>
@@ -228,7 +237,7 @@ const selectedLabel = searchType === 'movie' ? 'movie' : 'TV show';
             <input
         type="text"
         className="search-input"
-        placeholder={ `What ${selectedLabel} you wanna watch?` }
+        placeholder={ placeholderText }
         onChange={(e) => handleTyping(e.target.value)}
         ref={searchInputRef} 
       />
