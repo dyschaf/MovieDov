@@ -49,7 +49,9 @@ html, .body {
     transform: rotate(360deg);
   }
 }
-
+.episodes{
+  width:100%;
+}
 .sub-menu { 
   display: inline-block;
   /* margin-left: 20px; */
