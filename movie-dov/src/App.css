@@ -355,10 +355,10 @@ iframe { height: 80vh; }
   }
   .movie-card {
     /* width: ; */
-    width: 175px;
+    width: 145px;
 
     padding: 5px;
-    max-width: 175px;
+    max-width: 145px;
     margin: 5px;
 
   }
@@ -368,7 +368,7 @@ iframe { height: 80vh; }
     gap: 5px;
   }
   .submenu-container {
-    border-radius: 9999px;
+    /* border-radius: 9999px; */
     border-radius: 25px 25px 0 0;
 
   }
