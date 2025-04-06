@@ -362,10 +362,10 @@ iframe { height: 80vh; }
   }
   .movie-card {
     /* width: ; */
-    width: 175px;
+    width: 155px;
     justify-content: space-between;
     padding: 5px;
-    max-width: 175px;
+    max-width: 155px;
     margin: 5px;
     align-items: baseline
   }
