@@ -5,6 +5,23 @@ import Home from "./components/Home"
 import ErrorBoundary from './components/ErrorBoundary';
 import { Routes, Route, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+let deferredPrompt: any;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // show your "Install" button
+});
+
+const handleInstallClick = () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
+  }
+};
+handleInstallClick()
 function App() {
   
   return (
