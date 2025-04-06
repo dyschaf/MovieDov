@@ -322,6 +322,7 @@ iframe { height: 80vh; }
   }
 
   .movie-title {
+    padding: 8px;
     font-size: 16px;
     font-weight: 600;
     margin: 0;
@@ -361,16 +362,17 @@ iframe { height: 80vh; }
   }
   .movie-card {
     /* width: ; */
-    width: 155px;
+    width: 175px;
     justify-content: space-between;
     padding: 5px;
-    max-width: 155px;
+    max-width: 175px;
     margin: 5px;
     align-items: baseline
   }
   
   .mapMovieCard{
-    padding: 5px;
+    margin: 0px;
+    padding: 8px;
     gap: 5px;
   }
   .submenu-container {
