@@ -112,11 +112,17 @@ iframe { height: 100vh; }
 }
 
 .genre-tags {
+    display: flex;
+    flex-wrap: wrap;            /* ✅ allows wrapping */
+    gap: 6px;                   /* spacing between tags */
+    justify-content: flex-start; /* or center if you prefer */
+    margin-bottom: 6px;
+  
   /* display: flex;
   flex-wrap: wrap;
   justify-content: center; */
-  gap: 4px;
-  margin-bottom: 6px;
+  /* gap: 4px;
+  margin-bottom: 6px; */
 }
 
 .genre-tag {
@@ -457,12 +463,13 @@ iframe { height: 100vh; }
   }
 
   .movie-card {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
+    width: 165px;
+    height: 405px;
+    max-width: 155px;
+    /* margin: 0 auto; */
     background-color: #1e1f26;
     border-radius: 16px;
-    padding: 12px;
+    /* padding: 12px; */
     color: white;
     display: flex;
     flex-direction: column;
@@ -495,4 +502,25 @@ iframe { height: 100vh; }
     margin: 0;
     text-align: left;
   }
+  .mapMovieCard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* gap: 20px; */
+  /* padding: 20px; */
+}
+
+.movie-poster {
+  height: 306px;
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.movie-title {
+  margin: 10px 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 }
