@@ -281,6 +281,7 @@ iframe { height: 80vh; }
     padding: 8px;
     flex: 1;
     outline: none;
+    width: 50px;
   }
 
   .search-icon {
