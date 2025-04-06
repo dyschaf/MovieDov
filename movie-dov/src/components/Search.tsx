@@ -50,7 +50,7 @@ const Search: React.FC = () => {
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
-    setPlaceholderText(` ${selectedLabel}`);
+    setPlaceholderText(`${selectedLabel}`);
   }
 }, [selectedLabel]);
 const listLinks = selectedMovieId !== null ? [
@@ -249,7 +249,7 @@ const listLinks = selectedMovieId !== null ? [
             <input
         type="text"
         className="search-input"
-        placeholder={`Search ${placeholderText}`}
+        placeholder={`${placeholderText}`}
         onChange={(e) => handleTyping(e.target.value)}
         ref={searchInputRef} 
       />
