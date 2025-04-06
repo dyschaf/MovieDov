@@ -247,7 +247,8 @@ iframe { height: 100vh; }
   /* margin-bottom: 20px; */
 }
 .source-list-movie-div-div{
-  margin: 20px auto;
+  margin-left: 7vw;
+  margin-right: 25px;
     }
 .source-list-movie-ul::-webkit-scrollbar {
   display: none;                /* Chrome, Safari */
