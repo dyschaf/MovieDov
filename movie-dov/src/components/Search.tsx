@@ -50,7 +50,7 @@ const Search: React.FC = () => {
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
-    setPlaceholderText(`${selectedLabel}`);
+    setPlaceholderText(`search ${selectedLabel} 🔍`);
   }
 }, [selectedLabel]);
 const listLinks = selectedMovieId !== null ? [
