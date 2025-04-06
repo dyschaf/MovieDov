@@ -47,7 +47,34 @@ const Search: React.FC = () => {
   const selectedLabel = searchType === 'movie' ? 'Movie' : 'TV show';
 
   const [placeholderText, setPlaceholderText] = useState(`What ${selectedLabel} do you wanna watch?`);
+  const ul = document.querySelector(".source-list-ul");
+  const listRefMobile = useRef<HTMLDivElement>(null);
+  const listRefDesktop = useRef<HTMLUListElement>(null);
+  
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
+  const scrollDown = () => {
+    listRefDesktop.current?.scrollBy({ top: 60, behavior: 'smooth' });
+  };
+  
+  const scrollUp = () => {
+    listRefDesktop.current?.scrollBy({ top: -60, behavior: 'smooth' });
+  };
+  
+  const scrollLeft = () => {
+    listRefMobile.current?.scrollBy({ left: -100, behavior: 'smooth' });
+  };
+  
+  const scrollRight = () => {
+    listRefMobile.current?.scrollBy({ left: 100, behavior: 'smooth' });
+  };
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
@@ -140,6 +167,8 @@ const listLinks = selectedMovieId !== null ? [
 // 
   }
   };
+
+  
   useEffect(() => {
     if (selectedMovieId && searchType === 'movie') {
       // Get existing movie history from localStorage
@@ -268,44 +297,70 @@ const listLinks = selectedMovieId !== null ? [
             </div>
             </div>
             {selectedMovieId && listLinks[0] && searchType === "movie" ? (
+  <div className="source-list-movie-div">
+    <div className="source-list-movie-div-div">
+      {!isMobile ? (
+        // ✅ Mobile layout (vertical with ↑ ↓ arrows)
         <>
-        <div>
-        <div className='source-list-div'>
-          {/* Movie sources list */}
-          <div>
-            <p></p>
-          <ul className='source-list-ul'>sources
+          <button className="scroll-arrow up" onClick={scrollUp}>▲</button>
+          <ul className="source-list-movie-ul" ref={listRefDesktop}>
+            sources
             {listLinks.map((link, index) => (
-              <li key={index}
-              className='source-list'
-              
-              >
+              <li key={index} className="source-list-movie">
                 <button
                   onClick={() => handleSourceClick(index)}
-                  
+                  className={selectedMovieSourceIndex === index ? "active" : ""}
                 >
-                  {index + 1} 
+                  {index + 1}
                 </button>
               </li>
             ))}
           </ul>
+          <button className="scroll-arrow down" onClick={scrollDown}>▼</button>
+        </>
+      ) : (
+        // ✅ Desktop layout (horizontal with < > arrows)
+        <div className="source-scroll-container">
+          <button className="scroll-arrow left" onClick={scrollLeft}>&lt;</button>
+          <div className="source-scroll-wrapper" ref={listRefMobile}>
+            {listLinks.map((link, index) => (
+              <button
+                key={index}
+                onClick={() => handleSourceClick(index)}
+                className={`source-button ${selectedMovieSourceIndex === index ? 'active' : ''}`}
+              >
+                {index + 1}
+              </button>
+            ))}
           </div>
-          <div id="player" >
-          {/* Embed the selected movie source in the iframe */}
-          <iframe src={listLinks[selectedMovieSourceIndex]} width="100%" height="100%" allowFullScreen />
+          <button className="scroll-arrow right" onClick={scrollRight}>&gt;</button>
         </div>
-        </div>
-        </div>
+      )}
+    </div>
+
+    {/* Player Iframe */}
+    <div id="player">
+      <iframe
+        src={listLinks[selectedMovieSourceIndex]}
+        width="100%"
+        height="100%"
+        allowFullScreen
+      />
+    </div>
+  </div>
+) : null}
+
+        {/* </div> */}
           {/* <iframe src={listLinks[0]}  width="100%" height="100%" allowFullScreen></iframe> */}
        
           {/* <iframe src={`https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
           <iframe src={`https://vidsrc.me/embed/${selectedMovieId}/`}  width="100%" height="100%" allowFullScreen></iframe>
           <iframe id="iframe" src={`https://www.2embed.cc/embed/${selectedMovieId}`} width="100%" height="100%"allowFullScreen={true} ></iframe> */}
           {/* <iframe id="iframe" src="https://www.2embed.to/embed/tmdb/movie?id=849869" width="100%" height="100%" frameBorder="0"></iframe> */}
-        </>
+        {/* </>
         ) : (
           <></>
-        )}
+        )} */}
         {selectedMovieId && searchType === "tv" ? (
           // <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/${searchType}?id=${selectedMovieId}&s${selected}&e=${selectedEpisode}`} width="100%" height="100 %" ></iframe>
           <TvShow id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType} placeholderText={placeholderText}
