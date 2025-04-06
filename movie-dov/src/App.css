@@ -464,12 +464,12 @@ iframe { height: 100vh; }
 
   .movie-card {
     width: 165px;
-    height: 405px;
-    max-width: 155px;
+    /* height: 405px; */
+    max-width: 165px;
     /* margin: 0 auto; */
     background-color: #1e1f26;
     border-radius: 16px;
-    /* padding: 12px; */
+    padding: 12px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -480,25 +480,20 @@ iframe { height: 100vh; }
     transform: scale(1.02);
   }
 
-  .movie-poster {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
-  }
+
 
   .movie-sub-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 6px;
     padding-top: 8px;
   }
 
   .movie-title {
-    padding: 8px;
-    font-size: 16px;
-    font-weight: 600;
+    /* padding: 8px; */
+    font-size: 8px;
+    font-weight: 100;
     margin: 0;
     text-align: left;
   }
@@ -511,8 +506,8 @@ iframe { height: 100vh; }
 }
 
 .movie-poster {
-  height: 306px;
-  width: 100%;
+  width: 145px;
+  height: 200px;
   border-radius: 12px;
   object-fit: cover;
 }
