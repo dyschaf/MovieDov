@@ -34,7 +34,7 @@ interface TVShowHistoryItem {
 
 // const TvShow: React.FC = ({ id, setHistorySelect() }) => {
 // const [tvShowHistory, setTvShowHistory] = useState<any[]>([]);
-const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Dispatch<React.SetStateAction<any>>;setHistorySelect:React.Dispatch<React.SetStateAction<any>>; searchType:string}> = ({ id, historySelect, setSearchType ,setHistorySelect, searchType}) =>{
+const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Dispatch<React.SetStateAction<any>>;setHistorySelect:React.Dispatch<React.SetStateAction<any>>; searchType:string; placeholderText:string}> = ({ id, historySelect, setSearchType ,setHistorySelect, searchType, placeholderText}) =>{
   // Your component logic here
 // console.log(historySelect)
 
@@ -126,7 +126,7 @@ const TvShow: React.FC<{ id: number; historySelect:any ;setSearchType:React.Disp
       
       // console.log(safeEpisode.episode_number)
       // console.log(selectedEpisode.episode_number)
-  }, [selectedSeason, id]);
+  }, [selectedSeason, id,]);
 
   const handleSeasonSelect = (event:any) => {
     

@@ -3,12 +3,16 @@ import React, { useState } from 'react';
 
 interface SubMenuProps {
   onSearchTypeChange: (type: string) => void;
-}
+  searchType: string; // ✅ Add this line
+  setSearchType: (type: string) => void;
+  
+};
 
-const SubMenu: React.FC<SubMenuProps> = ({ onSearchTypeChange }) => {
+const SubMenu: React.FC<SubMenuProps> = ({onSearchTypeChange, searchType, setSearchType}) => {
   const [activeType, setActiveType] = useState<'movie' | 'tv'>('movie');
 
   const handleSearchTypeChange = (type: 'movie' | 'tv') => {
+    setSearchType(type);
     setActiveType(type);
     onSearchTypeChange(type);
   };

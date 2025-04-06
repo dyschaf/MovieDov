@@ -10,6 +10,15 @@ import logo from "../components/IMG/logo.png"
 
 // import Accordion from 'react-bootstrap/Accordion';
 
+type TvShowProps = {
+  id: number;
+  historySelect: any;
+  setSearchType: React.Dispatch<React.SetStateAction<string>>;
+  setHistorySelect: React.Dispatch<any>;
+  searchType: string;
+  placeholderText: string; // ✅ Add this line
+};
+
 interface DisplayHistoryProps {
   historySelect: any;  // Define the correct type for historySelect
   setHistorySelect: React.Dispatch<React.SetStateAction<any>>;  // Define the correct type for setHistorySelect
@@ -41,9 +50,9 @@ const Search: React.FC = () => {
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
-    setPlaceholderText(`Search ${selectedLabel}`);
+    setPlaceholderText(` ${selectedLabel}`);
   }
-}, []);
+}, [selectedLabel]);
 const listLinks = selectedMovieId !== null ? [
   `https://vidsrc.in/embed/movie/${selectedMovieId}`,
   `https://vidsrc.pro/embed/movie/${selectedMovieId}`,
@@ -62,7 +71,9 @@ const listLinks = selectedMovieId !== null ? [
     // Perform any setup here if necessary (for example, loading data from localStorage).
   }, []); 
   const handleSearchTypeChange = (type: string) => {
+  const selectedLabel = type === 'movie' ? 'movie' : 'TV show';
   setSearchType(type);
+  setPlaceholderText(`What ${selectedLabel} do you wanna watch?`);
   setSelectedMovieId(null);
   setMovies([]);
   handleSearch(query)
@@ -233,11 +244,12 @@ const listLinks = selectedMovieId !== null ? [
 
       {/* <h1>Search</h1> */}
 <div  className="submenu-container">
-            <SubMenu onSearchTypeChange={handleSearchTypeChange} />
+      <SubMenu onSearchTypeChange={handleSearchTypeChange} searchType={searchType} setSearchType={setSearchType}/>
+
             <input
         type="text"
         className="search-input"
-        placeholder={ placeholderText }
+        placeholder={`Search ${placeholderText}`}
         onChange={(e) => handleTyping(e.target.value)}
         ref={searchInputRef} 
       />
@@ -292,7 +304,7 @@ const listLinks = selectedMovieId !== null ? [
         )}
         {selectedMovieId && searchType === "tv" ? (
           // <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/${searchType}?id=${selectedMovieId}&s${selected}&e=${selectedEpisode}`} width="100%" height="100 %" ></iframe>
-          <TvShow id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType}
+          <TvShow id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType} placeholderText={placeholderText}
           />
           // <TvShow id={selectedMovieId} setHistorySelect={setHistorySelect} />
         ) : (
