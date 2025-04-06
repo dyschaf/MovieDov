@@ -227,14 +227,20 @@ iframe { height: 80vh; }
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
-    z-index: 1000;
+    z-index: 100000000000;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
     max-width: 100%;
     margin: 0;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
   }
-
+  .row:last-child {
+    margin-bottom: 50px;
+  }
+  .accordion-button collapsed{
+    z-index: 0;
+  }
+  
   .type-button,
   .icon-button {
     border: none;
