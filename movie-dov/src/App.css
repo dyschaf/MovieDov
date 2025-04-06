@@ -501,8 +501,8 @@ iframe { height: 100vh; }
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* gap: 20px; */
-  /* padding: 20px; */
+  gap: 8px;
+  padding: 8px;
 }
 
 .movie-poster {
