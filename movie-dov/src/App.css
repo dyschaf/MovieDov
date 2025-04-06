@@ -355,10 +355,10 @@ iframe { height: 80vh; }
   }
   .movie-card {
     /* width: ; */
-    width: 145px;
+    width: 155px;
 
     padding: 5px;
-    max-width: 145px;
+    max-width: 155px;
     margin: 5px;
 
   }
