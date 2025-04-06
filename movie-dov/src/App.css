@@ -43,8 +43,10 @@ html, .body {
   color: #61dafb;
 }
 
-iframe { height: 80vh; }
-
+iframe { height: 100vh; }
+#player{
+  width: 100%;
+}
 .episodes { width: 100%; }
 
 .sub-menu { display: inline-block; }
@@ -214,6 +216,20 @@ iframe { height: 80vh; }
   font-size: 24px;
   color: white;
 }
+.source-list-div{
+  display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    display: "flex";
+    
+    align-items: "flex-start" 
+}
+.source-list-ul {
+  list-style-type: none;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
   .submenu-container {
     position: fixed;
@@ -239,6 +255,28 @@ iframe { height: 80vh; }
   }
   .accordion-button collapsed{
     z-index: 0;
+  }
+  .source-list{
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+  }
+  .source-list-div{
+      display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        display: "flex";
+        
+        align-items: "flex-start" 
+    /* justify-content: center; */
+  }
+  .source-list-ul {
+    list-style-type: none;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: baseline;  
+    flex-direction: row   ;
   }
   
   .type-button,

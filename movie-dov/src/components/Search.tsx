@@ -270,14 +270,15 @@ const listLinks = selectedMovieId !== null ? [
             {selectedMovieId && listLinks[0] && searchType === "movie" ? (
         <>
         <div>
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start" }}>
+        <div className='source-list-div'>
           {/* Movie sources list */}
           <div>
             <p></p>
-          <ul style={{ listStyleType: "none", padding: "30px", marginBottom: "20px" }}>sources
+          <ul className='source-list-ul'>sources
             {listLinks.map((link, index) => (
               <li key={index}
-              style={{padding: "20%"}}
+              className='source-list'
+              
               >
                 <button
                   onClick={() => handleSourceClick(index)}
@@ -289,7 +290,7 @@ const listLinks = selectedMovieId !== null ? [
             ))}
           </ul>
           </div>
-          <div id="player" style={{width:"80%"}}>
+          <div id="player" >
           {/* Embed the selected movie source in the iframe */}
           <iframe src={listLinks[selectedMovieSourceIndex]} width="100%" height="100%" allowFullScreen />
         </div>
