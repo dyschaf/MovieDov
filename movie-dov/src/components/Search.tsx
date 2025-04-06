@@ -43,14 +43,14 @@ const Search: React.FC = () => {
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
   );
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const selectedLabel = searchType === 'movie' ? 'movie' : 'TV show';
+  const selectedLabel = searchType === 'movie' ? 'Movie' : 'TV show';
 
   const [placeholderText, setPlaceholderText] = useState(`What ${selectedLabel} do you wanna watch?`);
 
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
-    setPlaceholderText(`🔍 ${selectedLabel} `);
+    setPlaceholderText(`🔍 ${selectedLabel}`);
   }
 }, [selectedLabel]);
 const listLinks = selectedMovieId !== null ? [
