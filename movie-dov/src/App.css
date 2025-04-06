@@ -1,17 +1,15 @@
+/* DESKTOP & GLOBAL STYLES */
 .App {
   text-align: center;
-  /* background: #242731; */
-
 }
+
 html, .body {
-  /* top: 100; */
   background-color: #242731;
   margin: 0;
   padding: 0;
-  color: white; /* Optional: ensures text is visible on dark background */
-  font-family: sans-serif; /* Optional: sets a default font */
+  color: white;
+  font-family: sans-serif;
   height: 100%;
-  /* height: 100; */
 }
 
 .App-logo {
@@ -20,10 +18,14 @@ html, .body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .App-header {
@@ -41,21 +43,11 @@ html, .body {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.episodes{
-  width:100%;
-}
-.sub-menu { 
-  display: inline-block;
-  /* margin-left: 20px; */
- }
+iframe { height: 80vh; }
+
+.episodes { width: 100%; }
+
+.sub-menu { display: inline-block; }
 
 .sub-menu ul {
   list-style: none;
@@ -73,35 +65,30 @@ html, .body {
 .sub-menu li:hover {
   color: #007bff;
 }
-iframe{
-  height:80vh
-}
-.body{
-  /* text-align: center; */
-}
+
+.body { }
+
 .movie-card + img {
-width: 260px;
-padding: 12px;
-
-/* height: 380px; */
-
+  width: 260px;
+  padding: 12px;
 }
+
 .movie-card {
   top: 100;
   background-color: #1e1f26;
   border-radius: 16px;
   padding: 12px;
   width: 242px;
-  /* height: 306px; */
-  /* margin: 10px; */
   cursor: pointer;
   transition: transform 0.2s ease;
   color: white;
-  /* text-align: center; */
 }
+
+.movie-card:hover {
+  transform: scale(1.03);
+}
+
 .mapMovieCard {
-  /* top :40px; */
-  /* margin-top: 200px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -109,14 +96,8 @@ padding: 12px;
   padding: 20px;
 }
 
-.movie-card:hover {
-  /* top: 100; */
-  transform: scale(1.03);
-}
-
 .movie-poster {
   height: 306px;
-
   width: 100%;
   border-radius: 12px;
   object-fit: cover;
@@ -143,17 +124,19 @@ padding: 12px;
   font-size: 12px;
   color: #d1d1d1;
 }
-.year-genre-tags{
+
+.year-genre-tags {
   display: inline-block;
   flex-direction: row;
 }
+
 .movie-year {
   font-size: 13px;
   color: #888;
   margin-right: auto;
 }
 
-
+/* SUBMENU BASE STYLE */
 .submenu-container {
   display: flex;
   align-items: center;
@@ -161,11 +144,8 @@ padding: 12px;
   border-radius: 9999px;
   padding: 8px 16px;
   width: 88%;
-  /* max-width: 1000px; */
   margin: 20px auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  /* width: 80vw */
-
 }
 
 .type-button {
@@ -180,13 +160,11 @@ padding: 12px;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Default "movie" active style (pink) */
 .type-button.active.movie {
   background-color: #e600d8;
   color: white;
 }
 
-/* New "tv" active style (blue) */
 .type-button.active.tv {
   background-color: #00aaff;
   color: white;
@@ -208,6 +186,7 @@ padding: 12px;
   font-size: 18px;
   color: #444;
 }
+
 .stick-menu {
   background-color: #242731;
   position: sticky;
@@ -215,27 +194,177 @@ padding: 12px;
   z-index: 1;
   padding-bottom: 5px;
 }
+
 .header {
   padding-top: 20px;
   padding-left: 7vw;
   display: flex;
-  align-items: center;  /* Vertically center the items */
-  justify-content: flex-start;  /* Align items to the left */
-  gap: 10px;  /* Optional: Adds space between the logo and text */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .header img {
-  max-width: 40px;  /* Set a fixed size for the logo */
-  height: auto;  /* Ensure the aspect ratio is maintained */
+  max-width: 40px;
+  height: auto;
 }
 
 .header h2 {
-  margin: 0;  /* Remove default margin of <h2> */
-  font-size: 24px;  /* Adjust the font size */
-  color: white;  /* Adjust the text color */
+  margin: 0;
+  font-size: 24px;
+  color: white;
 }
 @media (max-width: 768px) {
+  .submenu-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1c1d22;
+    padding: 12px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .type-button,
+  .icon-button {
+    border: none;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 14px;
+    color: white;
+    background-color: #2e3138;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .type-button.active {
+    background-color: #e600ff;
+    color: white;
+  }
+
+  .icon-button {
+    background-color: #2e3138;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  .history-button {
+    background-color: #3d414a;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background-color: #2e3138;
+    border-radius: 20px;
+    padding: 5px 10px;
+    flex: 1;
+    max-width: 300px;
+  }
+
+  .search-input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 8px;
+    flex: 1;
+    outline: none;
+  }
+
   .search-icon {
-    display: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    filter: brightness(0) invert(1);
+  }
+  .movie-card {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    background-color: #1e1f26;
+    border-radius: 16px;
+    padding: 12px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+  }
+
+  .movie-card:hover {
+    transform: scale(1.02);
+  }
+
+  .movie-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .movie-sub-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    padding-top: 8px;
+  }
+
+  .movie-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    text-align: left;
+  }
+
+  .year-genre-tags {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .genre-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .genre-tag {
+    background-color: #2f3038;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #d1d1d1;
+  }
+
+  .movie-year {
+    font-size: 13px;
+    color: #aaa;
+  }
+  .movie-card {
+    /* width: ; */
+    width: 175px;
+
+    padding: 5px;
+    max-width: 175px;
+    margin: 5px;
+
+  }
+  
+  .mapMovieCard{
+    padding: 5px;
+    gap: 5px;
   }
 }

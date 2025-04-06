@@ -7,6 +7,7 @@ import TvShow from "./TvShow";
 import Accordion from 'react-bootstrap/Accordion'
 import DisplayHistory from "./DisplayHistory"
 import logo from "../components/IMG/logo.png"
+import questionMark from "../components/IMG/search.svg"
 
 // import Accordion from 'react-bootstrap/Accordion';
 
@@ -50,7 +51,7 @@ const Search: React.FC = () => {
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
-    setPlaceholderText(`🔍 ${selectedLabel}`);
+    setPlaceholderText(`Search ${selectedLabel}`);
   }
 }, [selectedLabel]);
 const listLinks = selectedMovieId !== null ? [
@@ -243,6 +244,7 @@ const listLinks = selectedMovieId !== null ? [
     </div>
 
       {/* <h1>Search</h1> */}
+      <div className="submenu-fixed">
 <div  className="submenu-container">
       <SubMenu onSearchTypeChange={handleSearchTypeChange} searchType={searchType} setSearchType={setSearchType}/>
 
@@ -253,8 +255,8 @@ const listLinks = selectedMovieId !== null ? [
         onChange={(e) => handleTyping(e.target.value)}
         ref={searchInputRef} 
       />
-
-      <span className="search-icon">🔍</span>
+      <img className="search-icon"src={questionMark}></img>
+      {/* <span className="search-icon"></span> */}
       </div>
             {/* {searchType === "movie" ? (
             <h3>Search for a Movie</h3>)
@@ -263,6 +265,7 @@ const listLinks = selectedMovieId !== null ? [
             <h3>Search for a TV Show</h3>
             </>)} */}
             {/* <input type="text" placeholder={`search ${searchType}`} onChange={(e) => handleSearch(e.target.value)} /> */}
+            </div>
             </div>
             {selectedMovieId && listLinks[0] && searchType === "movie" ? (
         <>
