@@ -1,4 +1,3 @@
-// SourceScroll.tsx
 import React, { useRef } from 'react';
 
 interface SourceScrollerProps {
@@ -12,7 +11,6 @@ const SourceScroller: React.FC<SourceScrollerProps> = ({
   links,
   selectedIndex,
   onSelect,
-//   setSelectedIndex,
   searchType,
 }) => {
   const listRefMobile = useRef<HTMLDivElement>(null);
@@ -30,54 +28,52 @@ const SourceScroller: React.FC<SourceScrollerProps> = ({
     }
   };
 
-  const activeColor = searchType === "tv" ? "#00aaff" : "#e600ff"; // תואם לכפתור TV או Movie
+  const activeColor = searchType === "tv" ? "#00aaff" : "#e600ff";
 
   return (
     <div className="source-scroll-wrapper">
       {!isMobile ? (
         // Desktop view
-        <>
         <div className="source-list-movie-div">
-        <div className="source-list-movie-div-div">
-          <button className="scroll-arrow up" onClick={() => scrollBy(-60, 'vertical')}>▲</button>
-          <ul className="source-list-movie-ul" ref={listRefDesktop}>
-            {links.map((_, index) => (
-              <li key={index} className="source-list-movie">
+          <div className="source-list-movie-div-div">
+            <button className="scroll-arrow up" onClick={() => scrollBy(-60, 'vertical')}>▲</button>
+            <ul className="source-list-movie-ul" ref={listRefDesktop}>
+              {links.map((_, index) => (
+                <li key={index} className="source-list-movie">
+                  <button
+                    onClick={() => onSelect(index)}
+                    className={selectedIndex === index ? 'active' : ''}
+                    style={{ backgroundColor: selectedIndex === index ? activeColor : undefined }}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button className="scroll-arrow down" onClick={() => scrollBy(60, 'vertical')}>▼</button>
+          </div>
+        </div>
+      ) : (
+        // Mobile view
+        <>
+          <button className="scroll-arrow left" onClick={() => scrollBy(-100, 'horizontal')}>&lt;</button>
+          
+          <div className="source-scroll-inner">
+            <div className="source-scroll-mobile" ref={listRefMobile}>
+              {links.map((_, index) => (
                 <button
+                  key={index}
                   onClick={() => onSelect(index)}
-                  className={selectedIndex === index ? 'active' : ''}
+                  className={`source-button ${selectedIndex === index ? 'active' : ''}`}
                   style={{ backgroundColor: selectedIndex === index ? activeColor : undefined }}
                 >
                   {index + 1}
                 </button>
-              </li>
-            ))}
-          </ul>
-          <button className="scroll-arrow down" onClick={() => scrollBy(60, 'vertical')}>▼</button>
+              ))}
+            </div>
           </div>
-          </div>
-        </>
-      ) : (
-        // Mobile view
-        <>
-        <div className="source-list-movie-div">
-        <div className="source-list-movie-div-div">
-          <button className="scroll-arrow left" onClick={() => scrollBy(-100, 'horizontal')}>&lt;</button>
-          <div className="source-scroll-mobile" ref={listRefMobile}>
-            {links.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => onSelect(index)}
-                className={`source-button ${selectedIndex === index ? 'active' : ''}`}
-                style={{ backgroundColor: selectedIndex === index ? activeColor : undefined }}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
+
           <button className="scroll-arrow right" onClick={() => scrollBy(100, 'horizontal')}>&gt;</button>
-          </div>
-          </div>
         </>
       )}
     </div>

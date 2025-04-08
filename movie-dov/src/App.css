@@ -476,16 +476,13 @@ iframe { height: 100vh; }
 
   .source-scroll-wrapper {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 8px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;         /* Firefox */
-    -ms-overflow-style: none;      /* IE/Edge */
-    max-width: 60vw;
-    margin: 0 12px;
-    /* justify-content: center; */
-    padding: 0 16px;               /* ✅ Add space on both ends */
-    box-sizing: content-box;       /* ✅ Prevent internal padding from shrinking max-width */
+    padding: 10px;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .source-scroll-wrapper::-webkit-scrollbar {
@@ -516,6 +513,7 @@ iframe { height: 100vh; }
   }
 
   .scroll-arrow {
+    flex-shrink: 0;
     background: transparent;
     border: none;
     color: #aaa;
@@ -523,7 +521,28 @@ iframe { height: 100vh; }
     cursor: pointer;
     padding: 0 12px;
   }
-
+  .source-scroll-inner {
+    overflow: hidden;
+    flex-grow: 1;
+  }
+  .source-scroll-mobile {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .source-scroll-mobile::-webkit-scrollbar {
+    display: none;
+  }
+  .source-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
   .scroll-arrow:hover {
     color: white;
   }
