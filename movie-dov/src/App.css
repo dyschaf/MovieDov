@@ -47,7 +47,7 @@ iframe { height: 100vh; }
 #player{
   width: 75%;
 }
-.episodes { width: 100%; }
+
 
 .sub-menu { display: inline-block; }
 
@@ -222,6 +222,9 @@ iframe { height: 100vh; }
   font-size: 24px;
   color: white;
 }
+.player-container{
+  display: flex;
+}
 .source-list-movie-div{
     display: flex;
     flex-direction: row;
@@ -253,6 +256,7 @@ iframe { height: 100vh; }
   /* margin-bottom: 20px; */
 }
 .source-list-movie-div-div{
+
   margin-left: 7vw;
   margin-right: 25px;
     }
@@ -302,10 +306,126 @@ iframe { height: 100vh; }
 .scroll-arrow:hover {
   color: white;
 }
+.source-button.active.movie {
+  background-color: #e600ff; /* צבע לסרט */
+}
+.source-button.active.tv {
+  background-color: #00AAFF; /* כמו כפתור TV Show */
+}
+.tv-show-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 7vw;
+  margin-top: 20px;
+}
+
+.tv-show-poster {
+  width: 60px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.tv-show-info {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  flex: 1;
+}
+
+.tv-show-top-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.tv-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.select-tv-season,
+.episodes {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: #242731;
+  color: #ffffff;
+  font-weight: 500;
+  /* min-width: 110px; */
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  cursor: pointer;
+  padding-right: 30px;
+
+  /* background-position: right -50px center; */
+}
+
+/* .select-tv-season,
+.episodes {
+  
+} */
+.tv-overview {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.5;
+  max-width: 700px;
+}
+.season-episode-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 7vw;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.season-nav,
+.episode-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow-button {
+  background-color: #3b3f4c;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.arrow-button:hover {
+  background-color: #4a4f5f;
+}
+
+.season-label,
+.episode-label {
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+}
 
 @media (max-width: 768px) {
   #player {
     width: 100%;
+  }
+  .player-container{
+    display: flex;
+    flex-direction: column;
   }
 
   .submenu-container {
@@ -407,7 +527,25 @@ iframe { height: 100vh; }
   .scroll-arrow:hover {
     color: white;
   }
-
+  .source-scroll-mobile {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    gap: 8px;
+    padding: 8px;
+    max-width: 100%;
+    box-sizing: border-box;
+  
+    /* Hide scrollbar for WebKit */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  .source-scroll-mobile::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari */
+  }
+  
   .type-button,
   .icon-button {
     border: none;
@@ -519,5 +657,40 @@ iframe { height: 100vh; }
   font-size: 16px;
   font-weight: 600;
 }
+.tv-show-container {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+}
 
+.tv-show-poster {
+  width: 120px;
+  height: auto;
+  align-self: center;
+}
+
+.tv-show-info {
+  width: 100%;
+}
+
+.tv-title {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.select-tv-season,
+.episodes {
+  width: 100%;
+  max-width: 100%;
+}
+
+.tv-overview {
+  display: none;
+}
+.source-list-movie-div-div{
+
+  display: flex;
+  flex-direction: row;
+    }
 }

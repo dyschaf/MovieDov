@@ -8,6 +8,7 @@ import Accordion from 'react-bootstrap/Accordion'
 import DisplayHistory from "./DisplayHistory"
 import logo from "../components/IMG/logo.png"
 import questionMark from "../components/IMG/search.svg"
+import SourceScroller from './SourceScroller';
 
 // import Accordion from 'react-bootstrap/Accordion';
 
@@ -60,21 +61,9 @@ const Search: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   
-  const scrollDown = () => {
-    listRefDesktop.current?.scrollBy({ top: 60, behavior: 'smooth' });
-  };
-  
-  const scrollUp = () => {
-    listRefDesktop.current?.scrollBy({ top: -60, behavior: 'smooth' });
-  };
-  
-  const scrollLeft = () => {
-    listRefMobile.current?.scrollBy({ left: -100, behavior: 'smooth' });
-  };
-  
-  const scrollRight = () => {
-    listRefMobile.current?.scrollBy({ left: 100, behavior: 'smooth' });
-  };
+  useEffect(() => {
+    localStorage.setItem("selectedMovieSourceIndex", selectedMovieSourceIndex.toString());
+  }, [selectedMovieSourceIndex]);
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
@@ -236,10 +225,6 @@ const listLinks = selectedMovieId !== null ? [
     }
   }, [historySelect]); 
   // const [forceRender, setForceRender] = useState(false);
-  const handleSourceClick = (index: number): void => {
-    setSelectedMovieSourceIndex(index);
-    localStorage.setItem("selectedMovieSourceIndex", index.toString()); // Save the index in localStorage
-  };
   // let typingTimeout: NodeJS.Timeout;
   const handleTyping = (query: string) => {
     const movieSearchSection = document.getElementById("movie-search");
@@ -297,48 +282,15 @@ const listLinks = selectedMovieId !== null ? [
             </div>
             </div>
             {selectedMovieId && listLinks[0] && searchType === "movie" ? (
-  <div className="source-list-movie-div">
-    <div className="source-list-movie-div-div">
-      {!isMobile ? (
-        // ✅ Mobile layout (vertical with ↑ ↓ arrows)
-        <>
-          <button className="scroll-arrow up" onClick={scrollUp}>▲</button>
-          <ul className="source-list-movie-ul" ref={listRefDesktop}>
-            sources
-            {listLinks.map((link, index) => (
-              <li key={index} className="source-list-movie">
-                <button
-                  onClick={() => handleSourceClick(index)}
-                  className={selectedMovieSourceIndex === index ? "active" : ""}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <button className="scroll-arrow down" onClick={scrollDown}>▼</button>
-        </>
-      ) : (
-        // ✅ Desktop layout (horizontal with < > arrows)
-        <div className="source-scroll-container">
-          <button className="scroll-arrow left" onClick={scrollLeft}>&lt;</button>
-          <div className="source-scroll-wrapper" ref={listRefMobile}>
-            {listLinks.map((link, index) => (
-              <button
-                key={index}
-                onClick={() => handleSourceClick(index)}
-                className={`source-button ${selectedMovieSourceIndex === index ? 'active' : ''}`}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-          <button className="scroll-arrow right" onClick={scrollRight}>&gt;</button>
-        </div>
-      )}
-    </div>
-
-    {/* Player Iframe */}
+  // <div className="source-list-movie-div">
+  <>
+<div className='player-container'>
+    <SourceScroller
+      links={listLinks}
+      selectedIndex={selectedMovieSourceIndex}
+      onSelect={setSelectedMovieSourceIndex}
+      searchType={searchType}
+    />
     <div id="player">
       <iframe
         src={listLinks[selectedMovieSourceIndex]}
@@ -347,8 +299,13 @@ const listLinks = selectedMovieId !== null ? [
         allowFullScreen
       />
     </div>
-  </div>
+    </div>
+    </>
+
 ) : null}
+    {/* </div> */}
+
+  
 
         {/* </div> */}
           {/* <iframe src={listLinks[0]}  width="100%" height="100%" allowFullScreen></iframe> */}
