@@ -65,7 +65,56 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     const selectedSeasonEpisodes = seasonEpisodes.filter(ep => ep.episode_number === episodeNumber);
     setSelectedEpisode(selectedSeasonEpisodes[0]);
   };
+  useEffect(() => {
+    if (
+      saveTVShowTitle &&  // ✅ Ensure title exists
+      selectedEpisode?.episode_number !== undefined &&  // ✅ Ensure episode exists
+      selectedSeason !== null // ✅ Ensure season exists
+    ) {
+      // setTimeout(() => {
+      //   // Code to execute after 5 seconds
+      // }, 1000000);
+  
+      const newEntry: TVShowHistoryItem = {
+        id: id,
+        title: saveTVShowTitle,
+        season: selectedSeason,
+        episode: selectedEpisode,
+        timestamp: new Date().toISOString(),
+      };
+  
+      
+      const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem("tvShowHistory") || "[]");
 
+      // ✅ Find entry where both ID and Title match (ensuring title consistency)
+      const existingItem = tvHistory.find((item) => item.id === id && item.title === saveTVShowTitle);
+  
+      if (existingItem) {
+        // ✅ **Check if season and episode are the same**
+        if (existingItem.season === newEntry.season && existingItem.episode === newEntry.episode) {
+          // console.log("No changes detected. Skipping save.");
+          return;
+        }
+  
+        // ✅ Remove the old entry before updating
+        const filteredHistory = tvHistory.filter((item) => item.id !== id);
+  
+        // ✅ Save updated history with the new entry
+        const updatedTVHistory = [newEntry, ...filteredHistory];
+        // console.log("Updated TV Show History:", updatedTVHistory);
+        localStorage.setItem("tvShowHistory", JSON.stringify(updatedTVHistory));
+      } else {
+        // ✅ If the entry does not exist, save it as a new entry
+        const updatedTVHistory = [newEntry, ...tvHistory];
+        // console.log("New TV Show History Entry:", updatedTVHistory);
+        localStorage.setItem("tvShowHistory", JSON.stringify(updatedTVHistory));
+      }
+  
+      setHistorySelect(null); // ✅ Reset history selection after saving
+    }
+    // console.log(selectedEpisode.episode_number)
+    // console.log(selectedEpisode)
+  }, [selectedEpisode]); // ✅ Removed id and title from dependencies // ✅ Removed id from dependencies
   const links = selectedEpisode ? [
     `https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`,
