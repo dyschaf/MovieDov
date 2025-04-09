@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import DisplayHistory from "./DisplayHistory";
 import SourceScroller from './SourceScroller';
+interface TVShowHistoryItem {
+  id: number;
+  title: string;
+  season: any;
+  episode: any;
+  timestamp: string;
+}
+interface Season {
+  id: number;
+  name: string;
+  air_date: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+  episode_count: number;
+}
 
 const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Dispatch<React.SetStateAction<any>>; setHistorySelect: React.Dispatch<React.SetStateAction<any>>; searchType: string; placeholderText: string }> = ({ id, historySelect, setSearchType, setHistorySelect, searchType }) => {
   const [seasons, setSeasons] = useState<any[]>([]);
