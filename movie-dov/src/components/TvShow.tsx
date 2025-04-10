@@ -118,7 +118,7 @@ interface Season {
   episode_count: number;
 }
 
-const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Dispatch<React.SetStateAction<any>>; setHistorySelect: React.Dispatch<React.SetStateAction<any>>; searchType: string; placeholderText: string }> = ({ id, historySelect, setSearchType, setHistorySelect, searchType }) => {
+const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Dispatch<React.SetStateAction<any>>; setHistorySelect: React.Dispatch<React.SetStateAction<any>>; searchType: string; placeholderText: string; query:string ;setQuery: React.Dispatch<React.SetStateAction<any>> }> = ({ id, historySelect, setSearchType, setHistorySelect, searchType, query,setQuery }) => {
   const [seasons, setSeasons] = useState<any[]>([]);
   const [tvshowData, setTvshowData] = useState<any[]>([]);
   const [seasonEpisodes, setSeasonEpisodes] = useState<any[]>([]);
@@ -152,15 +152,10 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       setSaveTVShowTitle(data.name);
       setSeasons(data.seasons);
       window.location.href = "/#upper";
-      tvHistory.find(item => {
-        if (item.id === id) {
-          setSelectedSeason(item.season);
-
-        }
-      });
+      // console.log(placeholderText)
       
-    };
-
+      
+  }
     const fetchEpisodes = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
@@ -171,7 +166,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       
         setSelectedEpisode(data.episodes[episodeIndex]);
         setSeasonEpisodes(data.episodes);
-      
+        setSelectedSeason(historySelect.season)
       
       } else {
         // if(savedSourceIndex.id === id){
@@ -180,6 +175,13 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
+      if (query !== "") {
+        const match = tvHistory.find(item => item.id === id);
+        if (match) {
+          setSelectedSeason(match.season);
+        }
+      };
+      setQuery("")
     };
 
     if (selectedSeason !== null) fetchEpisodes();

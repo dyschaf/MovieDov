@@ -60,7 +60,7 @@ const DisplayGeneric: React.FC<DisplayGenericProps> = ({ data, onClick, type_med
   const type = data.type_media || type_media;
   const year = data.release_date?.split('-')[0] || data.first_air_date?.split('-')[0] || '';
   const img= `https://image.tmdb.org/t/p/w300/${data.poster_path}`||`https://image.tmdb.org/t/p/w220_and_h330_face/${data.poster_path}`
-  console.log(genres)
+//   console.log(genres)
   return (
     <div className="movie-card" onClick={() => onClick(data.id, type)}>
       <img

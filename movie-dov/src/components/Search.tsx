@@ -504,7 +504,7 @@ useEffect(() => {
         )} */}
         {selectedMovieId && searchType === "tv" ? (
           // <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/${searchType}?id=${selectedMovieId}&s${selected}&e=${selectedEpisode}`} width="100%" height="100 %" ></iframe>
-          <TvShow id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType} placeholderText={placeholderText}
+          <TvShow id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType} placeholderText={placeholderText }query={query}setQuery={setQuery}
           />
           // <TvShow id={selectedMovieId} setHistorySelect={setHistorySelect} />
         ) : (
