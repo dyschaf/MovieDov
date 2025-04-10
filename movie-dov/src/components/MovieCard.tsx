@@ -4,30 +4,32 @@ interface MovieCardProps {
   movie: {
     id: number;
     title: string;
-    year: number;
+    year: string;
     poster: string;
-    genres: string; // comma-separated, e.g., "Action,War,Comedy"
+    genres?: string; // comma-separated, e.g., "Action,War,Comedy"
   };
   onClick: (id: number) => void;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
-  const genreList = movie.genres.split(',');
-
+  // const genreList = movie.genres.split(',');
+// console.log(movie.poster)
   return (
     <div className="movie-card" onClick={() => onClick(movie.id)}>
       <img src={movie.poster} alt={movie.title} className="movie-poster" />
+      <div className='movie-sub-info'>
       <h5 className="movie-title">{movie.title}</h5>
-      <div>
+      <div className="year-genre-tags">
       <div className="genre-tags">
-        {genreList.map((genre, index) => (
-          <span key={index} className="genre-tag">
-            {genre.trim()}
-          </span>
-        ))}
+      {movie.genres?.split(',').map((genre, genreIndex) => (
+  <span key={genreIndex} className="genre-tag">
+    {genre}
+  </span>
+))}
       </div>
       <p className="movie-year">{movie.year}</p>
       </div>
+    </div>
     </div>
   );
 };

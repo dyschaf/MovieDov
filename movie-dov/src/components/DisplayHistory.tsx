@@ -3,18 +3,21 @@ import { Accordion, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface DisplayHistoryProps {
+  tvHistory?:any;
+  setTvHistory: React.Dispatch<React.SetStateAction<any>>;
+  movieHistory?:any;
+  setMovieHistory: React.Dispatch<React.SetStateAction<any>>;
   historySelect: any;
   setHistorySelect: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const DisplayHistory: React.FC<DisplayHistoryProps> = ({ historySelect, setHistorySelect }) => {
-  const [tvShowHistory, setTvShowHistory] = useState<any[]>([]);
-  const [movieHistory, setMovieHistory] = useState<any[]>([]);
+const DisplayHistory: React.FC<DisplayHistoryProps> = ({ historySelect, setHistorySelect,tvHistory, setTvHistory,movieHistory, setMovieHistory}) => {
+  // const [tvShowHistory, setTvHistory] = useState<any[]>([]);
+  // const [movieHistory, setMovieHistory] = useState<any[]>([]);
 
   const handleClick = (item: any) => {
     setHistorySelect(null);
     setHistorySelect(item);
-    
   };
 
   const deleteMovie = (index: number, event: React.MouseEvent) => {
@@ -23,24 +26,25 @@ const DisplayHistory: React.FC<DisplayHistoryProps> = ({ historySelect, setHisto
     updatedHistory.splice(index, 1);
     setMovieHistory(updatedHistory);
     localStorage.setItem("movieHistory", JSON.stringify(updatedHistory));
+    // setMovieHistory(updatedHistory)
   };
 
   const deleteTVShow = (index: number, event: React.MouseEvent) => {
     event.stopPropagation();
-    const updatedHistory = [...tvShowHistory];
+    const updatedHistory = [...tvHistory];
     updatedHistory.splice(index, 1);
-    setTvShowHistory(updatedHistory);
+    setTvHistory(updatedHistory);
     localStorage.setItem("tvShowHistory", JSON.stringify(updatedHistory));
   };
 
   useEffect(() => {
-    setTvShowHistory(JSON.parse(localStorage.getItem("tvShowHistory") || "[]"));
+    setTvHistory(JSON.parse(localStorage.getItem("tvShowHistory") || "[]"));
     setMovieHistory(JSON.parse(localStorage.getItem("movieHistory") || "[]"));
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTvShowHistory(JSON.parse(localStorage.getItem("tvShowHistory") || "[]"));
+      setTvHistory(JSON.parse(localStorage.getItem("tvShowHistory") || "[]"));
       setMovieHistory(JSON.parse(localStorage.getItem("movieHistory") || "[]"));
     }, 1000); // Updates every second
   
@@ -52,12 +56,12 @@ const DisplayHistory: React.FC<DisplayHistoryProps> = ({ historySelect, setHisto
       <div className="row">
         {/* Movie History Accordion (Left Side) */}
         <div className="col-md-6">
-          <Accordion defaultActiveKey="0">
+          <Accordion defaultActiveKey="1">
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Movie History</Accordion.Header>
+              <Accordion.Header>Remove Movie History</Accordion.Header>
               <Accordion.Body>
                 <ul className="list-group">
-                  {movieHistory.map((item, index) => (
+                  {movieHistory?.map((item:any, index: number) => (
                     <li className="list-group-item d-flex justify-content-between" key={index} onClick={() => handleClick(item)}>
                       {item.title}
                       <Button
@@ -77,12 +81,12 @@ const DisplayHistory: React.FC<DisplayHistoryProps> = ({ historySelect, setHisto
 
         {/* TV Show History Accordion (Right Side) */}
         <div className="col-md-6">
-          <Accordion defaultActiveKey="0">
+          <Accordion defaultActiveKey="1">
             <Accordion.Item eventKey="0">
-              <Accordion.Header>TV Show History</Accordion.Header>
+              <Accordion.Header>Remove TV Show History</Accordion.Header>
               <Accordion.Body>
                 <ul className="list-group">
-                  {tvShowHistory.map((item, index) => (
+                  {tvHistory?.map((item:any, index:number) => (
                     <li className="list-group-item d-flex justify-content-between" key={index} onClick={() => handleClick(item)}>
                       {item.title} - S{item.season}, E{item.episode.episode_number}
                       <Button

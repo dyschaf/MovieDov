@@ -2,13 +2,112 @@ import React, { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import DisplayHistory from "./DisplayHistory";
 import SourceScroller from './SourceScroller';
+import { Item } from 'react-bootstrap/lib/Breadcrumb';
+interface TVShow {
+  id: number;
+  title?: string;
+  name?: string;
+  genres?: { id: number; name: string }[];
+  first_air_date?: string;
+  poster_path?: string;
+  backdrop_path?: string;
+}
+
+interface TVShowData {
+  adult: boolean;
+  backdrop_path: string;
+  created_by: {
+    id: number;
+    credit_id: string;
+    name: string;
+    gender: number;
+    profile_path: string | null;
+  }[];
+  episode_run_time: number[];
+  first_air_date: string;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  homepage: string;
+  id: number;
+  in_production: boolean;
+  languages: string[];
+  last_air_date: string;
+  last_episode_to_air: {
+    id: number;
+    name: string;
+    overview: string;
+    vote_average: number;
+    vote_count: number;
+    air_date: string;
+    episode_number: number;
+    production_code: string;
+    runtime: number;
+    season_number: number;
+    show_id: number;
+    still_path: string;
+  };
+  name: string;
+  next_episode_to_air: string | null;
+  networks: {
+    id: number;
+    logo_path: string;
+    name: string;
+    origin_country: string;
+  }[];
+  number_of_episodes: number;
+  number_of_seasons: number;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: {
+    id: number;
+    logo_path: string | null;
+    name: string;
+    origin_country: string;
+  }[];
+  production_countries: {
+    iso_3166_1: string;
+    name: string;
+  }[];
+  seasons: {
+    air_date: string;
+    episode_count: number;
+    id: number;
+    name: string;
+    overview: string;
+    poster_path: string;
+    season_number: number;
+    vote_average: number;
+  }[];
+  spoken_languages: {
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }[];
+  status: string;
+  tagline: string;
+  type: string;
+  vote_average: number;
+  vote_count: number;
+}
+
 interface TVShowHistoryItem {
   id: number;
   title: string;
   season: any;
   episode: any;
   timestamp: string;
+  genre_ids: number[];         // ✅ Correct way to type an array of numbers
+  first_air_date?: string;
+  poster_path?: string; 
+  type:string;         // (Optional) Add if you're also saving the poster
 }
+
 interface Season {
   id: number;
   name: string;
@@ -21,6 +120,7 @@ interface Season {
 
 const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Dispatch<React.SetStateAction<any>>; setHistorySelect: React.Dispatch<React.SetStateAction<any>>; searchType: string; placeholderText: string }> = ({ id, historySelect, setSearchType, setHistorySelect, searchType }) => {
   const [seasons, setSeasons] = useState<any[]>([]);
+  const [tvshowData, setTvshowData] = useState<any[]>([]);
   const [seasonEpisodes, setSeasonEpisodes] = useState<any[]>([]);
   const [selectedSeason, setSelectedSeason] = useState<number | null>(1);
   const [selectedEpisode, setSelectedEpisode] = useState<any | null>(null);
@@ -43,22 +143,40 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   }, [historySelect?.season, historySelect?.episode, historySelect?.title]);
 
   useEffect(() => {
+    const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem("tvShowHistory") || "[]");
+
     const fetchSeasons = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
+      setTvshowData(data)
       setSaveTVShowTitle(data.name);
       setSeasons(data.seasons);
       window.location.href = "/#upper";
+      tvHistory.find(item => {
+        if (item.id === id) {
+          setSelectedSeason(item.season);
+
+        }
+      });
+      
     };
 
     const fetchEpisodes = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
-      if (historySelect) {
-        const episodeIndex = Number(historySelect.episode.episode_number) - 1;
+      
+      if (historySelect || tvHistory.find(item => item.id === id)) {
+        const selectedHistory = historySelect || tvHistory.find(item => item.id === id);
+        const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
+      
         setSelectedEpisode(data.episodes[episodeIndex]);
         setSeasonEpisodes(data.episodes);
+      
+      
       } else {
+        // if(savedSourceIndex.id === id){
+        //   save
+        // }
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
@@ -83,54 +201,55 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   };
   useEffect(() => {
     if (
-      saveTVShowTitle &&  // ✅ Ensure title exists
-      selectedEpisode?.episode_number !== undefined &&  // ✅ Ensure episode exists
-      selectedSeason !== null // ✅ Ensure season exists
+      saveTVShowTitle &&
+      selectedEpisode?.episode_number !== undefined &&
+      selectedSeason !== null
     ) {
-      // setTimeout(() => {
-      //   // Code to execute after 5 seconds
-      // }, 1000000);
+      const tvShow = (Array.isArray(tvshowData) ? tvshowData[0] : tvshowData) as TVShow;
   
       const newEntry: TVShowHistoryItem = {
-        id: id,
+        id,
         title: saveTVShowTitle,
         season: selectedSeason,
         episode: selectedEpisode,
         timestamp: new Date().toISOString(),
+        // genre_ids: tvShow?.genres?.map((genre) => genre.id) || [],
+        genre_ids: tvShow?.genres?.map((genre: { id: number; name: string }) => genre.id) || [],
+        first_air_date: tvShow?.first_air_date,
+        poster_path: tvShow?.poster_path || tvShow?.backdrop_path || '',
+        type: 'tv',
       };
   
-      
-      const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem("tvShowHistory") || "[]");
-
-      // ✅ Find entry where both ID and Title match (ensuring title consistency)
-      const existingItem = tvHistory.find((item) => item.id === id && item.title === saveTVShowTitle);
+      const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem('tvShowHistory') || '[]');
+  
+      const existingItem = tvHistory.find(
+        (item) => item.id === id && item.title === saveTVShowTitle
+      );
   
       if (existingItem) {
-        // ✅ **Check if season and episode are the same**
-        if (existingItem.season === newEntry.season && existingItem.episode === newEntry.episode) {
+        const isSameEpisode =
+          existingItem.season === newEntry.season &&
+          existingItem.episode.episode_number === newEntry.episode.episode_number;
+  
+        if (isSameEpisode) {
           // console.log("No changes detected. Skipping save.");
           return;
         }
   
-        // ✅ Remove the old entry before updating
         const filteredHistory = tvHistory.filter((item) => item.id !== id);
-  
-        // ✅ Save updated history with the new entry
         const updatedTVHistory = [newEntry, ...filteredHistory];
-        // console.log("Updated TV Show History:", updatedTVHistory);
-        localStorage.setItem("tvShowHistory", JSON.stringify(updatedTVHistory));
+        localStorage.setItem('tvShowHistory', JSON.stringify(updatedTVHistory));
+        // console.log("Updated existing history entry.");
       } else {
-        // ✅ If the entry does not exist, save it as a new entry
         const updatedTVHistory = [newEntry, ...tvHistory];
-        // console.log("New TV Show History Entry:", updatedTVHistory);
-        localStorage.setItem("tvShowHistory", JSON.stringify(updatedTVHistory));
+        localStorage.setItem('tvShowHistory', JSON.stringify(updatedTVHistory));
+        // console.log("Added new history entry.");
       }
   
-      setHistorySelect(null); // ✅ Reset history selection after saving
+      setHistorySelect(null); // ✅ Reset after save
     }
-    // console.log(selectedEpisode.episode_number)
-    // console.log(selectedEpisode)
-  }, [selectedEpisode]); // ✅ Removed id and title from dependencies // ✅ Removed id from dependencies
+  },[selectedEpisode]);
+  // ✅ Removed id and title from dependencies // ✅ Removed id from dependencies
   const links = selectedEpisode ? [
     `https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`,
@@ -189,7 +308,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
             />
             <div id="player">
               <iframe
-                src={links[selectedTVShowSourceIndex]}
+                // src={links[selectedTVShowSourceIndex]}
                 width="100%"
                 height="100%"
                 allowFullScreen

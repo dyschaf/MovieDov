@@ -1,0 +1,58 @@
+
+  .generic-scroller-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+  
+  .generic-scroller-inner .movie-card {
+    flex: 0 0 auto; /* prevent shrinking or wrapping */
+  }
+  
+  .generic-scroller-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .generic-scroller-container {
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    flex: 1;
+    /* overflow-x: hidden;  */
+    padding: 20px 0;
+    /* position: relative;  */
+    -ms-overflow-style: none;     /* IE and Edge */
+    scrollbar-width: none;        /* Firefox */
+   }
+  
+  .generic-scroller-inner {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+  }
+  
+  .scroll-arrow {
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 0;
+    padding: 10px;
+    transition: 0.2s;
+  }
+  
+  .scroll-arrow:hover {
+    color: #ccc;
+  }
+  
+  .scroll-arrow.left {
+    margin-right: 10px;
+  }
+  
+  .scroll-arrow.right {
+    margin-left: 10px;
+  }
