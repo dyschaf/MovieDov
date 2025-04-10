@@ -326,7 +326,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
             />
             <div id="player">
               <iframe
-                // src={links[selectedTVShowSourceIndex]}
+                src={links[selectedTVShowSourceIndex]}
                 width="100%"
                 height="100%"
                 allowFullScreen
