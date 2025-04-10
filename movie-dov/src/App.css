@@ -462,8 +462,8 @@ iframe {
 
   }
 
-  .row:last-child {
-    margin-bottom: 50px;
+  .col-md-6:last-child {
+    margin-bottom: 80px;
   }
 
   .accordion-button {
