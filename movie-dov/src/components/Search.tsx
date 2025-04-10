@@ -247,6 +247,14 @@ useEffect(() => {
     if (movieType === "tv") {
       setSearchType(movieType);
       setSelectedMovieId(movieId);
+      // const match = tvHistory.find(item => item.id === id);
+      const match = tvHistory.find(item => item.id === movieId);
+      if (match) {
+      // console.log("test156")
+      // console.log(selectedSeason)
+
+        setHistorySelect(match);
+      }
     } 
     if (movieType === "movie") {
       setSearchType(movieType);

@@ -166,27 +166,43 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       
         setSelectedEpisode(data.episodes[episodeIndex]);
         setSeasonEpisodes(data.episodes);
-        setSelectedSeason(historySelect.season)
-      
+        // setSelectedSeason(historySelect.season)
       } else {
         // if(savedSourceIndex.id === id){
         //   save
         // }
+        // console.log("test2")
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
       if (query !== "") {
         const match = tvHistory.find(item => item.id === id);
         if (match) {
+        console.log("test16")
+        console.log(selectedSeason)
+
           setSelectedSeason(match.season);
         }
       };
+      // const match = tvHistory.find(item => item.id === id);
+      // if (match) {
+      // console.log("test156")
+      // console.log(selectedSeason)
+
+      //   setSelectedSeason(match.season);
+      // }
+      console.log("test16")
+      console.log(selectedSeason)
+
       setQuery("")
     };
 
-    if (selectedSeason !== null) fetchEpisodes();
+    if (selectedSeason !== null) 
+    fetchEpisodes();
     fetchSeasons();
-  }, [selectedSeason, id]);
+    console.log("test156")
+    console.log(selectedSeason)
+  }, [selectedSeason]);
 
   const handleSeasonSelect = (event: any) => {
     setHistorySelect(null);
