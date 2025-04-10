@@ -78,6 +78,10 @@ const Search: React.FC = () => {
   );
   const searchInputRef = useRef<HTMLInputElement>(null);
   const selectedLabel = searchType === 'movie' ? 'Movie' : 'TV show';
+  const scrollRefTrendMovie = useRef<HTMLDivElement>(null);
+  const scrollRefTrendTv = useRef<HTMLDivElement>(null);
+  const scrollRefSaveTv = useRef<HTMLDivElement>(null);
+  const scrollRefSaveMovie = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [placeholderText, setPlaceholderText] = useState(`What ${selectedLabel} do you wanna watch?`);
   const ul = document.querySelector(".source-list-ul");
@@ -291,9 +295,9 @@ useEffect(() => {
   };
 
   
-  const scrollByAmount = (amount: number) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+  const scrollByAmount = (ref: React.RefObject<HTMLDivElement>, amount: number) => {
+    if (ref.current) {
+      ref.current.scrollBy({ left: amount, behavior: 'smooth' });
     }
   };
   useEffect(() => {
@@ -520,15 +524,15 @@ useEffect(() => {
   {/* // Component logic */}
   {/* <div className="mapMovieCard" id='movie-search'> */}
   {/* <div> */}
-  
+
   {tvHistory  && tvHistory.length > 0?(
       <>
   <h5 className='generic-title'>TV Show History</h5>
   <div className="generic-scroller-wrapper">
-      <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
+      <button className="scroll-arrow left" onClick={() => scrollByAmount(scrollRefSaveTv,-300)}>
         &lt;
       </button>
-  <div className="generic-scroller-container" ref={scrollRef}>
+  <div className="generic-scroller-container" ref={scrollRefSaveTv}>
   <div className="generic-scroller-inner">
   {tvHistory.map((data) => (
                 <DisplayGeneric key={data.id} data={data} onClick={handleAllCardClick} type_media={'tv'} />
@@ -536,7 +540,7 @@ useEffect(() => {
  
         </div>
          </div>
-         <button className="scroll-arrow right" onClick={() => scrollByAmount(300)}>
+         <button className="scroll-arrow right" onClick={() => scrollByAmount(scrollRefSaveTv,300)}>
         &gt;
       </button>
     </div>
@@ -549,10 +553,10 @@ useEffect(() => {
   <>
   <h5 className='generic-title'>Movie History</h5>
     <div className="generic-scroller-wrapper">
-      <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
+      <button className="scroll-arrow left" onClick={() => scrollByAmount(scrollRefSaveMovie,-300)}>
         &lt;
       </button>
-  <div className="generic-scroller-container" ref={scrollRef}>
+  <div className="generic-scroller-container" ref={scrollRefSaveMovie}>
   <div className="generic-scroller-inner">
 
   {movieHistory.map((data) => (
@@ -561,7 +565,7 @@ useEffect(() => {
 
         </div>
          </div>
-         <button className="scroll-arrow right" onClick={() => scrollByAmount(300)}>
+         <button className="scroll-arrow right" onClick={() => scrollByAmount(scrollRefSaveMovie,300)}>
         &gt;
       </button>
     </div>
@@ -570,10 +574,10 @@ useEffect(() => {
 
 <h5 className='generic-title'>Trending Movies</h5>
     <div className="generic-scroller-wrapper">
-      <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
+      <button className="scroll-arrow left" onClick={() => scrollByAmount(scrollRefTrendMovie,-300)}>
         &lt;
       </button>
-  <div className="generic-scroller-container" ref={scrollRef}>
+  <div className="generic-scroller-container" ref={scrollRefTrendMovie}>
   <div className="generic-scroller-inner">
   {movieTrendsData.map((data) => (
                 <DisplayGeneric key={data.id} data={data} onClick={handleAllCardClick}type_media={'movie'}  />
@@ -581,17 +585,17 @@ useEffect(() => {
  
         </div>
          </div>
-         <button className="scroll-arrow right" onClick={() => scrollByAmount(300)}>
+         <button className="scroll-arrow right" onClick={() => scrollByAmount(scrollRefTrendMovie,300)}>
         &gt;
       </button>
     </div>
 
     <h5 className='generic-title'>Trending TV Shows</h5>
   <div className="generic-scroller-wrapper">
-      <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
+      <button className="scroll-arrow left" onClick={() => scrollByAmount(scrollRefTrendTv,-300)}>
         &lt;
       </button>
-  <div className="generic-scroller-container" ref={scrollRef}>
+  <div className="generic-scroller-container" ref={scrollRefTrendTv}>
   <div className="generic-scroller-inner">
   {tvTrendsData.map((data) => (
                 <DisplayGeneric key={data.id} data={data} onClick={handleAllCardClick} type_media={'tv'}  />
@@ -599,7 +603,7 @@ useEffect(() => {
  
         </div>
          </div>
-         <button className="scroll-arrow right" onClick={() => scrollByAmount(300)}>
+         <button className="scroll-arrow right" onClick={() => scrollByAmount(scrollRefTrendTv,300)}>
         &gt;
       </button>
     </div>

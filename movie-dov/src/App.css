@@ -112,6 +112,7 @@ iframe {
 .movie-title {
   margin: 10px 0 6px;
   font-size: 16px;
+  white-space: normal;
   font-weight: 600;
 }
 
