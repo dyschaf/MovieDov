@@ -219,7 +219,12 @@ useEffect(() => {
           poster: 'https://image.tmdb.org/t/p/w220_and_h330_face/'+movie.poster_path,
           year: Number(movie.release_date?.first_air_date?.split('-')[0] )|| '',
           director: '',
-          genres: movie.genre_ids
+          // genres: movie.genre_ids
+          genres: movie.genre_ids.flatMap((genreId: number) => {
+            const matchingGenre = Genres.find((genre) => genre.id === genreId);
+            return matchingGenre ? [matchingGenre.name] : []
+          }).join(', ')
+        // }));
         }));
         setMovies(movies);
     // window.location.href = "/#movie-search"
@@ -517,6 +522,8 @@ useEffect(() => {
   {/* <div> */}
   
   {tvHistory  && tvHistory.length > 0?(
+      <>
+  <h5 className='generic-title'>TV Show History</h5>
   <div className="generic-scroller-wrapper">
       <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
         &lt;
@@ -533,17 +540,21 @@ useEffect(() => {
         &gt;
       </button>
     </div>
+    </>
   ):null}
 
 
 
 {movieHistory&& movieHistory.length > 0 ? (
+  <>
+  <h5 className='generic-title'>Movie History</h5>
     <div className="generic-scroller-wrapper">
       <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
         &lt;
       </button>
   <div className="generic-scroller-container" ref={scrollRef}>
   <div className="generic-scroller-inner">
+
   {movieHistory.map((data) => (
                 <DisplayGeneric key={data.id} data={data} onClick={handleAllCardClick} type_media={'movie'} />
         ))}
@@ -554,9 +565,10 @@ useEffect(() => {
         &gt;
       </button>
     </div>
+    </>
 ):null}
 
-      
+<h5 className='generic-title'>Trending Movies</h5>
     <div className="generic-scroller-wrapper">
       <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
         &lt;
@@ -573,6 +585,8 @@ useEffect(() => {
         &gt;
       </button>
     </div>
+
+    <h5 className='generic-title'>Trending TV Shows</h5>
   <div className="generic-scroller-wrapper">
       <button className="scroll-arrow left" onClick={() => scrollByAmount(-300)}>
         &lt;
@@ -589,6 +603,7 @@ useEffect(() => {
         &gt;
       </button>
     </div>
+  
          {/* </div> */}
         {/* </div>  */}
           {/* <DisplayGeneric allData={{ results: allData }}/> */}
