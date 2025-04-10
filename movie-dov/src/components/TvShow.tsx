@@ -178,8 +178,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       if (query !== "") {
         const match = tvHistory.find(item => item.id === id);
         if (match) {
-        console.log("test16")
-        console.log(selectedSeason)
+        // console.log("test16")
+        // console.log(selectedSeason)
 
           setSelectedSeason(match.season);
         }
@@ -191,8 +191,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
 
       //   setSelectedSeason(match.season);
       // }
-      console.log("test16")
-      console.log(selectedSeason)
+      // console.log("test16")
+      // console.log(selectedSeason)
 
       setQuery("")
     };
@@ -200,8 +200,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     if (selectedSeason !== null) 
     fetchEpisodes();
     fetchSeasons();
-    console.log("test156")
-    console.log(selectedSeason)
+    // console.log("test156")
+    // console.log(selectedSeason)
   }, [selectedSeason]);
 
   const handleSeasonSelect = (event: any) => {
