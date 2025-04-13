@@ -257,6 +257,7 @@ useEffect(() => {
       }
     } 
     if (movieType === "movie") {
+      
       setSearchType(movieType);
       handleMovieCardClick(movieId);
     }
@@ -264,6 +265,8 @@ useEffect(() => {
   
   const handleMovieCardClick = (movieId: number) => {
     // setClickedMovie(null)
+    // setHistorySelect(historySelect);
+
     setSelectedMovieId(movieId);
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
 
@@ -334,7 +337,7 @@ useEffect(() => {
         first_air_date:clickedMovie?.release_date,
         poster_path: clickedMovie?.poster_path,
         timestamp: new Date().toISOString(),
-        type: "Movie"
+        type: "movie"
       };
       
       
