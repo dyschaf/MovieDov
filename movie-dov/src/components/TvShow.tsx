@@ -123,6 +123,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   const [tvshowData, setTvshowData] = useState<any[]>([]);
   const [seasonEpisodes, setSeasonEpisodes] = useState<any[]>([]);
   const [selectedSeason, setSelectedSeason] = useState<number | null>(1);
+  const [changeSeasonActive, setChangeSeasonActive] = useState<boolean | null>(false);
   const [selectedEpisode, setSelectedEpisode] = useState<any | null>(null);
   const [saveTVShowTitle, setSaveTVShowTitle] = useState<string | null>(null);
   const savedSourceIndex = localStorage.getItem("selectedTVShowSourceIndex");
@@ -162,11 +163,16 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       
       if (historySelect || tvHistory.find(item => item.id === id)) {
         const selectedHistory = historySelect || tvHistory.find(item => item.id === id);
+        if(changeSeasonActive){
+        setSelectedEpisode(data.episodes[0])
+        setChangeSeasonActive(false)
+        }else{
         const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
       
         setSelectedEpisode(data.episodes[episodeIndex]);
         setSeasonEpisodes(data.episodes);
         // setSelectedSeason(historySelect.season)
+        }
       } else {
         // if(savedSourceIndex.id === id){
         //   save
@@ -208,7 +214,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     setHistorySelect(null);
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
     setSelectedSeason(seasonNumber);
-    setSelectedEpisode(0);
+    setChangeSeasonActive(true)
+    setSelectedEpisode(null);
   };
 
   const handleEpisodeSelect = (event: any) => {
