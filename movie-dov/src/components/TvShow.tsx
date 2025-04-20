@@ -208,7 +208,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     setHistorySelect(null);
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
     setSelectedSeason(seasonNumber);
-    setSelectedEpisode(null);
+    setSelectedEpisode(0);
   };
 
   const handleEpisodeSelect = (event: any) => {
