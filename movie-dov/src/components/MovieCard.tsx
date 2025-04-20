@@ -4,7 +4,8 @@ interface MovieCardProps {
   movie: {
     id: number;
     title: string;
-    year: string;
+    year?: string;
+    first_air_date?: string;
     poster: string;
     genres?: any; // comma-separated, e.g., "Action,War,Comedy"
   };
@@ -13,6 +14,10 @@ interface MovieCardProps {
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
   const genreList = movie.genres.split(',');
+  const year = movie.first_air_date?.split('-')[0] || movie.year;
+  // console.log(movie)
+
+
 // console.log(movie.poster)
   return (
     <div className="movie-card" onClick={() => onClick(movie.id)}>
@@ -27,7 +32,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
   </span>
 ))}
       </div>
-      <p className="movie-year">{movie.year}</p>
+      <p className="movie-year">{year}</p>
       </div>
     </div>
     </div>

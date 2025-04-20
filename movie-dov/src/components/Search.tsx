@@ -221,7 +221,8 @@ useEffect(() => {
           id: movie.id,
           title: movie.title || movie.name,
           poster: 'https://image.tmdb.org/t/p/w220_and_h330_face/'+movie.poster_path,
-          year: Number(movie.release_date?.first_air_date?.split('-')[0] )|| '',
+          year: movie.release_date?.split('-')[0] || movie.first_air_date?.split('-')[0] || '',
+          // year: Number(movie.release_date?.first_air_date?.split('-')[0] )|| '',
           director: '',
           // genres: movie.genre_ids
           genres: movie.genre_ids.flatMap((genreId: number) => {
@@ -295,6 +296,7 @@ useEffect(() => {
     const stickyMenu = document.querySelector('.stick-menu');
     const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
 
+    
     if (moviePlayer) {
     window.scrollTo({
       top: moviePlayer.offsetTop - stickyMenuHeight,
