@@ -37,7 +37,7 @@ const SourceScroller: React.FC<SourceScrollerProps> = ({
         // Desktop view
         <div className="source-list-movie-div">
           <div className="source-list-movie-div-div">
-          Source
+          Sources
             <button className="scroll-arrow up" onClick={() => scrollBy(-60, 'vertical')}>▲</button>
             <ul className="source-list-movie-ul" ref={listRefDesktop}>
               {links.map((_, index) => (
@@ -58,7 +58,7 @@ const SourceScroller: React.FC<SourceScrollerProps> = ({
       ) : (
         // Mobile view
         <>
-        <div>Source</div>
+        <div>Sources</div>
           <button className="scroll-arrow left" onClick={() => scrollBy(-100, 'horizontal')}>&lt;</button>
           
           <div className="source-scroll-inner">
