@@ -165,6 +165,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         const selectedHistory = historySelect || tvHistory.find(item => item.id === id);
         if(changeSeasonActive){
         setSelectedEpisode(data.episodes[0])
+        setSeasonEpisodes(data.episodes)
         setChangeSeasonActive(false)
         }else{
         const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
