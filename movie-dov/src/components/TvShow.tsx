@@ -155,6 +155,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       window.location.href = "/#upper";
       // console.log(placeholderText)
   }
+  
     const fetchEpisodes = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
