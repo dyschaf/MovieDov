@@ -106,7 +106,17 @@ useEffect(() => {
     setPlaceholderText(`Search ${selectedLabel}`);
   }
 }, [selectedLabel]);
+window.addEventListener('message', (event) => {
+  if (event.origin !== 'https://vidlink.pro') return;
+  
+  if (event.data?.type === 'MEDIA_DATA') {
+    const mediaData = event.data.data;
+    localStorage.setItem('vidLinkProgress', JSON.stringify(mediaData));
+  }
+});
 const listLinks = selectedMovieId !== null ? [
+  `https://vidlink.pro/movie/${selectedMovieId}`,
+  `https://embed.su/embed/movie/${selectedMovieId}`,
   `https://vidsrc.in/embed/movie/${selectedMovieId}`,
   `https://vidsrc.pro/embed/movie/${selectedMovieId}`,
   `https://vidsrc.me/embed/${selectedMovieId}`,
@@ -115,7 +125,9 @@ const listLinks = selectedMovieId !== null ? [
   `https://vidsrc.to/embed/movie/${selectedMovieId}`,
   
   `https://vidsrc.uk/embed/movie/${selectedMovieId}`,
-  `https://multiembed.mov/directstream.php?video_id=${selectedMovieId}&tmdb=1`
+  `https://multiembed.mov/directstream.php?video_id=${selectedMovieId}&tmdb=1`,
+  
+
 
 ] : [];
 
