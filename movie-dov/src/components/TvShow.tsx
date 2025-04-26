@@ -274,6 +274,14 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       setHistorySelect(null); // ✅ Reset after save
     }
   },[selectedEpisode]);
+  window.addEventListener('message', (event) => {
+    if (event.origin !== 'https://vidlink.pro') return;
+    
+    if (event.data?.type === 'MEDIA_DATA') {
+      const mediaData = event.data.data;
+      localStorage.setItem('vidLinkProgress', JSON.stringify(mediaData));
+    }
+  });
   // ✅ Removed id and title from dependencies // ✅ Removed id from dependencies
   const links = selectedEpisode ? [
 
