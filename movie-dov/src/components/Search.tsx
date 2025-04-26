@@ -106,6 +106,22 @@ useEffect(() => {
     setPlaceholderText(`Search ${selectedLabel}`);
   }
 }, [selectedLabel]);
+useEffect(() => {
+  const handleMessage = (event: MessageEvent) => {
+    if (event.origin !== 'https://vidlink.pro') return;
+
+    if (event.data?.type === 'MEDIA_DATA') {
+      const mediaData = event.data.data;
+      localStorage.setItem('vidLinkProgress', JSON.stringify(mediaData));
+    }
+  };
+
+  window.addEventListener('message', handleMessage);
+
+  return () => {
+    window.removeEventListener('message', handleMessage); // ✅ Cleanup on unmount
+  };
+}, []); // ✅ Empty dependency array ensures this runs only once
 window.addEventListener('message', (event) => {
   if (event.origin !== 'https://vidlink.pro') return;
   
