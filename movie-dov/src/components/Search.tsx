@@ -458,7 +458,7 @@ useEffect(() => {
         // setSearchType("movie")
         setSearchType("tv")
         setSelectedMovieId(historySelect.id)
-        setHistorySelect(null)
+        // setHistorySelect(null)
       }
     }
   }, [historySelect]); 

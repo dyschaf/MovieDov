@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import DisplayHistory from "./DisplayHistory";
 import SourceScroller from './SourceScroller';
@@ -129,9 +129,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   const savedSourceIndex = localStorage.getItem("selectedTVShowSourceIndex");
   const [selectedTVShowSourceIndex, setSelectedTVShowSourceIndex] = useState<number>(
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
-  
   );
-const iframeTvRef = useRef<HTMLIFrameElement>(null);
 
   const safeEpisode = selectedEpisode ?? { episode_number: "" };
 
@@ -143,35 +141,31 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
     if (historySelect?.season) setSelectedSeason(historySelect.season);
     if (historySelect?.episode) setSelectedEpisode(historySelect.episode);
     if (historySelect?.title) setSaveTVShowTitle(historySelect.title);
-    // setHistorySelect(null)
-  }, [historySelect?.season, historySelect?.episode, historySelect?.title]);
+    setHistorySelect(null)
 
-//   useEffect(() => {
-//     const fetchSeasons = async () => {
-//       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
-//       const data = await response.json();
-//       setTvshowData(data)
-//       setSaveTVShowTitle(data.name);
-//       setSeasons(data.seasons);
-//       console.log(`${seasons[1].poster_path}`)
-//       // window.location.href = "/#upper";
-//       // console.log(placeholderText)
-//   }
-//   fetchSeasons()
-//   if (iframeTvRef.current) {
-//     iframeTvRef.current.scrollIntoView({ behavior: 'smooth' });
-//   }
-// },[id]);
+  }, [historySelect?.season, historySelect?.episode, historySelect?.title]);
+  // useEffect(() => {
+  //   const fetchSeasons = async () => {
+  //     const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
+  //     const data = await response.json();
+  //     setTvshowData(data)
+  //     setSaveTVShowTitle(data.name);
+  //     setSeasons(data.seasons);
+  //     window.location.href = "/#upper";
+  //     // console.log(placeholderText)
+  // }
+  // }, [id]);
+
   useEffect(() => {
     const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem("tvShowHistory") || "[]");
+
     const fetchSeasons = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
       setTvshowData(data)
       setSaveTVShowTitle(data.name);
       setSeasons(data.seasons);
-      console.log(`${seasons[1].poster_path}`)
-      // window.location.href = "/#upper";
+      window.location.href = "/#upper";
       // console.log(placeholderText)
   }
 
@@ -185,31 +179,23 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
         setSelectedEpisode(data.episodes[0])
         setSeasonEpisodes(data.episodes)
         setChangeSeasonActive(false)
-        // setHistorySelect(null);
-
         }else{
         const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
       
-        setSelectedEpisode(data.episodes[episodeIndex]);
         setSeasonEpisodes(data.episodes);
-        // setHistorySelect(null);
-
+        setSelectedEpisode(data.episodes[episodeIndex]);
         // setSelectedSeason(historySelect.season)
         }
       } else {
-        // setHistorySelect(null);
         // if(savedSourceIndex.id === id){
         //   save
         // }
         // console.log("test2")
-        setSelectedSeason(1)
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
       if (query !== "") {
         const match = tvHistory.find(item => item.id === id);
-        // console.log(match)
-        // console.log(id)
         if (match) {
         // console.log("test16")
         // console.log(selectedSeason)
@@ -231,23 +217,18 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
     };
 
     if (selectedSeason !== null) 
+    fetchSeasons();
     fetchEpisodes();
-    fetchSeasons()
-    
-    if (iframeTvRef.current) {
-      iframeTvRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
     // console.log("test156")
     // console.log(selectedSeason)
-    ;
-  }, [selectedSeason, id]);
+  }, [selectedSeason,id]);
 
   const handleSeasonSelect = (event: any) => {
     setHistorySelect(null);
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
     setSelectedSeason(seasonNumber);
     setChangeSeasonActive(true)
-    setSelectedEpisode(null);
+    setSelectedEpisode(null);//
   };
 
   const handleEpisodeSelect = (event: any) => {
@@ -257,14 +238,14 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
     setSelectedEpisode(selectedSeasonEpisodes[0]);
   };
   useEffect(() => {
-    // const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem('tvShowHistory') || '[]');
-
+    setTimeout(() => {
+      console.log('This runs after 2 seconds');
+    }, 2000); // 2000ms = 2 seconds
+    
     if (
-      
       saveTVShowTitle &&
       selectedEpisode?.episode_number !== undefined &&
       selectedSeason !== null
-      //selectedEpisode?.episode_number !== 1
     ) {
       const tvShow = (Array.isArray(tvshowData) ? tvshowData[0] : tvshowData) as TVShow;
   
@@ -310,32 +291,14 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
       setHistorySelect(null); // ✅ Reset after save
     }
   },[selectedEpisode]);
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== 'https://vidlink.pro') return;
-  
-      if (event.data?.type === 'MEDIA_DATA') {
-        const mediaData = event.data.data;
-        localStorage.setItem('vidLinkProgress', JSON.stringify(mediaData));
-      }
-    };
-  
-    window.addEventListener('message', handleMessage);
-  
-    return () => {
-      window.removeEventListener('message', handleMessage); // ✅ Cleanup on unmount
-    };
-  }, []); // ✅ Empty dependency array ensures this runs only once
-  
-
-window.addEventListener('message', (event) => {
-  // if (event.origin !== 'https://vidlink.pro') return;
-  
-  if (event.data?.type === 'MEDIA_DATA') {
-    const mediaData = event.data.data;
-    localStorage.setItem('vidLinkProgress', JSON.stringify(mediaData));
-  }
-});
+  window.addEventListener('message', (event) => {
+    if (event.origin !== 'https://vidlink.pro') return;
+    
+    if (event.data?.type === 'MEDIA_DATA') {
+      const mediaData = event.data.data;
+      localStorage.setItem('vidLinkProgress', JSON.stringify(mediaData));
+    }
+  });
   // ✅ Removed id and title from dependencies // ✅ Removed id from dependencies
   const links = selectedEpisode ? [
     
@@ -400,7 +363,6 @@ window.addEventListener('message', (event) => {
             />
             <div id="player">
               <iframe
-                ref-iframeTvRef
                 src={links[selectedTVShowSourceIndex]}
                 width="100%"
                 height="100%"
