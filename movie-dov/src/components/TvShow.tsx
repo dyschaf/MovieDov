@@ -201,17 +201,17 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
         // if(savedSourceIndex.id === id){
         //   save
         // }
-        console.log("test2")
+        // console.log("test2")
         setSelectedSeason(1)
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
       if (query !== "") {
         const match = tvHistory.find(item => item.id === id);
-        console.log(match)
-        console.log(id)
+        // console.log(match)
+        // console.log(id)
         if (match) {
-        console.log("test16")
+        // console.log("test16")
         // console.log(selectedSeason)
 
           setSelectedSeason(match.season);
