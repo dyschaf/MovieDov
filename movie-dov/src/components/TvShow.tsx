@@ -318,10 +318,10 @@ window.addEventListener('message', (event) => {
 });
   // ✅ Removed id and title from dependencies // ✅ Removed id from dependencies
   const links = selectedEpisode ? [
-
+    
+    `https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidlink.pro/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://embed.su/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
-    `https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`,
     `https://www.2embed.cc/embedtv/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`,
     `https://embed.smashystream.com/playere.php?tmdb=${id}&season=${selectedSeason}&episode=${selectedEpisode.episode_number}`,
