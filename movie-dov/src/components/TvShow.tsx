@@ -172,6 +172,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       // console.log(selectedSeason)
 
         setHistorySelect(match);
+        // setSelectedSeason(match.season)
       }else{
         setSelectedSeason(1)
         fetchEpisodes()
@@ -246,7 +247,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
     setSelectedSeason(seasonNumber);
     setChangeSeasonActive(true)
-    setSelectedEpisode(null);//
+    setSelectedEpisode(0);
   };
 
   const handleEpisodeSelect = (event: any) => {
@@ -330,6 +331,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     `https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode.episode_number}`,
     `https://vidsrc.uk/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
+    ""
 
     
     // `https://9animetv.to`
