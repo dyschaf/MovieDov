@@ -87,7 +87,8 @@ const Search: React.FC = () => {
   const ul = document.querySelector(".source-list-ul");
   const listRefMobile = useRef<HTMLDivElement>(null);
   const listRefDesktop = useRef<HTMLUListElement>(null);
-  
+  const iframeMovieRef = useRef<HTMLIFrameElement>(null);
+
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -123,7 +124,7 @@ useEffect(() => {
   };
 }, []); // ✅ Empty dependency array ensures this runs only once
 window.addEventListener('message', (event) => {
-  if (event.origin !== 'https://vidlink.pro') return;
+  // if (event.origin !== 'https://vidlink.pro') return;
   
   if (event.data?.type === 'MEDIA_DATA') {
     const mediaData = event.data.data;
@@ -274,6 +275,7 @@ useEffect(() => {
   const handleAllCardClick = (movieId: number, movieType: string) => {
     // setClickedMovie(null)
     if (movieType === "tv") {
+      // setSearchType("movie");
       setSearchType(movieType);
       setSelectedMovieId(movieId);
       // const match = tvHistory.find(item => item.id === id);
@@ -290,6 +292,7 @@ useEffect(() => {
       setSearchType(movieType);
       handleMovieCardClick(movieId);
     }
+    setClickedMovie(null)
   };
   
   const handleMovieCardClick = (movieId: number) => {
@@ -443,6 +446,16 @@ useEffect(() => {
       } else {
         // This is a Movie (no episode field)
         // console.log(historySelect)
+        const moviePlayer = document.getElementById("player");
+        const stickyMenu = document.querySelector('.stick-menu');
+        const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
+    
+        if (moviePlayer) {
+        window.scrollTo({
+          top: moviePlayer.offsetTop - stickyMenuHeight,
+          // behavior: 'smooth'
+        });}
+        // setSearchType("movie")
         setSearchType("tv")
         setSelectedMovieId(historySelect.id)
       
@@ -518,6 +531,7 @@ useEffect(() => {
     />
     <div id="player">
       <iframe
+        ref={iframeMovieRef}
         src={listLinks[selectedMovieSourceIndex]}
         width="100%"
         height="100%"

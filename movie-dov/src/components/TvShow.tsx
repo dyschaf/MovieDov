@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import DisplayHistory from "./DisplayHistory";
 import SourceScroller from './SourceScroller';
@@ -129,7 +129,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   const savedSourceIndex = localStorage.getItem("selectedTVShowSourceIndex");
   const [selectedTVShowSourceIndex, setSelectedTVShowSourceIndex] = useState<number>(
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
+  
   );
+const iframeTvRef = useRef<HTMLIFrameElement>(null);
 
   const safeEpisode = selectedEpisode ?? { episode_number: "" };
 
@@ -144,17 +146,24 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   }, [historySelect?.season, historySelect?.episode, historySelect?.title]);
 
   useEffect(() => {
-    const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem("tvShowHistory") || "[]");
-
     const fetchSeasons = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
       setTvshowData(data)
       setSaveTVShowTitle(data.name);
       setSeasons(data.seasons);
-      window.location.href = "/#upper";
+      console.log(`${seasons[1].poster_path}`)
+      // window.location.href = "/#upper";
       // console.log(placeholderText)
   }
+  fetchSeasons()
+  if (iframeTvRef.current) {
+    iframeTvRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+},[id]);
+  useEffect(() => {
+    const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem("tvShowHistory") || "[]");
+
 
     const fetchEpisodes = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
@@ -205,7 +214,10 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
 
     if (selectedSeason !== null) 
     fetchEpisodes();
-    fetchSeasons();
+    
+    if (iframeTvRef.current) {
+      iframeTvRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
     // console.log("test156")
     // console.log(selectedSeason)
   }, [selectedSeason]);
@@ -225,10 +237,14 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     setSelectedEpisode(selectedSeasonEpisodes[0]);
   };
   useEffect(() => {
+    // const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem('tvShowHistory') || '[]');
+
     if (
+      
       saveTVShowTitle &&
       selectedEpisode?.episode_number !== undefined &&
       selectedSeason !== null
+      //selectedEpisode?.episode_number !== 1
     ) {
       const tvShow = (Array.isArray(tvshowData) ? tvshowData[0] : tvshowData) as TVShow;
   
@@ -293,7 +309,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   
 
 window.addEventListener('message', (event) => {
-  if (event.origin !== 'https://vidlink.pro') return;
+  // if (event.origin !== 'https://vidlink.pro') return;
   
   if (event.data?.type === 'MEDIA_DATA') {
     const mediaData = event.data.data;
@@ -364,6 +380,7 @@ window.addEventListener('message', (event) => {
             />
             <div id="player">
               <iframe
+                ref-iframeTvRef
                 src={links[selectedTVShowSourceIndex]}
                 width="100%"
                 height="100%"
