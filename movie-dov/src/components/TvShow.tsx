@@ -163,7 +163,16 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
 },[id]);
   useEffect(() => {
     const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem("tvShowHistory") || "[]");
-
+    const fetchSeasons = async () => {
+      const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
+      const data = await response.json();
+      setTvshowData(data)
+      setSaveTVShowTitle(data.name);
+      setSeasons(data.seasons);
+      console.log(`${seasons[1].poster_path}`)
+      // window.location.href = "/#upper";
+      // console.log(placeholderText)
+  }
 
     const fetchEpisodes = async () => {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
@@ -175,11 +184,15 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
         setSelectedEpisode(data.episodes[0])
         setSeasonEpisodes(data.episodes)
         setChangeSeasonActive(false)
+        // setHistorySelect(null);
+
         }else{
         const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
       
         setSelectedEpisode(data.episodes[episodeIndex]);
         setSeasonEpisodes(data.episodes);
+        setHistorySelect(null);
+
         // setSelectedSeason(historySelect.season)
         }
       } else {
@@ -212,7 +225,8 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
       setQuery("")
     };
 
-    if (selectedSeason !== null) 
+    // if (selectedSeason !== null) 
+    fetchSeasons()
     fetchEpisodes();
     
     if (iframeTvRef.current) {
@@ -220,7 +234,7 @@ const iframeTvRef = useRef<HTMLIFrameElement>(null);
     }
     // console.log("test156")
     // console.log(selectedSeason)
-  }, [selectedSeason]);
+  }, [selectedSeason, id]);
 
   const handleSeasonSelect = (event: any) => {
     setHistorySelect(null);
