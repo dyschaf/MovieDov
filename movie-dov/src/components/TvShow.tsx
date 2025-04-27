@@ -131,7 +131,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
   );
 
-  const safeEpisode = selectedEpisode ?? { episode_number: "" };
+  const safeEpisode = selectedEpisode ?? { episode_number: 1 };
 
   useEffect(() => {
     localStorage.setItem("selectedTVShowSourceIndex", selectedTVShowSourceIndex.toString());
@@ -166,6 +166,16 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       setSaveTVShowTitle(data.name);
       setSeasons(data.seasons);
       window.location.href = "/#upper";
+      const match = tvHistory.find(item => item.id === id);
+      if (match) {
+      // console.log("test156")
+      // console.log(selectedSeason)
+
+        setHistorySelect(match);
+      }else{
+        setSelectedSeason(1)
+        fetchEpisodes()
+      }
       // console.log(placeholderText)
   }
 
@@ -181,7 +191,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         setChangeSeasonActive(false)
         }else{
         const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
-      
+      console.log(56)
+      console.log(data.episodes)
+      console.log(data.episodes[episodeIndex])
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[episodeIndex]);
         // setSelectedSeason(historySelect.season)
@@ -190,7 +202,13 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         // if(savedSourceIndex.id === id){
         //   save
         // }
-        // console.log("test2")
+        console.log("test2")
+        console.log(data.episodes[0])
+        console.log(data.episodes)
+        // setSelectedSeason(1)
+        // setSelectedSeason(1)
+        console.log(data.episodes)
+        console.log(data.episodes[0])
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
@@ -217,8 +235,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     };
 
     if (selectedSeason !== null) 
-    fetchSeasons();
     fetchEpisodes();
+    fetchSeasons();
     // console.log("test156")
     // console.log(selectedSeason)
   }, [selectedSeason,id]);
