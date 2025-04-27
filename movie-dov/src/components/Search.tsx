@@ -132,7 +132,7 @@ window.addEventListener('message', (event) => {
   }
 });
 const listLinks = selectedMovieId !== null ? [
-  `https://vidsr4c.in/embed/movie/${selectedMovieId}`,
+  `https://vidsrc.in/embed/movie/${selectedMovieId}`,
   `https://vidlink.pro/movie/${selectedMovieId}`,
   `https://embed.su/embed/movie/${selectedMovieId}`,
   `https://vidsrc.pro/embed/movie/${selectedMovieId}`,
