@@ -171,8 +171,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       // console.log("test156")
       // console.log(selectedSeason)
 
-        setHistorySelect(match);
-        // setSelectedSeason(match.season)
+      //   setHistorySelect(match);
+      //   setSelectedSeason(match.season)
       }else{
         setSelectedSeason(1)
         fetchEpisodes()
@@ -247,7 +247,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
     setSelectedSeason(seasonNumber);
     setChangeSeasonActive(true)
-    setSelectedEpisode(0);
+    setSelectedEpisode(null);
   };
 
   const handleEpisodeSelect = (event: any) => {
