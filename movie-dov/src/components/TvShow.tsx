@@ -361,8 +361,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
                       ) : null
                     )}
                   </select>
-
-
                   <select className="episodes" onChange={handleEpisodeSelect} value={safeEpisode.episode_number}>
                     {seasonEpisodes.map(ep => (
                       <option key={ep.id} value={ep.episode_number}>
