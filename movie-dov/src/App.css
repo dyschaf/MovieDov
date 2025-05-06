@@ -250,7 +250,7 @@ iframe {
   max-height: 60vh;
   overflow-y: auto;
   padding: 0px 0px 0px 0;
-  /* margin-bottom: 20px; */
+  margin-bottom: -5px;
   scroll-behavior: smooth;
 
   /* Hide scrollbar (cross-browser) */
@@ -305,10 +305,11 @@ iframe {
   background: transparent;
   border: none;
   color: #aaa;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   margin: 4px auto;
   display: block;
+  
 }
 
 .scroll-arrow:hover {
@@ -533,7 +534,7 @@ iframe {
     background: transparent;
     border: none;
     color: #aaa;
-    font-size: 28px;
+    font-size: 16px;
     cursor: pointer;
     padding: 0 12px;
   }
