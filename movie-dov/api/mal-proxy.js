@@ -1,7 +1,6 @@
 // import type { VercelRequest, VercelResponse } from '@vercel/node';
-const fetch = require('node-fetch'); // ✅ ADD THIS
-
-export default async function handler(req: any, res: any) {
+import fetch from 'node-fetch'; 
+export default async function handler(req, res) {
   console.log("Received request:", req.url); 
   const { q } = req.query;
 
@@ -23,7 +22,7 @@ export default async function handler(req: any, res: any) {
 
     const data = await response.json();
     return res.status(200).json(data);
-  } catch (error: any) {
+  } catch (error) {
     return res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 }
