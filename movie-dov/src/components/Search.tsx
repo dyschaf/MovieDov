@@ -10,6 +10,7 @@ import logo from "../components/IMG/logo.png"
 import questionMark from "../components/IMG/search.svg"
 import SourceScroller from './SourceScroller';
 import DisplayGeneric from './DisplayGeneric';
+import Anime from './Anime';
 import { title } from 'process';
 import { TIMEOUT } from 'dns';
 
@@ -613,6 +614,14 @@ useEffect(() => {
         ) : (
           <></>
         )} */}
+        {selectedMovieId && searchType === "anime" ? (
+          // <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/${searchType}?id=${selectedMovieId}&s${selected}&e=${selectedEpisode}`} width="100%" height="100 %" ></iframe>
+          <Anime id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType} placeholderText={placeholderText }query={query}setQuery={setQuery}
+          />
+          // <TvShow id={selectedMovieId} setHistorySelect={setHistorySelect} />
+        ) : (
+          <></>
+        )}
         {selectedMovieId && searchType === "tv" ? (
           // <iframe id="iframe" src={`https://www.2embed.to/embed/tmdb/${searchType}?id=${selectedMovieId}&s${selected}&e=${selectedEpisode}`} width="100%" height="100 %" ></iframe>
           <TvShow id={selectedMovieId} historySelect={historySelect} setSearchType={setSearchType} setHistorySelect={setHistorySelect} searchType={searchType} placeholderText={placeholderText }query={query}setQuery={setQuery}
