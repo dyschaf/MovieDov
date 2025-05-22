@@ -357,6 +357,9 @@ useEffect(() => {
     // setHistorySelect(historySelect);
 
     setSelectedMovieId(movieId);
+    console.log(searchType)
+    if (searchType !== "Anime") {
+  
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
 
     const options = {
@@ -374,11 +377,13 @@ useEffect(() => {
         // console.log("Fetched movie data:", json);
         setClickedMovie(null)
         setClickedMovie(json); // ✅ save to state
+      
       })
       .catch((err) => {
         // setClickedMovie(null)
         // console.error("Failed to fetch movie data:", err);
       });
+    }
   // };
     const moviePlayer = document.getElementById("player");
     const stickyMenu = document.querySelector('.stick-menu');

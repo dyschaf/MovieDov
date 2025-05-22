@@ -27,12 +27,12 @@ const SubMenu: React.FC<SubMenuProps> = ({ onSearchTypeChange, searchType, setSe
       >
         TV Show
       </button>
-      <button
+      {/* <button
         className={`type-button ${searchType === 'anime' ? 'active anime' : ''}`}
         onClick={() => handleSearchTypeChange('anime')}
       >
         Anime
-      </button>
+      </button> */}
     </>
   );
 };
