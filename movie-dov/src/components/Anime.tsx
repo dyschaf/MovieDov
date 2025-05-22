@@ -20,7 +20,7 @@ interface AnimeHistoryItem {
   type: string;
 }
 
-const AnimeShow: React.FC<{
+const Anime: React.FC<{
   id: number;
   historySelect: any;
   setSearchType: React.Dispatch<React.SetStateAction<any>>;
@@ -113,4 +113,4 @@ const AnimeShow: React.FC<{
   );
 };
 
-export default AnimeShow;
+export default Anime;
