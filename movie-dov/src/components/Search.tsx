@@ -11,6 +11,7 @@ import questionMark from "../components/IMG/search.svg"
 import SourceScroller from './SourceScroller';
 import DisplayGeneric from './DisplayGeneric';
 import { title } from 'process';
+import { TIMEOUT } from 'dns';
 
 // import Accordion from 'react-bootstrap/Accordion';
 
@@ -61,6 +62,8 @@ interface type_media{
 const Search: React.FC = () => {
   const [searchType, setSearchType] = useState('movie');
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [animeSelected, setAnimeSelected] = useState<Movie[]>([]);
+  const [animeSearch, setAnimeSearch] = useState<Movie[]>([]);
   // const [clickedMovie, setClickedMovie] = useState<Movie[]>([]);
   const [clickedMovie, setClickedMovie] = useState<any | null>(null);
   const [tvHistory, setTvHistory] = useState<TVShowHistoryItem[]>([]);
@@ -77,7 +80,14 @@ const Search: React.FC = () => {
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
   );
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const selectedLabel = searchType === 'movie' ? 'Movie' : 'TV show';
+  let selectedLabel = '';
+  if (searchType === 'movie') {
+    selectedLabel = 'Movie';
+  } else if (searchType === 'tv') {
+    selectedLabel = 'TV show';
+  } else if (searchType === 'anime') {
+    selectedLabel = 'Anime';
+  }
   const scrollRefTrendMovie = useRef<HTMLDivElement>(null);
   const scrollRefTrendTv = useRef<HTMLDivElement>(null);
   const scrollRefSaveTv = useRef<HTMLDivElement>(null);
@@ -213,12 +223,31 @@ useEffect(() => {
   fetchAllData();
 }, []);
   useEffect(() => {
-    // Perform any setup here if necessary (for example, loading data from localStorage).
-  }, []); 
-  const handleSearchTypeChange = (type: string) => {
-  const selectedLabel = type === 'movie' ? 'movie' : 'TV show';
-  setSearchType(type);
+    if (searchType === 'movie') {
+      selectedLabel = 'Movie';
+    } else if (searchType === 'tv') {
+      selectedLabel = 'TV show';
+    } else if (searchType === 'anime') {
+      selectedLabel = 'Anime';
+    }
+    
   setPlaceholderText(`What ${selectedLabel} do you wanna watch?`);
+    // Perform any setup here if necessary (for example, loading data from localStorage).
+  }, [searchType]); 
+  const handleSearchTypeChange = (type: string) => {
+ 
+    // let selectedLabel = '';
+
+  //   if (searchType === 'movie') {
+  //     selectedLabel = 'Movie';
+  //   } else if (searchType === 'tv') {
+  //     selectedLabel = 'TV show';
+  //   } else if (searchType === 'anime') {
+  //     selectedLabel = 'Anime';
+  //   }
+    
+  // setPlaceholderText(`What ${selectedLabel} do you wanna watch?`);
+  setSearchType(type);
   setSelectedMovieId(null);
   setMovies([]);
   handleSearch(query)
@@ -235,12 +264,42 @@ useEffect(() => {
   }, [searchType]);
   const handleSearch = (query: string) => {
     setQuery(query);
-    const requestOptions: any = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-    
-    
+   
+    if (searchType === "anime"){
+      fetch(`https://api.myanimelist.net/v2/anime?q=${query}&limit=5`, {
+        method: "GET",
+        // "User-Agent": "PostmanRuntime/7.32.3",
+        headers: {
+          "X-MAL-CLIENT-ID": "82150ba786771cfb04d451a7231f86bc",
+        "User-Agent": "PostmanRuntime/7.32.3",
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        redirect: 'follow'
+        },
+        
+        
+      })
+      .then((res) => {
+        if (!res.ok) throw new Error("Request failed");
+        return res.json();
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Request failed");
+          return res.json();
+        })
+        .then((data) => {
+          setAnimeSearch(data.data);
+          console.log(data)
+        })
+        // .catch((err) => {
+        //   setError(err.message);
+        // });
+    }else{
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
     // fetch(`https://api.themoviedb.org/3/search/keyword?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
     fetch(`https://api.themoviedb.org/3/search/${searchType}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
       .then(response => response.json())
@@ -266,6 +325,7 @@ useEffect(() => {
         
       })
       .catch(error => console.log('error', error));
+    }
   };
   useEffect(() => {
     if (searchInputRef.current) {

@@ -7,7 +7,7 @@ interface SubMenuProps {
 }
 
 const SubMenu: React.FC<SubMenuProps> = ({ onSearchTypeChange, searchType, setSearchType }) => {
-  const handleSearchTypeChange = (type: 'movie' | 'tv') => {
+  const handleSearchTypeChange = (type: 'movie' | 'tv'| 'anime') => {
     setSearchType(type);
     onSearchTypeChange(type);
   };
@@ -27,6 +27,12 @@ const SubMenu: React.FC<SubMenuProps> = ({ onSearchTypeChange, searchType, setSe
       >
         TV Show
       </button>
+      {/* <button
+        className={`type-button ${searchType === 'anime' ? 'active anime' : ''}`}
+        onClick={() => handleSearchTypeChange('anime')}
+      >
+        Anime
+      </button> */}
     </>
   );
 };

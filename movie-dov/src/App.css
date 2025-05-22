@@ -182,6 +182,10 @@ iframe {
   background-color: #00aaff;
   color: white;
 }
+.type-button.active.anime {
+  background-color: #00C49F;
+  color: white;
+}
 
 .search-input {
   flex: 1;
@@ -628,7 +632,8 @@ iframe {
     padding: 8px;
     flex: 1;
     outline: none;
-    width: 50px;
+    width: 150px;
+    display: inline;
   }
 
   .search-icon {
