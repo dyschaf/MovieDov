@@ -284,7 +284,7 @@ useEffect(() => {
               genres: '', // Only available if you fetch `genres` field
             };
           });
-          
+          setMovies(movies);
           setAnimeSearch(data.data);
           console.log(data)
         })
