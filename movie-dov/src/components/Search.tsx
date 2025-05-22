@@ -286,7 +286,7 @@ useEffect(() => {
           });
           setMovies(movies);
           setAnimeSearch(data.data);
-          console.log(data)
+          console.log(movies)
         })
         // .catch((err) => {
         //   setError(err.message);
