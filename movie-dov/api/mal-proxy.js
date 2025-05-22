@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `https://api.myanimelist.net/v2/anime?q=${encodeURIComponent(q)}&limit=5`;
+    const url = `https://api.myanimelist.net/v2/anime?q=${encodeURIComponent(q)}&limit=20`;
 
     const response = await fetch(url, {
       headers: {
