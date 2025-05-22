@@ -266,24 +266,7 @@ useEffect(() => {
     setQuery(query);
    
     if (searchType === "anime"){
-      fetch(`https://api.myanimelist.net/v2/anime?q=${query}&limit=5`, {
-        method: "GET",
-        // "User-Agent": "PostmanRuntime/7.32.3",
-        headers: {
-          "X-MAL-CLIENT-ID": "82150ba786771cfb04d451a7231f86bc",
-        "User-Agent": "PostmanRuntime/7.32.3",
-        "Accept": "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Connection": "keep-alive",
-        redirect: 'follow'
-        },
-        
-        
-      })
-      .then((res) => {
-        if (!res.ok) throw new Error("Request failed");
-        return res.json();
-      })
+      fetch(`/api/mal-proxy?q=${query}`)
         .then((res) => {
           if (!res.ok) throw new Error("Request failed");
           return res.json();
