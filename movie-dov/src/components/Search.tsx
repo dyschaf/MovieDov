@@ -272,6 +272,19 @@ useEffect(() => {
           return res.json();
         })
         .then((data) => {
+          const movies: Movie[] = data.data.map((entry: any) => {
+            const anime = entry.node;
+          
+            return {
+              id: anime.id,
+              title: anime.title,
+              poster: anime.main_picture?.medium || '',  // or `.large` if you want bigger
+              year: '', // You can add this later if you fetch `start_date`
+              director: '',
+              genres: '', // Only available if you fetch `genres` field
+            };
+          });
+          
           setAnimeSearch(data.data);
           console.log(data)
         })
