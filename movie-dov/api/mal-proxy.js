@@ -1,5 +1,6 @@
 // import type { VercelRequest, VercelResponse } from '@vercel/node';
-import fetch from 'node-fetch'; 
+const fetch = require('node-fetch'); // ✅ ADD THIS
+ 
 export default async function handler(req, res) {
   console.log("Received request:", req.url); 
   const { q } = req.query;
