@@ -31,6 +31,8 @@ const Anime: React.FC<{
   setQuery: React.Dispatch<React.SetStateAction<any>>;
 }> = ({ id, historySelect, setSearchType, setHistorySelect, searchType, query, setQuery }) => {
   const [animeData, setAnimeData] = useState<AnimeData | null>(null);
+  const [episodeNumber, setEpisodeNumber] = useState(1);
+
   const [selectedSourceIndex, setSelectedSourceIndex] = useState<number>(() => {
     const saved = localStorage.getItem("selectedAnimeSourceIndex");
     return saved ? parseInt(saved) : 0;
@@ -40,6 +42,7 @@ const Anime: React.FC<{
     localStorage.setItem("selectedAnimeSourceIndex", selectedSourceIndex.toString());
   }, [selectedSourceIndex]);
 
+  
   useEffect(() => {
     const fetchAnime = async () => {
       // fetch(`/api/mal-anime-details?id=${movieId}&fields=id,title,start_date,main_picture,synopsis,genres,mean,num_episodes,status`)
@@ -90,6 +93,7 @@ const Anime: React.FC<{
   }, [animeData]);
 
   const links = animeData ? [
+    `https://vidlink.pro/anime/${id}/${episodeNumber}/Dub?fallback=true`,
     `https://vidsrc.to/embed/anime/${id}`,
     `https://vidlink.pro/anime/${id}`,
     `https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`,
@@ -123,6 +127,17 @@ const Anime: React.FC<{
                 allowFullScreen
               />
             </div>
+          </div>
+          <div className="episode-nav">
+            <button className="arrow-button" onClick={() => {    if (episodeNumber > 1) {
+              episodeNumber - 1}}}
+              >
+              &lt;
+            </button>
+            <span className="episode-label">Episode {safeEpisode.episode_number}</span>
+            <button className="arrow-button" onClick={() => {  episodeNumber + 1}} >
+              &gt;
+            </button>
           </div>
         </>
       )}
