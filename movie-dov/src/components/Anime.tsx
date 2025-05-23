@@ -42,7 +42,19 @@ const Anime: React.FC<{
 
   useEffect(() => {
     const fetchAnime = async () => {
-      const res = await fetch(`/api/mal-anime-details?id=${id}&fields=id,title,start_date,main_picture,synopsis`);
+      // fetch(`/api/mal-anime-details?id=${movieId}&fields=id,title,start_date,main_picture,synopsis,genres,mean,num_episodes,status`)
+      // .then((res) => {
+      //   if (!res.ok) throw new Error("Request failed");
+      //   return res.json();
+      // })
+      // .then((data) => {
+      //   console.log(data); // or 
+      //   setAnimeSelected(data);
+      // })
+      // .catch((err) => {
+      //   console.error("Fetch error:", err);
+      // });
+      const res = await fetch(`/api/mal-anime-details?id=${id}&fields=id,title,start_date,main_picture,synopsis,genres,mean,num_episodes,status`);
       const data = await res.json();
       setAnimeData(data);
     };
