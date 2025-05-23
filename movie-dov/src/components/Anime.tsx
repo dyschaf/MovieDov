@@ -95,7 +95,7 @@ const Anime: React.FC<{
   }, [animeData]);
 
   const links = animeData ? [
-    `https://vidlink.pro/anime/${id}/${episodeNumber}/Dub`,
+    `https://vidlink.pro/anime/${id}/${episodeNumber}/dub?fallback=true`,
     `https://vidsrc.to/embed/anime/${id}`,
     `https://vidlink.pro/anime/${id}`,
     `https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`,
