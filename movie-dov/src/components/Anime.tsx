@@ -57,6 +57,7 @@ const Anime: React.FC<{
       const res = await fetch(`/api/mal-anime-details?id=${id}&fields=id,title,start_date,main_picture,synopsis,genres,mean,num_episodes,status`);
       const data = await res.json();
       setAnimeData(data);
+      console.log(data)
     };
     fetchAnime();
   }, [id]);
