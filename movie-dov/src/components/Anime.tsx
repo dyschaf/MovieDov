@@ -19,7 +19,9 @@ interface AnimeHistoryItem {
   poster_path?: string;
   type: string;
 }
-
+interface episodeNumber {
+  episodeNumber:number
+}
 const Anime: React.FC<{
   id: number;
   historySelect: any;
