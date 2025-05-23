@@ -132,12 +132,12 @@ const Anime: React.FC<{
           </div>
           <div className="episode-nav">
             <button className="arrow-button" onClick={() => {    if (episodeNumber > 1) {
-              episodeNumber - 1}}}
+              setEpisodeNumber(episodeNumber - 1)}}}
               >
               &lt;
             </button>
             <span className="episode-label">Episode {episodeNumber}</span>
-            <button className="arrow-button" onClick={() => {  episodeNumber + 1}} >
+            <button className="arrow-button" onClick={() => {  setEpisodeNumber(episodeNumber + 1)}} >
               &gt;
             </button>
           </div>
