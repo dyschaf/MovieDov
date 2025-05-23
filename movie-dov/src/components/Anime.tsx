@@ -108,7 +108,7 @@ const Anime: React.FC<{
             <img className="tv-show-poster" src={animeData.main_picture?.medium} alt="Anime poster" />
             <div className="tv-show-info">
               <h1 className="tv-title">{animeData.title}</h1>
-              <p className="tv-overview">{animeData.synopsis}</p>
+              {/* <p className="tv-overview">{animeData.synopsis}</p> */}
             </div>
           </div>
 
