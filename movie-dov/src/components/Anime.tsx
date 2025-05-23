@@ -134,7 +134,7 @@ const Anime: React.FC<{
               >
               &lt;
             </button>
-            <span className="episode-label">Episode {safeEpisode.episode_number}</span>
+            <span className="episode-label">Episode {episodeNumber}</span>
             <button className="arrow-button" onClick={() => {  episodeNumber + 1}} >
               &gt;
             </button>
