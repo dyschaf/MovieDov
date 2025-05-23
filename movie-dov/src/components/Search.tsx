@@ -121,7 +121,12 @@ useEffect(() => {
 useEffect(() => {
   const handleMessage = (event: MessageEvent) => {
     if (event.origin !== 'https://vidlink.pro') return;
-
+  
+    if (event.data?.type === 'PLAYER_EVENT') {
+      const { event: eventType, currentTime, duration } = event.data.data;
+      // Handle the event
+      console.log(`Player ${eventType} at ${currentTime}s of ${duration}s`);
+    }
     if (event.data?.type === 'MEDIA_DATA') {
       const mediaData = event.data.data;
       localStorage.setItem('vidLinkProgress', JSON.stringify(mediaData));
