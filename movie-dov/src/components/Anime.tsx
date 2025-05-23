@@ -96,7 +96,7 @@ const Anime: React.FC<{
 
   const links = animeData ? [
     
-    `https://www.mewatch.sg/embed/${id}`,
+    `https://www.mewatch.sg/watch/${animeData.title.split(" ").join("-")}`,
     `https://vidlink.pro/anime/${id}/${episodeNumber}/dub?fallback=true`,
     `https:// /embed/anime/${id}`,
     `https://vidlink.pro/anime/${id}`,
