@@ -34,6 +34,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ onSearchTypeChange, searchType, setSe
         Anime
       </button> */}
     </>
+    
   );
 };
 
