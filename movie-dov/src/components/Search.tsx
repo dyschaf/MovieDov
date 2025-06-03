@@ -117,7 +117,7 @@ useEffect(() => {
   if (isMobile) {
     setPlaceholderText(`Search ${selectedLabel}`);
   }
-  
+
 }, [selectedLabel]);
 useEffect(() => {
   const handleMessage = (event: MessageEvent) => {
@@ -272,38 +272,41 @@ useEffect(() => {
   const handleSearch = (query: string) => {
     setQuery(query);
    
-    if (searchType === "anime"){
-      fetch(`/api/mal-proxy?q=${query}`)
-        .then((res) => {
-          if (!res.ok) throw new Error("Request failed");
-          return res.json();
-        })
-        .then((data) => {
-          const movies: Movie[] = data.data.map((entry: any) => {
-            const anime = entry.node;
+    // if (searchType === "anime"){
+      // fetch(`/api/mal-proxy?q=${query}`)
+      //   .then((res) => {
+      //     if (!res.ok) throw new Error("Request failed");
+      //     return res.json();
+      //   })
+      //   .then((data) => {
+      //     const movies: Movie[] = data.data.map((entry: any) => {
+      //       const anime = entry.node;
           
-            return {
-              id: anime.id,
-              title: anime.title,
-              poster: anime.main_picture?.medium || '',  // or `.large` if you want bigger
-              year: '', // You can add this later if you fetch `start_date`
-              director: '',
-              genres: '', // Only available if you fetch `genres` field
-            };
-          });
-          setMovies(movies);
-          setAnimeSearch(data.data);
-          console.log(movies)
-        })
+      //       return {
+      //         id: anime.id,
+      //         title: anime.title,
+      //         poster: anime.main_picture?.medium || '',  // or `.large` if you want bigger
+      //         year: '', // You can add this later if you fetch `start_date`
+      //         director: '',
+      //         genres: '', // Only available if you fetch `genres` field
+      //       };
+      //     });
+      //     setMovies(movies);
+      //     setAnimeSearch(data.data);
+      //     console.log(movies)
+      //   })
         // .catch((err) => {
         //   setError(err.message);
         // });
-    }else{
+    // }else{
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
       };
     // fetch(`https://api.themoviedb.org/3/search/keyword?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
+    if (searchType === "anime"){
+    fetch(`https://api.themoviedb.org/3/discover/tv?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&with_genres=16&query=${query}&page=1&include_adult=false`, requestOptions);
+    }else{
     fetch(`https://api.themoviedb.org/3/search/${searchType}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
       .then(response => response.json())
       .then(result => {
