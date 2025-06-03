@@ -117,6 +117,7 @@ useEffect(() => {
   if (isMobile) {
     setPlaceholderText(`Search ${selectedLabel}`);
   }
+  
 }, [selectedLabel]);
 useEffect(() => {
   const handleMessage = (event: MessageEvent) => {
