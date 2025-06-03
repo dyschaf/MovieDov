@@ -59,13 +59,16 @@ const Anime: React.FC<{
       // .catch((err) => {
       //   console.error("Fetch error:", err);
       // });
-      const res = await fetch(`/api/mal-anime-details?id=${id}&fields=id,title,start_date,main_picture,synopsis,genres,mean,num_episodes,status`);
-      const data = await res.json();
-      setAnimeData(data);
-      console.log(data)
+      // const res = await fetch(`/api/mal-anime-details?id=${id}&fields=id,title,start_date,main_picture,synopsis,genres,mean,num_episodes,status`);
+      // const data = await res.json();
+      // setAnimeData(data);
+      // console.log(data)
       // const season = await fetch(`/api/mal-anime-details?id=${id}&fields=id,title,start_date,main_picture,synopsis,genres,mean,num_episodes,status`);
       // const seasonData = await season.json();
       // console.log(seasonData)
+      const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/1?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
+      const data = await response.json();
+      setAnimeData(data);
     };
     fetchAnime();
     
@@ -96,13 +99,13 @@ const Anime: React.FC<{
 
   const links = animeData ? [
     `https://Letsembed.cc/embed/anime/?id=73223/1/1`,
-    `https://www.mewatch.sg/embed/${id}`,
-    `https://www.mewatch.sg/watch/${animeData.title.split(" ").join("-")}-E${episodeNumber}-${id}`,
-    `https://vidlink.pro/anime/${id}/${episodeNumber}/dub?fallback=true`,
-    `https:// /embed/anime/${id}`,
-    `https://vidlink.pro/anime/${id}`,
-    `https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`,
-    `https://vidsrc.uk/embed/anime/${id}`,
+    // `https://www.mewatch.sg/embed/${id}`,
+    // `https://www.mewatch.sg/watch/${animeData.title.split(" ").join("-")}-E${episodeNumber}-${id}`,
+    // `https://vidlink.pro/anime/${id}/${episodeNumber}/dub?fallback=true`,
+    // `https:// /embed/anime/${id}`,
+    // `https://vidlink.pro/anime/${id}`,
+    // `https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1`,
+    // `https://vidsrc.uk/embed/anime/${id}`,
   ] : [];
 
   return (

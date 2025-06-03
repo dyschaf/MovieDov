@@ -305,8 +305,40 @@ useEffect(() => {
       };
     // fetch(`https://api.themoviedb.org/3/search/keyword?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
     if (searchType === "anime"){
-    fetch(`https://api.themoviedb.org/3/discover/tv?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&with_genres=16&query=${query}&page=1&include_adult=false`, requestOptions);
-    }else{
+    // fetch(`https://api.themoviedb.org/3/discover/tv?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&query=${query}&with_genres=16&page=1&include_adult=false`, requestOptions)
+    // .then(response => response.json())
+    // .then(result => {
+      fetch(`https://api.themoviedb.org/3/search/tv?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&query=${encodeURIComponent(query)}&page=1&include_adult=false`)
+      .then(res => res.json())
+      .then(data => {
+        const animeResults = data.results.filter((item: any) =>
+           item.genre_ids.includes(16)
+        );
+        console.log(animeResults)       // setResults(animeResults);
+      
+
+      const movies: Movie[] = animeResults.map((movie: any) => ({
+        id: movie.id,
+        title: movie.title || movie.name,
+        poster: 'https://image.tmdb.org/t/p/w220_and_h330_face/'+movie.poster_path,
+        year: movie.release_date?.split('-')[0] || movie.first_air_date?.split('-')[0] || '',
+        // year: Number(movie.release_date?.first_air_date?.split('-')[0] )|| '',
+        director: '',
+        // genres: movie.genre_ids
+        genres: movie.genre_ids.flatMap((genreId: number) => {
+          const matchingGenre = Genres.find((genre) => genre.id === genreId);
+          return matchingGenre ? [matchingGenre.name] : []
+        }).join(', ')
+      // }));
+      }));
+      setMovies(movies);
+  // window.location.href = "/#movie-search"
+  
+      
+    })
+    .catch(error => console.log('error', error));
+    
+  }else{
     fetch(`https://api.themoviedb.org/3/search/${searchType}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US&query=${query}&page=1&include_adult=false`, requestOptions)
       .then(response => response.json())
       .then(result => {
@@ -389,11 +421,31 @@ useEffect(() => {
       
       })
       .catch((err) => {
+        
         // setClickedMovie(null)
         // console.error("Failed to fetch movie data:", err);
       });
     }else{
-     
+       
+    const url = `https://api.themoviedb.org/3/tv/${movieId}?language=en-US`;
+
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMWM1OGM4ZDA5ZTE3MDdmOGFlOThhMTgzMmRkMTVhMyIsIm5iZiI6MTY4MDQ4NTE0Ny42LCJzdWIiOiI2NDJhMmIxYjY2NTQwODAwOTdmNjE4NTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.9pk3bj2GOmq_vPmEZHd6CNWy2T_k1BsD-_mZEMsJ9qQ'
+      }
+    };
+  
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log("Fetched movie data:", json);
+        setClickedMovie(null)
+        setClickedMovie(json); // ✅ save to state
+      
+      })
   };
     const moviePlayer = document.getElementById("player");
     const stickyMenu = document.querySelector('.stick-menu');
