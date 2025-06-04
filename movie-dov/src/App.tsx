@@ -5,7 +5,7 @@ import Home from "./components/Home"
 import ErrorBoundary from './components/ErrorBoundary';
 import { Routes, Route, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Analytics } from "@vercel/analytics/react"
 
 
 function App() {
