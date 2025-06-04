@@ -12,8 +12,11 @@ function App() {
   
   return (
     <>
+      <Analytics/>
+      <SpeedInsights/>
       <ErrorBoundary fallback={<div>Something went wrong!</div>}>
         <Routes>
+
           <Route path="/" element={<Home/>} />
         </Routes>
       </ErrorBoundary>
