@@ -388,6 +388,7 @@ useEffect(() => {
       searchInputRef.current.focus();
     }
   }, [])
+  
   const handleAllCardClick = (movieId: number, movieType: string) => {
     const type = movieType || 'movie'; // or 'tv', 'anime'
     // const = encodeURIComponent(movieId);
@@ -415,22 +416,25 @@ useEffect(() => {
     }
     setClickedMovie(null)
   };
-  // useEffect(() => {
-  //   // console.log("Route params:", { type, id, title, season, episode });
+  useEffect(() => {
+    // console.log("Route params:", { type, id, title, season, episode });
 
-  //   if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
-  //     handleMovieCardClick(ParamID)
-  //   } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
-  //     // show detail panel or similar
-  //     handleMovieCardClick(ParamID)
-  //   }
-  // }, [location.pathname]);
+    if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
+      handleMovieCardClick(ParamID)
+    } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
+      // show detail panel or similar
+      handleMovieCardClick(ParamID)
+    }
+  }, [location.pathname]);
   const handleMovieCardClick = (movieId: number) => {
     // setClickedMovie(null)
     // setHistorySelect(historySelect);
-
+    
     setSelectedMovieId(movieId);
-    console.log(searchType)
+    if(ParamEpisode){
+      setSearchType("tv")
+    }
+    // console.log(searchType)
     if (searchType !== "Anime") {
   
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
@@ -502,7 +506,7 @@ useEffect(() => {
     }
   };
   useEffect(() => {
-    if (selectedMovieId && searchType === 'movie') {
+    if (selectedMovieId && searchType === 'movie' && clickedMovie?.id) {
       // Get existing movie history from localStorage
       const storedMovieHistory = JSON.parse(localStorage.getItem("movieHistory") || "[]");
   
