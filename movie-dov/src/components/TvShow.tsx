@@ -278,13 +278,13 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     setTimeout(() => {
       console.log('This runs after 2 seconds');
     }, 2000); // 2000ms = 2 seconds
-    const tvShow = (Array.isArray(tvshowData) ? tvshowData[0] : tvshowData) as TVShow;
     
     if (
       saveTVShowTitle &&
       selectedEpisode?.episode_number !== undefined &&
       selectedSeason !== null
     ) {
+      const tvShow = (Array.isArray(tvshowData) ? tvshowData[0] : tvshowData) as TVShow;
   
       const newEntry: TVShowHistoryItem = {
         id,
@@ -326,10 +326,11 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       }
   
       setHistorySelect(null); // ✅ Reset after save
+      if (tvShow.first_air_date){
+        navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvShow?.first_air_date}`);
+        }
     }
-    if (tvShow.first_air_date){
-      navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvShow?.first_air_date}`);
-      }
+    
   },[selectedEpisode]);
   window.addEventListener('message', (event) => {
     if (event.origin !== 'https://vidlink.pro') return;
