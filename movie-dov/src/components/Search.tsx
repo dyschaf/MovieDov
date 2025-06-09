@@ -520,7 +520,7 @@ useEffect(() => {
         updatedMovieHistory = [newEntry, ...storedMovieHistory];
       }
       if(clickedMovie?.release_date){
-        navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}/${clickedMovie.release_date.split('-')[0]}`);
+        navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}`);
         }
       // Save the updated movie history back to localStorage
       localStorage.setItem("movieHistory", JSON.stringify(updatedMovieHistory));
