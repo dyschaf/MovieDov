@@ -211,8 +211,11 @@ iframe {
   z-index: 1;
   padding-bottom: 5px;
 }
-
+.pointer{
+cursor: pointer;
+}
 .header {
+  
   padding-top: 20px;
   padding-left: 7vw;
   display: flex;

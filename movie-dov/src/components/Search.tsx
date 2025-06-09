@@ -655,9 +655,9 @@ useEffect(() => {
     
     <div id='upper'>
     <div className='stick-menu'>
-      <div className="header">
-        <img src={logo} alt="Logo" />
-        <h2>Movie-Dov</h2>
+      <div className="header" >
+        <img className="pointer" src={logo} alt="Logo" onClick={() =>window.location.href = "/"}/>
+        <h2 className="pointer" onClick={() => window.location.href = "/"}>Movie-Dov</h2>
     </div>
 
       {/* <h1>Search</h1> */}
