@@ -217,6 +217,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
+
       if (query !== "") {
         const match = tvHistory.find(item => item.id === id);
         if (match) {
@@ -226,6 +227,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
           setSelectedSeason(match.season);
         }
       };
+      
       // const match = tvHistory.find(item => item.id === id);
       // if (match) {
       // console.log("test156")
@@ -244,19 +246,18 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     fetchSeasons();
     // console.log("test156")
     // console.log(selectedSeason)
-    const tvShowContainer = document.getElementById("tv-show-container");
-    const stickyMenu = document.querySelector('.stick-menu');
-    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 110;
-
-    
-    if (tvShowContainer) {
-      console.log("msfdsf")
-    window.scrollTo({
-      top: tvShowContainer.offsetTop - stickyMenuHeight,
-      // behavior: 'smooth'
-    })}
+  
   }, [selectedSeason,id]);
+  const tvShowContainer = document.getElementById("upper");
+  const stickyMenu = document.querySelector('.stick-menu');
+  const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 110;
 
+  
+    if (tvShowContainer) {
+  window.scrollTo({
+    top: tvShowContainer.offsetTop - stickyMenuHeight,
+    // behavior: 'smooth'
+  })}
   const handleSeasonSelect = (event: any) => {
     setHistorySelect(null);
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
