@@ -19,8 +19,8 @@ function App() {
         <Home />
         <Routes>
           <Route path="/" element={null} />
-          <Route path="/:type/:title/" element={null} />
-          <Route path="/:type/:title/:season/:episode" element={null} />
+          <Route path="/:type/:id/:title/" element={null} />
+          <Route path="/:type/id/:title/:season/:episode" element={null} />
 
 
         </Routes>

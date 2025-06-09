@@ -13,7 +13,8 @@ import DisplayGeneric from './DisplayGeneric';
 import Anime from './Anime';
 import { title } from 'process';
 import { TIMEOUT } from 'dns';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , useLocation, useParams } from 'react-router-dom';
+// import { useLocation, useParams } from 'react-router-dom';
 
 // import Accordion from 'react-bootstrap/Accordion';
 
@@ -82,6 +83,7 @@ const Search: React.FC = () => {
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
   );
   const searchInputRef = useRef<HTMLInputElement>(null);
+  
   let selectedLabel = '';
   if (searchType === 'movie') {
     selectedLabel = 'Movie';
@@ -90,6 +92,19 @@ const Search: React.FC = () => {
   } else if (searchType === 'anime') {
     selectedLabel = 'Anime';
   }
+  const location = useLocation();
+  const params = useParams();
+  // const { type, id, title, season, episode } = useParams();
+  // const location = useLocation();
+  const segments = location.pathname.split('/');
+
+  const ParamType = segments[1];
+  const ParamID = Number(segments[2]);
+  const ParamTitle = segments[3];
+  const ParamSeason = Number(segments[4]);
+  const ParamEpisode = Number(segments[5]);
+  // console.log("Route changed:", params);
+
   const scrollRefTrendMovie = useRef<HTMLDivElement>(null);
   const scrollRefTrendTv = useRef<HTMLDivElement>(null);
   const scrollRefSaveTv = useRef<HTMLDivElement>(null);
@@ -108,6 +123,8 @@ const Search: React.FC = () => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+
+
   }, []);
   
   useEffect(() => {
@@ -398,14 +415,26 @@ useEffect(() => {
     }
     setClickedMovie(null)
   };
-  
+  useEffect(() => {
+    console.log("Route params:", { ParamType, ParamID, ParamTitle, ParamSeason, ParamEpisode });
+
+    if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
+      handleMovieCardClick(ParamID)
+
+    } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
+      handleMovieCardClick(ParamID)
+    }
+  }, []);
   const handleMovieCardClick = (movieId: number) => {
     // setClickedMovie(null)
     // setHistorySelect(historySelect);
 
     setSelectedMovieId(movieId);
     console.log(searchType)
-    if (searchType !== "Anime") {
+    if (searchType !== ParamType && ParamType){
+      setSearchType(ParamType)
+    }
+    if (searchType !== "tv") {
   
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
 
@@ -520,7 +549,7 @@ useEffect(() => {
         updatedMovieHistory = [newEntry, ...storedMovieHistory];
       }
       if(clickedMovie?.release_date){
-        navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}`);
+        navigate(`/${searchType}/${selectedMovieId}/${clickedMovie?.title.replace(/\s+/g, '-')}`);
         }
       // Save the updated movie history back to localStorage
       localStorage.setItem("movieHistory", JSON.stringify(updatedMovieHistory));

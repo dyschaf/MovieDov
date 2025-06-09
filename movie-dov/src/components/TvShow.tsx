@@ -299,7 +299,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         type: 'tv',
       };
       if (tvShow?.first_air_date){
-        navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}`);
+        navigate(`/${searchType}/${id}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}`);
         }
       const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem('tvShowHistory') || '[]');
   
