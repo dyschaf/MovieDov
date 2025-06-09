@@ -421,19 +421,21 @@ useEffect(() => {
 
     if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
       handleMovieCardClick(ParamID)
+      setSearchType(ParamType)
     } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
       // show detail panel or similar
+      setSearchType(ParamType)
       handleMovieCardClick(ParamID)
     }
-  }, [location.pathname]);
+  }, []);
   const handleMovieCardClick = (movieId: number) => {
     // setClickedMovie(null)
     // setHistorySelect(historySelect);
     
     setSelectedMovieId(movieId);
-    if(ParamEpisode){
-      setSearchType("tv")
-    }
+    // if(ParamEpisode){
+    //   setSearchType(ParamType)
+    // }
     // console.log(searchType)
     if (searchType !== "Anime") {
   
