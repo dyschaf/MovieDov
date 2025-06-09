@@ -503,7 +503,7 @@ useEffect(() => {
         timestamp: new Date().toISOString(),
         type: "movie"
       };
-
+      
       // navigate(`/${searchType}/${clickedMovie.title}/$year`)
       let updatedMovieHistory;
   
@@ -519,13 +519,12 @@ useEffect(() => {
         // If movie doesn't exist, just add it to the top
         updatedMovieHistory = [newEntry, ...storedMovieHistory];
       }
-      if(clickedMovie.release_date){
-        navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}/${clickedMovie?.release_date}`);
+      if(clickedMovie?.release_date){
+        navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}/${clickedMovie.release_date.split('-')[0]}`);
         }
       // Save the updated movie history back to localStorage
       localStorage.setItem("movieHistory", JSON.stringify(updatedMovieHistory));
     }
-    
   }, [clickedMovie]);
   // console.log("TvShow.tsx received historySelect:", historySelect);
   // const handleHistorySelect = (item: any) => {
