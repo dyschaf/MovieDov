@@ -326,7 +326,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       }
   
       setHistorySelect(null); // ✅ Reset after save
-      if (tvShow.first_air_date){
+      if (tvShow?.first_air_date){
         navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvShow?.first_air_date}`);
         }
     }

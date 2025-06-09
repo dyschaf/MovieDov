@@ -519,12 +519,13 @@ useEffect(() => {
         // If movie doesn't exist, just add it to the top
         updatedMovieHistory = [newEntry, ...storedMovieHistory];
       }
+      if(clickedMovie.release_date){
+        navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}/${clickedMovie?.release_date}`);
+        }
       // Save the updated movie history back to localStorage
       localStorage.setItem("movieHistory", JSON.stringify(updatedMovieHistory));
     }
-    if(clickedMovie.release_date){
-      navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}/${clickedMovie?.release_date}`);
-      }
+    
   }, [clickedMovie]);
   // console.log("TvShow.tsx received historySelect:", historySelect);
   // const handleHistorySelect = (item: any) => {
