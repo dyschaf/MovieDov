@@ -503,8 +503,9 @@ useEffect(() => {
         timestamp: new Date().toISOString(),
         type: "movie"
       };
+      if(clickedMovie.release_date){
       navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}/${clickedMovie?.release_date}`);
-
+      }
       // navigate(`/${searchType}/${clickedMovie.title}/$year`)
       let updatedMovieHistory;
   

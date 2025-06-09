@@ -298,8 +298,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         poster_path: tvShow?.poster_path || tvShow?.backdrop_path || '',
         type: 'tv',
       };
+      if (tvShow.first_air_date){
       navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvShow?.first_air_date}`);
-  
+      }
       const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem('tvShowHistory') || '[]');
   
       const existingItem = tvHistory.find(
