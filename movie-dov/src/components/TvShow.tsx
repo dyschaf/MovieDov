@@ -3,6 +3,8 @@ import Accordion from 'react-bootstrap/Accordion';
 import DisplayHistory from "./DisplayHistory";
 import SourceScroller from './SourceScroller';
 import { Item } from 'react-bootstrap/lib/Breadcrumb';
+import { TIMEOUT } from 'dns';
+import { useNavigate } from 'react-router-dom';
 interface TVShow {
   id: number;
   title?: string;
@@ -130,6 +132,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   const [selectedTVShowSourceIndex, setSelectedTVShowSourceIndex] = useState<number>(
     savedSourceIndex ? parseInt(savedSourceIndex) : 0
   );
+  const navigate = useNavigate(); 
 
   const safeEpisode = selectedEpisode ?? { episode_number: 1 };
 
@@ -165,7 +168,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       setTvshowData(data)
       setSaveTVShowTitle(data.name);
       setSeasons(data.seasons);
-      window.location.href = "/#upper";
+
+      // window.location.href = "/#upper";
       const match = tvHistory.find(item => item.id === id);
       if (match) {
       // console.log("test156")
@@ -240,6 +244,17 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     fetchSeasons();
     // console.log("test156")
     // console.log(selectedSeason)
+    const tvShowContainer = document.getElementById("tv-show-container");
+    const stickyMenu = document.querySelector('.stick-menu');
+    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 110;
+
+    
+    if (tvShowContainer) {
+      console.log("msfdsf")
+    window.scrollTo({
+      top: tvShowContainer.offsetTop - stickyMenuHeight,
+      // behavior: 'smooth'
+    })}
   }, [selectedSeason,id]);
 
   const handleSeasonSelect = (event: any) => {
@@ -280,6 +295,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         poster_path: tvShow?.poster_path || tvShow?.backdrop_path || '',
         type: 'tv',
       };
+      navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvShow?.first_air_date}`);
   
       const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem('tvShowHistory') || '[]');
   

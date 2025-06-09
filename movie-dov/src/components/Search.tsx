@@ -13,6 +13,7 @@ import DisplayGeneric from './DisplayGeneric';
 import Anime from './Anime';
 import { title } from 'process';
 import { TIMEOUT } from 'dns';
+import { useNavigate } from 'react-router-dom';
 
 // import Accordion from 'react-bootstrap/Accordion';
 
@@ -99,7 +100,7 @@ const Search: React.FC = () => {
   const listRefMobile = useRef<HTMLDivElement>(null);
   const listRefDesktop = useRef<HTMLUListElement>(null);
   const iframeMovieRef = useRef<HTMLIFrameElement>(null);
-
+  const navigate = useNavigate();
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -371,6 +372,11 @@ useEffect(() => {
     }
   }, [])
   const handleAllCardClick = (movieId: number, movieType: string) => {
+    const type = movieType || 'movie'; // or 'tv', 'anime'
+    // const = encodeURIComponent(movieId);
+    // const year = item.year || '';
+
+    
     // setClickedMovie(null)
     if (movieType === "tv") {
       // setSearchType("movie");
@@ -446,6 +452,7 @@ useEffect(() => {
         setClickedMovie(json); // ✅ save to state
       
       })
+      ;
   };
     const moviePlayer = document.getElementById("player");
     const stickyMenu = document.querySelector('.stick-menu');
@@ -496,8 +503,9 @@ useEffect(() => {
         timestamp: new Date().toISOString(),
         type: "movie"
       };
-      
-      
+      navigate(`/${searchType}/${clickedMovie?.title.replace(/\s+/g, '-')}/${clickedMovie?.release_date}`);
+
+      // navigate(`/${searchType}/${clickedMovie.title}/$year`)
       let updatedMovieHistory;
   
       if (existingMovieIndex > -1) {
@@ -512,7 +520,6 @@ useEffect(() => {
         // If movie doesn't exist, just add it to the top
         updatedMovieHistory = [newEntry, ...storedMovieHistory];
       }
-  
       // Save the updated movie history back to localStorage
       localStorage.setItem("movieHistory", JSON.stringify(updatedMovieHistory));
     }
