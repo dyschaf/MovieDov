@@ -415,26 +415,23 @@ useEffect(() => {
     }
     setClickedMovie(null)
   };
-  useEffect(() => {
-    console.log("Route params:", { ParamType, ParamID, ParamTitle, ParamSeason, ParamEpisode });
+  // useEffect(() => {
+  //   // console.log("Route params:", { type, id, title, season, episode });
 
-    if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
-      handleMovieCardClick(ParamID)
-
-    } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
-      handleMovieCardClick(ParamID)
-    }
-  }, []);
+  //   if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
+  //     handleMovieCardClick(ParamID)
+  //   } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
+  //     // show detail panel or similar
+  //     handleMovieCardClick(ParamID)
+  //   }
+  // }, [location.pathname]);
   const handleMovieCardClick = (movieId: number) => {
     // setClickedMovie(null)
     // setHistorySelect(historySelect);
 
     setSelectedMovieId(movieId);
     console.log(searchType)
-    if (searchType !== ParamType && ParamType){
-      setSearchType(ParamType)
-    }
-    if (searchType !== "tv") {
+    if (searchType !== "Anime") {
   
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
 
