@@ -185,6 +185,16 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   }
 
     const fetchEpisodes = async () => {
+      const tvShowContainer = document.getElementById("upper");
+    const stickyMenu = document.querySelector('.stick-menu');
+    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 110;
+  
+    
+      if (tvShowContainer) {
+    window.scrollTo({
+      top: tvShowContainer.offsetTop - stickyMenuHeight,
+      // behavior: 'smooth'
+    })}
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
       
@@ -226,6 +236,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
 
           setSelectedSeason(match.season);
         }
+        
       };
       
       // const match = tvHistory.find(item => item.id === id);
@@ -246,18 +257,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     fetchSeasons();
     // console.log("test156")
     // console.log(selectedSeason)
-  
+    
   }, [selectedSeason,id]);
-  const tvShowContainer = document.getElementById("upper");
-  const stickyMenu = document.querySelector('.stick-menu');
-  const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 110;
-
   
-    if (tvShowContainer) {
-  window.scrollTo({
-    top: tvShowContainer.offsetTop - stickyMenuHeight,
-    // behavior: 'smooth'
-  })}
   const handleSeasonSelect = (event: any) => {
     setHistorySelect(null);
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
