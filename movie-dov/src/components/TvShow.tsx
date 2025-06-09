@@ -168,7 +168,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       setTvshowData(data)
       setSaveTVShowTitle(data.name);
       setSeasons(data.seasons);
-      
+
       // window.location.href = "/#upper";
       const match = tvHistory.find(item => item.id === id);
       if (match) {
@@ -177,17 +177,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
 
       //   setHistorySelect(match);
       //   setSelectedSeason(match.season)
-      // setTimeout(() => {
-      //   if (tvshowData?.first_air_date){
-      //     navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvshowData?.first_air_date.split('-')[0]}`);
-      //     }
-      //   console.log('This runs after 2 seconds');
-      // }, 5000);
       }else{
         setSelectedSeason(1)
         fetchEpisodes()
-
-
       }
       // console.log(placeholderText)
   }
@@ -212,16 +204,13 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         setSelectedEpisode(data.episodes[0])
         setSeasonEpisodes(data.episodes)
         setChangeSeasonActive(false)
-
+        }else{
         const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
       console.log(56)
       console.log(data.episodes)
       console.log(data.episodes[episodeIndex])
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[episodeIndex]);
-        // if (tvshowData?.first_air_date){
-        //   navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvshowData?.first_air_date.split('-')[0]}`);
-        //   }
         // setSelectedSeason(historySelect.season)
         }
       } else {
@@ -237,13 +226,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         console.log(data.episodes[0])
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
-        // setTimeout(() => {
-        // if (tvshowData?.first_air_date){
-        //     navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvshowData?.first_air_date.split('-')[0]}`);
-        //     }
-        //   console.log('This runs after 2 seconds');
-        // }, 5000);
-        
       }
 
       if (query !== "") {
@@ -253,12 +235,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         // console.log(selectedSeason)
 
           setSelectedSeason(match.season);
-          setTimeout(() => {
-            if (tvshowData?.first_air_date){
-              navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}/${tvshowData?.first_air_date.split('-')[0]}`);
-              }
-            console.log('This runs after 2 seconds');
-          }, 5000);
         }
         
       };
@@ -284,7 +260,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     
   }, [selectedSeason,id]);
   
-  
   const handleSeasonSelect = (event: any) => {
     setHistorySelect(null);
     const seasonNumber = Number(event.target.value) || Number(selectedSeason);
@@ -299,10 +274,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     const selectedSeasonEpisodes = seasonEpisodes.filter(ep => ep.episode_number === episodeNumber);
     setSelectedEpisode(selectedSeasonEpisodes[0]);
   };
-//   useEffect(() => {
-
-    
-// },[selectedEpisode])
   useEffect(() => {
     setTimeout(() => {
       console.log('This runs after 2 seconds');
@@ -327,8 +298,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         poster_path: tvShow?.poster_path || tvShow?.backdrop_path || '',
         type: 'tv',
       };
-      // console.log(tvshowData?.first_air_date)
-    
+      if (tvShow?.first_air_date){
+        navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}`);
+        }
       const tvHistory: TVShowHistoryItem[] = JSON.parse(localStorage.getItem('tvShowHistory') || '[]');
   
       const existingItem = tvHistory.find(
@@ -356,12 +328,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       }
   
       setHistorySelect(null); // ✅ Reset after save
-    
-        if (tvshowData?.first_air_date){
-          navigate(`/${searchType}/${saveTVShowTitle?.replace(/\s+/g, '-')}/${selectedSeason}/${selectedEpisode.episode_number}`);
-          }
-       
-    
      
     }
     
