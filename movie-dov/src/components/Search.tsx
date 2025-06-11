@@ -420,12 +420,12 @@ useEffect(() => {
     // console.log("Route params:", { type, id, title, season, episode });
 
     if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
-      handleMovieCardClick(ParamID)
-      setSearchType(ParamType)
+      handleAllCardClick(ParamID,ParamType)
+  
     } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
       // show detail panel or similar
-      setSearchType(ParamType)
-      handleMovieCardClick(ParamID)
+
+      handleAllCardClick(ParamID,ParamType)
     }
   }, []);
   const handleMovieCardClick = (movieId: number) => {
