@@ -144,7 +144,7 @@ useEffect(() => {
     if (event.data?.type === 'PLAYER_EVENT') {
       const { event: eventType, currentTime, duration } = event.data.data;
       // Handle the event
-      console.log(`Player ${eventType} at ${currentTime}s of ${duration}s`);
+      // console.log(`Player ${eventType} at ${currentTime}s of ${duration}s`);
     }
     if (event.data?.type === 'MEDIA_DATA') {
       const mediaData = event.data.data;
@@ -332,7 +332,7 @@ useEffect(() => {
         const animeResults = data.results.filter((item: any) =>
            item.genre_ids.includes(16)
         );
-        console.log(animeResults)       // setResults(animeResults);
+        // console.log(animeResults)       // setResults(animeResults);
       
 
       const movies: Movie[] = animeResults.map((movie: any) => ({
@@ -401,13 +401,34 @@ useEffect(() => {
       setSearchType(movieType);
       setSelectedMovieId(movieId);
       // const match = tvHistory.find(item => item.id === id);
-      const match = tvHistory.find(item => item.id === movieId);
-      if (match) {
-      // console.log("test156")
-      // console.log(selectedSeason)
-
-        setHistorySelect(match);
+      
+      // console.log(tvHistory)
+  
+      
+      const storedTvHistory = localStorage.getItem("tvShowHistory");
+    // console.log(storedTvHistory)
+    if (storedTvHistory) {
+      try {
+        const parsed : TVShowHistoryItem[] = JSON.parse(storedTvHistory);
+        const match = parsed.find(item => item?.id === movieId);
+        console.log(match)
+        if (match) {
+        // console.log("test156")
+        // console.log(selectedSeason)
+  
+          setHistorySelect(match);
+        }
+        setTvHistory(Array.isArray(parsed) ? parsed : []);
+        // console.log(tvHistory)  
+      } catch (e) {
+        console.error("Invalid JSON in localStorage:", e);
+        setTvHistory([]);
       }
+    } else {
+      setTvHistory([]);
+    }
+
+   
     } 
     if (movieType === "movie") {
       
@@ -417,14 +438,19 @@ useEffect(() => {
     setClickedMovie(null)
   };
   useEffect(() => {
+    
+
     // console.log("Route params:", { type, id, title, season, episode });
 
-    if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
-      handleAllCardClick(ParamID,ParamType)
+    // if (ParamSeason && ParamEpisode && ParamID != selectedMovieId) {
+    //   handleAllCardClick(ParamID,ParamType)
   
-    } else if (ParamID && ParamTitle && ParamID != selectedMovieId) {
-      // show detail panel or similar
-
+    // } else 
+    if (ParamID && ParamTitle && ParamID != selectedMovieId) {
+    //   // show detail panel or similar
+    // const storedTvHistory = localStorage.getItem("tvShowHistory");
+      // setTvHistory(storedTvHistory)
+      console.log(ParamID,ParamType)
       handleAllCardClick(ParamID,ParamType)
     }
   }, []);
@@ -565,10 +591,10 @@ useEffect(() => {
 
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log("⏰ 5 seconds passed!");
-      // You can run any code here after the delay
-    }, 10000);
+    // setTimeout(() => {
+    //   // console.log("⏰ 5 seconds passed!");
+    //   // You can run any code here after the delay
+    // }, 10000);
     const storedTvHistory = localStorage.getItem("tvShowHistory");
     if (storedTvHistory) {
       try {
