@@ -393,7 +393,17 @@ useEffect(() => {
     const type = movieType || 'movie'; // or 'tv', 'anime'
     // const = encodeURIComponent(movieId);
     // const year = item.year || '';
+    const moviePlayer = document.getElementById("upper");
+    // const moviePlayer = document.querySelector('.source-list-movie-div');
+    const stickyMenu = document.querySelector('.stick-menu');
+    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
 
+    console.log(moviePlayer)
+    if (moviePlayer) {
+    window.scrollTo({
+      top: moviePlayer.offsetTop - stickyMenuHeight,
+      // behavior: 'smooth'
+    });}
     
     // setClickedMovie(null)
     if (movieType === "tv") {
@@ -512,19 +522,7 @@ useEffect(() => {
       })
       ;
   };
-    const moviePlayer = document.getElementById("player");
-    const stickyMenu = document.querySelector('.stick-menu');
-    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
-
-    
-    if (moviePlayer) {
-    window.scrollTo({
-      top: moviePlayer.offsetTop - stickyMenuHeight,
-      // behavior: 'smooth'
-    });
-    // window.location.href = "/#player"
-// 
-  }
+   
   };
 
   
@@ -623,32 +621,13 @@ useEffect(() => {
         setSelectedMovieId(historySelect.id);  // Set the selectedMovieId to the id of the movie
         setHistorySelect(null);  // Clear the historySelect after handling
         // console.log(historySelect)
-        const moviePlayer = document.getElementById("player");
-        const stickyMenu = document.querySelector('.stick-menu');
-        const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
-    
-        if (moviePlayer) {
-        window.scrollTo({
-          top: moviePlayer.offsetTop - stickyMenuHeight,
-          // behavior: 'smooth'
-        });}
+        
         // This is a TV Show with an episode
         // Handle TV Show logic here, for example, setting selectedEpisode or selectedSeason
       } else {
         // This is a Movie (no episode field)
         // console.log(historySelect)
-        const moviePlayer = document.getElementById("player");
-        const stickyMenu = document.querySelector('.stick-menu');
-        const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
-    
-        if (moviePlayer) {
-        window.scrollTo({
-          top: moviePlayer.offsetTop - stickyMenuHeight,
-          // behavior: 'smooth'
-        });}
-        // setSearchType("movie")
-        setSearchType("tv")
-        setSelectedMovieId(historySelect.id)
+       
         // setHistorySelect(null)
       }
     }
@@ -714,7 +693,7 @@ useEffect(() => {
             {selectedMovieId && listLinks[0] && searchType === "movie" ? (
   // <div className="source-list-movie-div">
   <>
-<div className='player-container'>
+<div className='player-container' id="player-container">
     <SourceScroller
       links={listLinks}
       selectedIndex={selectedMovieSourceIndex}

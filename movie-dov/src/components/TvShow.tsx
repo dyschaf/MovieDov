@@ -185,16 +185,16 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   }
 
     const fetchEpisodes = async () => {
-      const tvShowContainer = document.getElementById("upper");
-    const stickyMenu = document.querySelector('.stick-menu');
-    const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 110;
+    //   const tvShowContainer = document.getElementById("upper");
+    // const stickyMenu = document.querySelector('.stick-menu');
+    // const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 110;
   
     
-      if (tvShowContainer) {
-    window.scrollTo({
-      top: tvShowContainer.offsetTop - stickyMenuHeight,
-      // behavior: 'smooth'
-    })}
+    //   if (tvShowContainer) {
+    // window.scrollTo({
+    //   top: tvShowContainer.offsetTop - stickyMenuHeight,
+    //   // behavior: 'smooth'
+    // })}
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
       const data = await response.json();
       
@@ -396,7 +396,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
             </div>
           </div>
 
-          <div className='player-container'>
+          <div className='player-container'id='player-container'>
             <SourceScroller
               links={links}
               selectedIndex={selectedTVShowSourceIndex}
