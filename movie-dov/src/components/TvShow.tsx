@@ -206,9 +206,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         setChangeSeasonActive(false)
         }else{
         const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
-      console.log(56)
-      console.log(data.episodes)
-      console.log(data.episodes[episodeIndex])
+      // console.log(56)
+      // console.log(data.episodes)
+      // console.log(data.episodes[episodeIndex])
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[episodeIndex]);
         // setSelectedSeason(historySelect.season)
@@ -217,13 +217,13 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         // if(savedSourceIndex.id === id){
         //   save
         // }
-        console.log("test2")
-        console.log(data.episodes[0])
-        console.log(data.episodes)
+        // console.log("test2")
+        // console.log(data.episodes[0])
+        // console.log(data.episodes)
         // setSelectedSeason(1)
         // setSelectedSeason(1)
-        console.log(data.episodes)
-        console.log(data.episodes[0])
+        // console.log(data.episodes)
+        // console.log(data.episodes[0])
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[0]);
       }
@@ -276,7 +276,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   };
   useEffect(() => {
     setTimeout(() => {
-      console.log('This runs after 2 seconds');
+      // console.log('This runs after 2 seconds');
     }, 2000); // 2000ms = 2 seconds
     
     if (
