@@ -398,7 +398,7 @@ useEffect(() => {
     const stickyMenu = document.querySelector('.stick-menu');
     const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
 
-    console.log(moviePlayer)
+   
     if (moviePlayer) {
     window.scrollTo({
       top: moviePlayer.offsetTop - stickyMenuHeight,
