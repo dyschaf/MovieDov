@@ -5,6 +5,7 @@ import SourceScroller from './SourceScroller';
 import { Item } from 'react-bootstrap/lib/Breadcrumb';
 import { TIMEOUT } from 'dns';
 import { useNavigate } from 'react-router-dom';
+// import { link } from 'fs';
 interface TVShow {
   id: number;
   title?: string;
@@ -134,10 +135,14 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   );
   const navigate = useNavigate(); 
 
-  const safeEpisode = selectedEpisode ?? { episode_number: 1 };
+  const safeEpisode = selectedEpisode ?? { episode_number:1 };
 
   useEffect(() => {
+    if(selectedTVShowSourceIndex < links.length  ){
     localStorage.setItem("selectedTVShowSourceIndex", selectedTVShowSourceIndex.toString());
+    }else
+    localStorage.setItem("selectedTVShowSourceIndex", "0");
+    
   }, [selectedTVShowSourceIndex]);
 
   useEffect(() => {
@@ -195,7 +200,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     //   top: tvShowContainer.offsetTop - stickyMenuHeight,
     //   // behavior: 'smooth'
     // })}
+    
       const response = await fetch(`https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=d1c58c8d09e1707f8ae98a1832dd15a3&language=en-US`);
+      if (response.status !== 404){
       const data = await response.json();
       
       if (historySelect || tvHistory.find(item => item.id === id)) {
@@ -205,14 +212,22 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
         setSeasonEpisodes(data.episodes)
         setChangeSeasonActive(false)
         }else{
-        const episodeIndex = Number(selectedHistory.episode.episode_number) - 1;
+        if(selectedHistory.episode.episode_number){
+        // console.log(selectedHistory.episode.episode_number-1)
+        // setTimeout(() => {
+        //     // console.log('This runs after 2 seconds');
+        //   }, 2000); // 200
+        const episodeIndex = Number(selectedHistory.episode.episode_number) - 1||0;
+        console.log(episodeIndex)
       // console.log(56)
       // console.log(data.episodes)
       // console.log(data.episodes[episodeIndex])
         setSeasonEpisodes(data.episodes);
         setSelectedEpisode(data.episodes[episodeIndex]);
+        console.log(data.episodes[episodeIndex])
         // setSelectedSeason(historySelect.season)
         }
+      }
       } else {
         // if(savedSourceIndex.id === id){
         //   save
@@ -250,11 +265,13 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
       // console.log(selectedSeason)
 
       setQuery("")
+    }
     };
 
     if (selectedSeason !== null) 
-    fetchEpisodes();
-    fetchSeasons();
+      fetchSeasons();
+      fetchEpisodes();
+      fetchEpisodes();
     // console.log("test156")
     // console.log(selectedSeason)
     
@@ -275,9 +292,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     setSelectedEpisode(selectedSeasonEpisodes[0]);
   };
   useEffect(() => {
-    setTimeout(() => {
-      // console.log('This runs after 2 seconds');
-    }, 2000); // 2000ms = 2 seconds
+    // setTimeout(() => {
+    //   // console.log('This runs after 2 seconds');
+    // }, 2000); // 2000ms = 2 seconds
     
     if (
       saveTVShowTitle &&
@@ -376,9 +393,11 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
                 <div className="season-episode-row">
                   <select className="select-tv-season" onChange={handleSeasonSelect} value={selectedSeason ?? ""}>
                     {seasons.map(season =>
+                    
                       season.season_number !== 0 ? (
                         <option key={season.id} value={season.season_number}>
                           Season {season.season_number}
+                          {/* {console.log(season)} */}
                         </option>
                       ) : null
                     )}

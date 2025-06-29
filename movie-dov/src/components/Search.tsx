@@ -128,7 +128,11 @@ const Search: React.FC = () => {
   }, []);
   
   useEffect(() => {
+    if (selectedMovieSourceIndex < listLinks.length) {
     localStorage.setItem("selectedMovieSourceIndex", selectedMovieSourceIndex.toString());
+    }else {
+      localStorage.setItem("selectedMovieSourceIndex", "0");
+    }
   }, [selectedMovieSourceIndex]);
 useEffect(() => {
   const isMobile = window.innerWidth <= 768;
@@ -398,7 +402,6 @@ useEffect(() => {
     const stickyMenu = document.querySelector('.stick-menu');
     const stickyMenuHeight = stickyMenu ? stickyMenu.clientHeight : 100;
 
-   
     if (moviePlayer) {
     window.scrollTo({
       top: moviePlayer.offsetTop - stickyMenuHeight,
