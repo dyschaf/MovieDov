@@ -141,6 +141,7 @@ useEffect(() => {
   }
 
 }, [selectedLabel]);
+
 useEffect(() => {
   const handleMessage = (event: MessageEvent) => {
     if (event.origin !== 'https://vidlink.pro') return;
