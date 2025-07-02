@@ -97,14 +97,12 @@ const Search: React.FC = () => {
   // const { type, id, title, season, episode } = useParams();
   // const location = useLocation();
   const segments = location.pathname.split('/');
-
   const ParamType = segments[1];
   const ParamID = Number(segments[2]);
   const ParamTitle = segments[3];
   const ParamSeason = Number(segments[4]);
   const ParamEpisode = Number(segments[5]);
   // console.log("Route changed:", params);
-
   const scrollRefTrendMovie = useRef<HTMLDivElement>(null);
   const scrollRefTrendTv = useRef<HTMLDivElement>(null);
   const scrollRefSaveTv = useRef<HTMLDivElement>(null);
