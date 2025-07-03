@@ -114,7 +114,6 @@ const Search: React.FC = () => {
   const listRefDesktop = useRef<HTMLUListElement>(null);
   const iframeMovieRef = useRef<HTMLIFrameElement>(null);
   const navigate = useNavigate();
-
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
