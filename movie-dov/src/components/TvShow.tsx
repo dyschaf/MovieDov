@@ -361,7 +361,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   const links = selectedEpisode ? [
     
     `https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
+    
     `https://vidlink.pro/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
+    `https://111movies.com/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://embed.su/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidsrc.me/embed/${id}/${selectedSeason}-${selectedEpisode.episode_number}`,
     `https://www.2embed.cc/embedtv/${id}&s=${selectedSeason}&e=${selectedEpisode.episode_number}`,
@@ -370,8 +372,8 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     `https://multiembed.mov/directstream.php?video_id=${id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode.episode_number}`,
     `https://vidsrc.uk/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
+    `https://vidjoy.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`
     // ""
-
 
     
     // `https://9animetv.to`
