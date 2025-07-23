@@ -374,7 +374,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     `https://vidsrc.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://vidjoy.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`
     // ""
-
   
     // `https://9animetv.to`
   ] : [];
