@@ -375,10 +375,10 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
     `https://vidjoy.pro/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`
     // ""
   
-    
+
     // `https://9animetv.to`
   ] : [];
-
+ 
   return (
     <div>
       {selectedEpisode && selectedSeason && (
