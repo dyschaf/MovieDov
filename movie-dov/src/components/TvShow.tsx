@@ -431,6 +431,7 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
             />
             <div id="player">
               <iframe
+                title={`player`}
                 src={links[selectedTVShowSourceIndex]}
                 width="100%"
                 height="100%"
