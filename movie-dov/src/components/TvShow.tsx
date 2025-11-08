@@ -361,7 +361,6 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
   const links = selectedEpisode ? [
     
     `https://vidsrc.net/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
-    
     `https://vidlink.pro/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://111movies.com/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
     `https://embed.su/embed/tv/${id}/${selectedSeason}/${selectedEpisode.episode_number}`,
