@@ -378,10 +378,9 @@ const TvShow: React.FC<{ id: number; historySelect: any; setSearchType: React.Di
 
 
 
-    
+
 
     
-
 
 
     // `https://9animetv.to`
