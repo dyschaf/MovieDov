@@ -181,7 +181,7 @@ const listLinks = selectedMovieId !== null ? [
   `https://embed.smashystream.com/playere.php?tmdb=${selectedMovieId}`,
   `https://vidsrc.to/embed/movie/${selectedMovieId}`,
 
-  
+
   `https://vidsrc.uk/embed/movie/${selectedMovieId}`,
   `https://multiembed.mov/directstream.php?video_id=${selectedMovieId}&tmdb=1`,
   
