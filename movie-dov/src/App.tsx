@@ -4,7 +4,7 @@ import './App.css';
 import Home from "./components/Home"
 import ErrorBoundary from './components/ErrorBoundary';
 import { Routes, Route, useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
 
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={null} />
           <Route path="/:type/:id/:title/" element={null} />
-          <Route path="/:type/id/:title/:season/:episode" element={null} />
+          <Route path="/:type/:id/:title/:season/:episode" element={null} />
 
 
         </Routes>
