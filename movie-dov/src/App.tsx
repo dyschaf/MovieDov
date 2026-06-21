@@ -1,6 +1,6 @@
 import React from 'react';
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 import Home from "./components/Home"
 import ErrorBoundary from './components/ErrorBoundary';
 import { Routes, Route, useNavigate } from "react-router-dom";
